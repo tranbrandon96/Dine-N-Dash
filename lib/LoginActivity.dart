@@ -221,7 +221,7 @@ class FirstScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.blue[100], Colors.blue[400]],
+            colors: [Color(0xFFFF0041), Color(0xFFFB8E40)],
           ),
         ),
         child: Center(
@@ -248,7 +248,7 @@ class FirstScreen extends StatelessWidget {
                 name,
                 style: TextStyle(
                     fontSize: 25,
-                    color: Colors.deepPurple,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
@@ -263,7 +263,7 @@ class FirstScreen extends StatelessWidget {
                 email,
                 style: TextStyle(
                     fontSize: 25,
-                    color: Colors.deepPurple,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
@@ -275,12 +275,13 @@ class FirstScreen extends StatelessWidget {
                     return LoginActivity();
                   }), ModalRoute.withName('/'));
                 },
-                color: Colors.deepPurple,
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Sign Out',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
+                    style:
+                        TextStyle(fontSize: 25, color: Colors.deepOrangeAccent),
                   ),
                 ),
                 elevation: 5,
