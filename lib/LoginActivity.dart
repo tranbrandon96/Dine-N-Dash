@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/SignUpSelectActivity.dart';
 import 'package:flutter_app/sign_in.dart';
 import 'CustomerIDActivity.dart';
@@ -75,8 +76,9 @@ class _LoginActivity extends State<LoginActivity> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
             children: <Widget>[
-              Image(
-                image: AssetImage("assets/images/DnD Logo.PNG"),
+
+              SvgPicture.asset(
+                  "assets/images/DnDLogo.svg",
                 width: 250,
                 height: 250,
               ),

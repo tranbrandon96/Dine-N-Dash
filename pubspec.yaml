@@ -39,6 +39,9 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: "^0.7.5"
   flutter_launcher_name: "^0.0.1"
+  flutter_svg: "^0.17.4"
+
+
 
 
 

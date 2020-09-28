@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/AccountCreationActivity.dart';
 
 class SignUpSelectActivity extends StatelessWidget {
@@ -34,8 +35,8 @@ class SignUpSelectActivity extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
             children: <Widget>[
-              Image(
-                image: AssetImage("assets/images/DnD Logo.PNG"),
+              SvgPicture.asset(
+                "assets/images/DnDLogo.svg",
                 width: 250,
                 height: 250,
               ),
@@ -54,6 +55,7 @@ class SignUpSelectActivity extends StatelessWidget {
                 child: Text('Customer',
                     style: TextStyle(color: Colors.deepOrange)),
                 shape: RoundedRectangleBorder(
+
                   borderRadius: BorderRadius.circular(28.0),
                 ),
               ),
@@ -71,6 +73,7 @@ class SignUpSelectActivity extends StatelessWidget {
                 ),
               ),
             ],
+
           ),
         ),
       ),
