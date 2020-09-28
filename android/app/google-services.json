@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "527287654122",
+    "firebase_url": "https://dine-n-dash-4ce28.firebaseio.com",
+    "project_id": "dine-n-dash-4ce28",
+    "storage_bucket": "dine-n-dash-4ce28.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527287654122:android:0af977053716f6d3996993",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527287654122-aca23u6nk253nhq60kul6gjltabojeb6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_app",
+            "certificate_hash": "5d462fbf7b1c5ad6ab35b735f9bc619b15ff22b7"
+          }
+        },
+        {
+          "client_id": "527287654122-tjskmven35qvsdk0qpnm9ivm35ib63v1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa1Y5fA--jnH6N7KZkwulxHbQrMWgPBrE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527287654122-tjskmven35qvsdk0qpnm9ivm35ib63v1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
