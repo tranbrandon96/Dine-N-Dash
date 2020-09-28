@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'CustomerIDActivity.dart';
 
 
-class AccountCreationActivity extends MaterialPageRoute<Null> {
-  AccountCreationActivity() : super(builder: (BuildContext context){
+class AccountCreationActivity extends StatelessWidget {
+  Widget build(BuildContext context) {
     return Scaffold(
 
       body: Container(
@@ -129,7 +129,7 @@ class AccountCreationActivity extends MaterialPageRoute<Null> {
         ),
       ),
     );
-  });
+  }
 }
 
 Widget buildTextField(String hint,bool obscure){

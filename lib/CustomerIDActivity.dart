@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomerIDActivity extends MaterialPageRoute<Null> {
-  CustomerIDActivity() : super(builder: (BuildContext context) {
+class CustomerIDActivity extends StatelessWidget {
+    Widget build(BuildContext context) {
     return Scaffold(
 
       body: Container(
@@ -118,5 +118,5 @@ class CustomerIDActivity extends MaterialPageRoute<Null> {
         ),
       ),
     );
-  });
+  }
 }

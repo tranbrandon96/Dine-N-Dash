@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/AccountCreationActivity.dart';
 
-class SignUpSelectActivity extends MaterialPageRoute<Null> {
-  SignUpSelectActivity() : super(builder: (BuildContext context){
+class SignUpSelectActivity extends StatelessWidget {
+  Widget build(BuildContext context) {
 
   
     return Scaffold(
@@ -57,7 +57,9 @@ class SignUpSelectActivity extends MaterialPageRoute<Null> {
 
               ),
               RaisedButton(onPressed: () {
-                Navigator.push(context,AccountCreationActivity());},
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) =>
+                    AccountCreationActivity()));},
                 child: Text(
                     'Customer',
                     style: TextStyle(color: Colors.deepOrange)),
@@ -68,7 +70,9 @@ class SignUpSelectActivity extends MaterialPageRoute<Null> {
               ),
 
               RaisedButton(onPressed: () {
-                Navigator.push(context,AccountCreationActivity());},
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) =>
+                    AccountCreationActivity()));},
                 child: Text(
                     'Employee',
                     style: TextStyle(color: Colors.deepOrange)),
@@ -82,5 +86,5 @@ class SignUpSelectActivity extends MaterialPageRoute<Null> {
         ),
       ),
     );
-  });
+  }
 }

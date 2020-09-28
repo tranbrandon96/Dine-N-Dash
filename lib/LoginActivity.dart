@@ -160,7 +160,9 @@ class _LoginActivity extends State<LoginActivity> {
 
 
               RaisedButton(onPressed: () {
-                Navigator.push(context, CustomerIDActivity());
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) =>
+                    CustomerIDActivity()));
               },
                 child: Text(
                     'LOGIN',
@@ -181,7 +183,9 @@ class _LoginActivity extends State<LoginActivity> {
 
 
               FlatButton(onPressed: () {
-                Navigator.push(context, SignUpSelectActivity());
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) =>
+                    SignUpSelectActivity()));
               },
                 child: Text(
                     'No Account? SIGN UP',
