@@ -3,26 +3,17 @@ import 'package:flutter_app/AccountCreationActivity.dart';
 
 class SignUpSelectActivity extends StatelessWidget {
   Widget build(BuildContext context) {
-
-  
     return Scaffold(
-
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Colors.pink, Colors.deepOrangeAccent]),
-
-
+              colors: [Color(0xFFFF0041), Color(0xFFFB8E40)]),
         ),
-
-
         child: Center(
-
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-
 
           child: Column(
             // Column is also a layout widget. It takes a list of children and
@@ -44,44 +35,42 @@ class SignUpSelectActivity extends StatelessWidget {
 
             children: <Widget>[
               Image(
-
                 image: AssetImage("assets/images/DnD Logo.PNG"),
                 width: 250,
                 height: 250,
               ),
-
-              SizedBox(height: 20 ),
+              SizedBox(height: 20),
               Text(
                 'USE FOR:',
                 style: TextStyle(fontSize: 25, color: Colors.white),
-
               ),
-              RaisedButton(onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) =>
-                    AccountCreationActivity()));},
-                child: Text(
-                    'Customer',
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AccountCreationActivity()));
+                },
+                child: Text('Customer',
                     style: TextStyle(color: Colors.deepOrange)),
                 shape: RoundedRectangleBorder(
-
                   borderRadius: BorderRadius.circular(28.0),
                 ),
               ),
-
-              RaisedButton(onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) =>
-                    AccountCreationActivity()));},
-                child: Text(
-                    'Employee',
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AccountCreationActivity()));
+                },
+                child: Text('Employee',
                     style: TextStyle(color: Colors.deepOrange)),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(28.0),
                 ),
               ),
             ],
-
           ),
         ),
       ),

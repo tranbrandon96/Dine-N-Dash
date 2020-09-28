@@ -3,7 +3,6 @@ import 'package:flutter_app/SignUpSelectActivity.dart';
 import 'CustomerIDActivity.dart';
 import 'AccountCreationActivity.dart';
 
-
 class LoginActivity extends StatefulWidget {
   LoginActivity({Key key, this.title}) : super(key: key);
 
@@ -45,23 +44,16 @@ class _LoginActivity extends State<LoginActivity> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Colors.pink, Colors.deepOrangeAccent]),
-
-
+              colors: [Color(0xFFFF0041), Color(0xFFFB8E40)]),
         ),
-
-
         child: Center(
-
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-
 
           child: Column(
             // Column is also a layout widget. It takes a list of children and
@@ -81,35 +73,22 @@ class _LoginActivity extends State<LoginActivity> {
 
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-
             children: <Widget>[
-
-
               Image(
-
                 image: AssetImage("assets/images/DnD Logo.PNG"),
                 width: 250,
                 height: 250,
               ),
-
               SizedBox(height: 20),
               Text(
                 'USERNAME',
                 style: TextStyle(fontSize: 18, color: Colors.white),
-
               ),
-
-
               Container(
                 width: 300,
                 child: TextField(
                   obscureText: false,
-
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white
-                  ),
-
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                   decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -119,29 +98,20 @@ class _LoginActivity extends State<LoginActivity> {
                     ),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
-
                     ),
                   ),
                 ),
               ),
-
               SizedBox(height: 20),
               Text(
                 'PASSWORD',
                 style: TextStyle(fontSize: 18, color: Colors.white),
-
               ),
-
               Container(
                 width: 300,
                 child: TextField(
                   obscureText: true,
-
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white
-                  ),
-
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                   decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -151,52 +121,43 @@ class _LoginActivity extends State<LoginActivity> {
                     ),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
-
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-
-
-              RaisedButton(onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) =>
-                    CustomerIDActivity()));
-              },
-                child: Text(
-                    'LOGIN',
-                    style: TextStyle(color: Colors.deepOrange)),
+              SizedBox(height: 50),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CustomerIDActivity()));
+                },
+                child:
+                    Text('LOGIN', style: TextStyle(color: Colors.deepOrange)),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0),
                 ),
-
               ),
-
-
-              FlatButton(onPressed: () {},
-                child: Text(
-                    'Forgot Username or Password?',
+              FlatButton(
+                onPressed: () {},
+                child: Text('Forgot Username or Password?',
                     style: TextStyle(color: Colors.white)),
                 highlightColor: Colors.deepOrangeAccent,
               ),
-
-
-              FlatButton(onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) =>
-                    SignUpSelectActivity()));
-              },
-                child: Text(
-                    'No Account? SIGN UP',
+              FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SignUpSelectActivity()));
+                },
+                child: Text('No Account? SIGN UP',
                     style: TextStyle(color: Colors.white)),
                 highlightColor: Colors.deepOrangeAccent,
               ),
               SizedBox(height: 40),
-
-
             ],
-
           ),
         ),
       ),

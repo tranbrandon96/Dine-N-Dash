@@ -31,4 +31,3 @@ class DineNDashApp extends StatelessWidget {
     );
   }
 }
-

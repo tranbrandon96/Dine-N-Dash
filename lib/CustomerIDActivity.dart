@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CustomerIDActivity extends StatelessWidget {
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
-
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Colors.pink, Colors.deepOrangeAccent]),
-
-
+              colors: [Color(0xFFFF0041), Color(0xFFFB8E40)]),
         ),
-
-
         child: Center(
-
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-
 
           child: Column(
             // Column is also a layout widget. It takes a list of children and
@@ -41,68 +33,61 @@ class CustomerIDActivity extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
 
             children: <Widget>[
-              Align(alignment: Alignment.topRight,
-                  child: IconButton(onPressed: () {
-                    Navigator.pop(context);
-                  },
-                    icon: Icon(Icons.cancel, size: 35, color: Colors.white),)
-              ),
-
+              Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.cancel, size: 35, color: Colors.white),
+                  )),
               Text(
                 'CUSTOMER CHECK IN',
                 style: TextStyle(fontSize: 27, color: Colors.white),
-
               ),
               SizedBox(height: 20),
-
               Container(
                 height: 400,
                 width: 300,
-
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
                       color: Colors.black,
                     ),
                     borderRadius: BorderRadius.circular(20)),
-
                 child: Container(
-
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-
                         Text(
                           'Member Card',
-
-                          style: TextStyle(fontSize: 23,
+                          style: TextStyle(
+                              fontSize: 23,
                               color: Colors.deepOrange,
                               fontWeight: FontWeight.bold),
                         ),
                         Image(
-
                           image: AssetImage('assets/images/QR_Code.png'),
                         ),
-
                         Text(
                           'John Doe',
-                          style: TextStyle(fontSize: 23,
+                          style: TextStyle(
+                              fontSize: 23,
                               color: Colors.deepOrange,
                               fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 5),
                         Text(
                           '7HSGD930GJAJADMG39J',
-                          style: TextStyle(
-                              fontSize: 15, color: Colors.deepOrange),
+                          style:
+                              TextStyle(fontSize: 15, color: Colors.deepOrange),
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
-
               SizedBox(height: 20),
               Align(
                 alignment: Alignment.center,
@@ -113,7 +98,6 @@ class CustomerIDActivity extends StatelessWidget {
                 ),
               ),
             ],
-
           ),
         ),
       ),
