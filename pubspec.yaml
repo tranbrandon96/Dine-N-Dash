@@ -87,10 +87,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Futura
+    - family: Futura Medium
       fonts:
-        - asset: assets/fonts/Futura.ttf
-
+        - asset: assets/fonts/Futura Medium.ttf
+        - asset: assets/fonts/Futura Std Medium.ttf
+        - asset: assets/fonts/Futura Std Medium Condensed.ttf
+        - asset: assets/fonts/Futura TOT Medium Condensed.ttf
+        - asset: assets/fonts/Futura URW Medium.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
