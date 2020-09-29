@@ -17,7 +17,7 @@ class EditCustomerAccount extends StatelessWidget {
                     children: <Widget>[
                       SizedBox(height: 30),
                       Image.asset(
-                        "assets/coloredQR.png",
+                        "assets/icons/user-5.svg",
                         width: 110,
                         height: 110,
                       ),
