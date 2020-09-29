@@ -91,8 +91,9 @@ class _LoginActivity extends State<LoginActivity> {
               Container(
                 width: 300,
                 child: TextField(
+                  textAlign: TextAlign.center,
                   obscureText: false,
-                  style: TextStyle(fontSize: 14, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                   decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -114,8 +115,9 @@ class _LoginActivity extends State<LoginActivity> {
               Container(
                 width: 300,
                 child: TextField(
+                  textAlign: TextAlign.center,
                   obscureText: true,
-                  style: TextStyle(fontSize: 14, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                   decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
