@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'CustomerIDActivity.dart';
-
+import '../../components/membership_card_screen.dart';
 
 class AccountCreationActivity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [Colors.white, Colors.white]),
-
-
         ),
-
-
-
         child: Center(
-
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-
-
 
           child: Column(
             // Column is also a layout widget. It takes a list of children and
@@ -44,87 +34,67 @@ class AccountCreationActivity extends StatelessWidget {
 
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-
             children: <Widget>[
               Container(
                 width: 500,
                 height: 75,
                 decoration: BoxDecoration(
-                    color: Colors.red[500],
+                  color: Colors.red[500],
                 ),
-
                 child: Container(
                   child: Center(
-
                     child: Text(
                       "CREATE ACCOUNT",
                       style: TextStyle(
-                          fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold
-                      ),
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     ),
-
                   ),
                 ),
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                 Text(
-                  "CONTINUE WITH",
-                  style: TextStyle(
-                      fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold
+                  Text(
+                    "CONTINUE WITH",
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
                   ),
-                ),
-
                   FlatButton(
-                    child:  Image.asset("assets/images/Google.PNG"),
+                    child: Image.asset("assets/images/Google.PNG"),
                     padding: EdgeInsets.all(0.0),
                     onPressed: () {},
-
                   ),
                 ],
               ),
-
               Text(
                 " or continue with email",
                 style: TextStyle(
-                    fontSize: 12, color: Colors.black,
+                  fontSize: 12,
+                  color: Colors.black,
                 ),
               ),
-
-
               buildTextField("First Name", false),
-
               buildTextField("Last Name", false),
-
               buildTextField("Email", false),
-
               buildTextField("Mobile Number", false),
-
               buildTextField("Gender", false),
-
               buildTextField("Birthday", false),
-
               buildTextField("Password", true),
-
-              SizedBox(height: 20 ),
-
-
-              RaisedButton(onPressed: () {},
-                child: Text(
-                    'Continue',
+              SizedBox(height: 20),
+              RaisedButton(
+                onPressed: () {},
+                child: Text('Continue',
                     style: TextStyle(color: Colors.deepOrange)),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0),
                 ),
-
               ),
-
-              SizedBox(height: 40 ),
-
+              SizedBox(height: 40),
             ],
-
           ),
         ),
       ),
@@ -132,29 +102,22 @@ class AccountCreationActivity extends StatelessWidget {
   }
 }
 
-Widget buildTextField(String hint,bool obscure){
-  return
-  Container(
+Widget buildTextField(String hint, bool obscure) {
+  return Container(
     width: 300,
     child: TextField(
       obscureText: obscure,
-
-      style: TextStyle(
-          fontSize: 18,
-          color: Colors.black
-      ),
-
+      style: TextStyle(fontSize: 18, color: Colors.black),
       decoration: InputDecoration(
         hintText: hint,
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey, width:1.0),
+          borderSide: BorderSide(color: Colors.grey, width: 1.0),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey, width:1.0),
+          borderSide: BorderSide(color: Colors.grey, width: 1.0),
         ),
         border: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey, width:1.0),
-
+          borderSide: BorderSide(color: Colors.grey, width: 1.0),
         ),
       ),
     ),

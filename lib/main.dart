@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'LoginActivity.dart';
+import 'screens/sign_in/sign_in_screen.dart';
 
 void main() {
   runApp(DineNDashApp());

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/SignUpSelectActivity.dart';
-import 'package:flutter_app/sign_in.dart';
-import 'CustomerIDActivity.dart';
-import 'AccountCreationActivity.dart';
-import 'AccountCreationActivity.dart';
+import 'package:flutter_app/screens/sign_up/sign_up_choice_screen.dart';
+import 'package:flutter_app/firebase/sign_in.dart';
+import '../../components/membership_card_screen.dart';
+import '../sign_up/account_creation_screen.dart';
+import '../sign_up/account_creation_screen.dart';
 
 class LoginActivity extends StatefulWidget {
   LoginActivity({Key key, this.title}) : super(key: key);

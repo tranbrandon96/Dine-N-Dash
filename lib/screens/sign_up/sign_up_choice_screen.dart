@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/AccountCreationActivity.dart';
+import 'package:flutter_app/screens/sign_up/account_creation_screen.dart';
 
 class SignUpSelectActivity extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -55,7 +55,6 @@ class SignUpSelectActivity extends StatelessWidget {
                 child: Text('Customer',
                     style: TextStyle(color: Colors.deepOrange)),
                 shape: RoundedRectangleBorder(
-
                   borderRadius: BorderRadius.circular(28.0),
                 ),
               ),
@@ -73,7 +72,6 @@ class SignUpSelectActivity extends StatelessWidget {
                 ),
               ),
             ],
-
           ),
         ),
       ),
