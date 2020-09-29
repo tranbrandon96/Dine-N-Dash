@@ -85,14 +85,14 @@ class _LoginActivity extends State<LoginActivity> {
               ),
               SizedBox(height: 60),
               Text(
-                'USERNAME',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                'EMAIL/USERNAME',
+                style: TextStyle(fontSize: 14, color: Colors.white),
               ),
               Container(
                 width: 300,
                 child: TextField(
                   obscureText: false,
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(fontSize: 14, color: Colors.white),
                   decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -109,13 +109,13 @@ class _LoginActivity extends State<LoginActivity> {
               SizedBox(height: 20),
               Text(
                 'PASSWORD',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                style: TextStyle(fontSize: 14, color: Colors.white),
               ),
               Container(
                 width: 300,
                 child: TextField(
                   obscureText: true,
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(fontSize: 14, color: Colors.white),
                   decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -129,7 +129,7 @@ class _LoginActivity extends State<LoginActivity> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               RaisedButton(
                 onPressed: () {
                   Navigator.push(
@@ -147,7 +147,7 @@ class _LoginActivity extends State<LoginActivity> {
               _signInButton(),
               FlatButton(
                 onPressed: () {},
-                child: Text('Forgot Username or Password?',
+                child: Text('FORGOT USERNAME OR PASSWORD?',
                     style: TextStyle(color: Colors.white)),
                 highlightColor: Colors.deepOrangeAccent,
               ),
@@ -158,7 +158,7 @@ class _LoginActivity extends State<LoginActivity> {
                       MaterialPageRoute(
                           builder: (context) => SignUpSelectActivity()));
                 },
-                child: Text('No Account? SIGN UP',
+                child: Text('NO ACCOUNT? SIGN UP',
                     style: TextStyle(color: Colors.white)),
                 highlightColor: Colors.deepOrangeAccent,
               ),
