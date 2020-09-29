@@ -32,44 +32,43 @@ class SignUpSelectActivity extends StatelessWidget {
             // axis because Columns are vertical (the cross axis would be
             // horizontal).
 
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
             children: <Widget>[
+              SizedBox(height: 60),
               SvgPicture.asset(
                 "assets/images/DnDLogo.svg",
-                width: 250,
-                height: 250,
+                width: 150,
+                height: 150,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 50),
               Text(
                 'USE FOR:',
                 style: TextStyle(fontSize: 25, color: Colors.white),
               ),
-              RaisedButton(
+              SizedBox(height: 50),
+              FlatButton(
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => AccountCreationActivity()));
                 },
-                child: Text('Customer',
-                    style: TextStyle(color: Colors.deepOrange)),
+                child: Text('CUSTOMER', style: TextStyle(color: Colors.white)),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(28.0),
-                ),
+                    borderRadius: BorderRadius.circular(15.0),
+                    side: BorderSide(color: Colors.white)),
               ),
-              RaisedButton(
+              SizedBox(height: 25),
+              FlatButton(
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => AccountCreationActivity()));
                 },
-                child: Text('Employee',
-                    style: TextStyle(color: Colors.deepOrange)),
+                child: Text('EMPLOYEE', style: TextStyle(color: Colors.white)),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(28.0),
-                ),
+                    borderRadius: BorderRadius.circular(15.0),
+                    side: BorderSide(color: Colors.white)),
               ),
             ],
           ),
