@@ -77,13 +77,13 @@ class _LoginActivity extends State<LoginActivity> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
             children: <Widget>[
-
+              Spacer(),
               SvgPicture.asset(
-                  "assets/images/DnDLogo.svg",
-                width: 250,
-                height: 250,
+                "assets/images/DnDLogo.svg",
+                width: 150,
+                height: 150,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 60),
               Text(
                 'USERNAME',
                 style: TextStyle(fontSize: 18, color: Colors.white),
@@ -129,7 +129,7 @@ class _LoginActivity extends State<LoginActivity> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 30),
               RaisedButton(
                 onPressed: () {
                   Navigator.push(
