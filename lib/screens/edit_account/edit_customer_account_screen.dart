@@ -16,8 +16,8 @@ class EditCustomerAccount extends StatelessWidget {
                   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       SizedBox(height: 30),
-                      SvgPicture.asset(
-                        "assets/icons/user-5.svg",
+                      Image.asset(
+                        "assets/coloredQR.png",
                         width: 110,
                         height: 110,
                       ),
@@ -125,6 +125,17 @@ class EditCustomerAccount extends StatelessWidget {
                             ),
                           )
                       ),
+                      SizedBox(height: 20),
+                      RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Color(0xFFFF0041))),
+                        onPressed: () {},
+                        color: Color(0xFFFF0041),
+                        textColor: Colors.white,
+                        child: Text('EDIT ACCOUNT',
+                            style: TextStyle(fontSize: 16)),
+                      )
                     ]
                 )
             )
