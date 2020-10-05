@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/screens/sign_up/account_creation_screen.dart';
 
-class SignUpSelectActivity extends StatelessWidget {
+class member_type_screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -32,6 +32,8 @@ class SignUpSelectActivity extends StatelessWidget {
             // axis because Columns are vertical (the cross axis would be
             // horizontal).
 
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
             children: <Widget>[
               SizedBox(height: 60),
               SvgPicture.asset(
@@ -50,7 +52,7 @@ class SignUpSelectActivity extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AccountCreationActivity()));
+                          builder: (context) => account_creation_screen()));
                 },
                 child: Text('CUSTOMER', style: TextStyle(color: Colors.white)),
                 shape: RoundedRectangleBorder(
@@ -63,7 +65,7 @@ class SignUpSelectActivity extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AccountCreationActivity()));
+                          builder: (context) => account_creation_screen()));
                 },
                 child: Text('EMPLOYEE', style: TextStyle(color: Colors.white)),
                 shape: RoundedRectangleBorder(

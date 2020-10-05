@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomerIDActivity extends StatelessWidget {
+class membership_card_screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(

@@ -2,9 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../components/membership_card_screen.dart';
 
-class AccountCreationActivity extends StatelessWidget {
+class account_creation_screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar:
+        AppBar(
+          leading: Container(
+            width: 500,
+            height: 75,
+          ),
+          centerTitle: true,
+          title: Text(
+            "CREATE ACCOUNT",
+            style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: Colors.red[500],
+        ),
+
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -15,6 +32,7 @@ class AccountCreationActivity extends StatelessWidget {
         child: Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
+
 
           child: Column(
             // Column is also a layout widget. It takes a list of children and
@@ -35,24 +53,7 @@ class AccountCreationActivity extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
             children: <Widget>[
-              Container(
-                width: 500,
-                height: 75,
-                decoration: BoxDecoration(
-                  color: Colors.red[500],
-                ),
-                child: Container(
-                  child: Center(
-                    child: Text(
-                      "CREATE ACCOUNT",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -102,14 +103,16 @@ class AccountCreationActivity extends StatelessWidget {
   }
 }
 
-Widget buildTextField(String hint, bool obscure) {
+///Function builds a text field with input values for hint text and
+///bool to obscure user input text.
+Widget buildTextField(String hintText, bool obscureText) {
   return Container(
     width: 300,
     child: TextField(
-      obscureText: obscure,
+      obscureText: obscureText,
       style: TextStyle(fontSize: 18, color: Colors.black),
       decoration: InputDecoration(
-        hintText: hint,
+        hintText: hintText,
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.grey, width: 1.0),
         ),

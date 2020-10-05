@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
-import 'package:flutter_app/screens/sign_up/sign_up_choice_screen.dart';
+import 'package:flutter_app/screens/sign_up/member_type_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginActivity extends StatefulWidget {
-  LoginActivity({Key key, this.title}) : super(key: key);
+class sign_in_screen extends StatefulWidget {
+  sign_in_screen({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -19,10 +19,10 @@ class LoginActivity extends StatefulWidget {
   final String title;
 
   @override
-  _LoginActivity createState() => _LoginActivity();
+  _sign_in_screen createState() => _sign_in_screen();
 }
 
-class _LoginActivity extends State<LoginActivity> {
+class _sign_in_screen extends State<sign_in_screen> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -135,7 +135,7 @@ class _LoginActivity extends State<LoginActivity> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CustomerIDActivity()));
+                          builder: (context) => membership_card_screen()));
                 },
                 child:
                     Text('LOGIN', style: TextStyle(color: Colors.deepOrange)),
@@ -156,7 +156,7 @@ class _LoginActivity extends State<LoginActivity> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SignUpSelectActivity()));
+                          builder: (context) => member_type_screen()));
                 },
                 child: Text('NO ACCOUNT? SIGN UP',
                     style: TextStyle(color: Colors.white)),
@@ -275,7 +275,7 @@ class FirstScreen extends StatelessWidget {
                   signOutGoogle();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) {
-                    return LoginActivity();
+                    return sign_in_screen();
                   }), ModalRoute.withName('/'));
                 },
                 color: Colors.white,
