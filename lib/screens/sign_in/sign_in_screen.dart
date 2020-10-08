@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
+import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
 import 'package:flutter_app/screens/sign_up/member_type_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -45,33 +46,21 @@ class _sign_in_screen extends State<sign_in_screen> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
+      floatingActionButton: _floatingActionButtonTester(),
+
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [Color(0xFFFF0041), Color(0xFFFB8E40)]),
-        ),
-        child: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
+          ),
 
+        child:Center(
           child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
             children: <Widget>[
@@ -81,11 +70,13 @@ class _sign_in_screen extends State<sign_in_screen> {
                 width: 150,
                 height: 150,
               ),
+
               SizedBox(height: 60),
               Text(
                 'EMAIL/USERNAME',
                 style: TextStyle(fontSize: 14, color: Colors.white),
               ),
+
               Container(
                 width: 300,
                 child: TextField(
@@ -105,11 +96,13 @@ class _sign_in_screen extends State<sign_in_screen> {
                   ),
                 ),
               ),
+
               SizedBox(height: 20),
               Text(
                 'PASSWORD',
                 style: TextStyle(fontSize: 14, color: Colors.white),
               ),
+
               Container(
                 width: 300,
                 child: TextField(
@@ -129,28 +122,20 @@ class _sign_in_screen extends State<sign_in_screen> {
                   ),
                 ),
               ),
+
               SizedBox(height: 20),
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => membership_card_screen()));
-                },
-                child:
-                    Text('LOGIN', style: TextStyle(color: Colors.deepOrange)),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-              ),
+              _loginButton(),
+
               SizedBox(height: 10),
               _signInButton(),
+
               FlatButton(
                 onPressed: () {},
                 child: Text('FORGOT USERNAME OR PASSWORD?',
                     style: TextStyle(color: Colors.white)),
                 highlightColor: Colors.deepOrangeAccent,
               ),
+
               FlatButton(
                 onPressed: () {
                   Navigator.push(
@@ -165,9 +150,59 @@ class _sign_in_screen extends State<sign_in_screen> {
               SizedBox(height: 40),
             ],
           ),
-        ),
+        ),),
       ),
     );
+  }
+
+  ///This class is the setup for calling a modal bottomSheet.
+  ///Temporarily located here fot testing until screen that this is meant to go is created.
+  void displayModalBottomSheet(context) {
+    var bottomSheetController =
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0)),
+        clipBehavior: Clip.hardEdge,
+        isScrollControlled: true,
+
+        context: context,
+        builder: (BuildContext buildContext) {
+          return SingleChildScrollView(
+            padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Container(
+                height:MediaQuery.of(context).size.height/3,
+                color: Color(0xFF737373),
+                child:table_info_screen(),
+              ),
+          );
+        }
+        );
+  }
+
+  ///This class is to test new screens using FAB on press.
+  ///Feel free to use.
+  Widget _floatingActionButtonTester(){
+    return FloatingActionButton(
+      onPressed: (){
+        displayModalBottomSheet(context);
+      }
+    );
+  }
+
+  ///This button is to go to main page after login.
+  Widget _loginButton(){
+      return RaisedButton(
+        onPressed: () { membership_card_screen();   },
+
+        child: Text(
+            'LOGIN',
+            style: TextStyle(color: Colors.deepOrange)),
+
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+        ),
+      );
   }
 
   Widget _signInButton() {
