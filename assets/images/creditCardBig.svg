@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="184" height="120.455" viewBox="0 0 184 120.455">
+  <g id="Group_97" data-name="Group 97" transform="translate(2 2)">
+    <rect id="Rectangle_28" data-name="Rectangle 28" width="180" height="116.455" rx="10" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="Path_43" data-name="Path 43" d="M125,121.994,101.56,121.9a4.638,4.638,0,0,1-4.606-4.643l.061-15.52.01-2.448a4.639,4.639,0,0,1,4.643-4.607l23.439.093a4.639,4.639,0,0,1,4.606,4.643l-.015,3.913-.056,14.055A4.638,4.638,0,0,1,125,121.994Z" transform="translate(-82.415 -79.359)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <line id="Line_61" data-name="Line 61" x2="10.275" y2="0.041" transform="translate(37.014 22.468)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path_44" data-name="Path 44" d="M174.567,119.351" transform="translate(-137.553 -96.883)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path_45" data-name="Path 45" d="M126.4,119.16" transform="translate(-103.337 -96.747)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <line id="Line_62" data-name="Line 62" x2="8.467" y2="0.034" transform="translate(14.6 22.379)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <line id="Line_63" data-name="Line 63" x2="10.275" y2="0.041" transform="translate(36.983 30.33)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path_46" data-name="Path 46" d="M174.459,146.5" transform="translate(-137.476 -116.168)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path_47" data-name="Path 47" d="M126.3,146.307" transform="translate(-103.26 -116.033)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <line id="Line_64" data-name="Line 64" x2="8.467" y2="0.034" transform="translate(14.569 30.241)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <line id="Line_65" data-name="Line 65" x2="32.689" y2="0.13" transform="translate(14.538 38.102)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <rect id="Rectangle_29" data-name="Rectangle 29" width="13.947" height="21.791" rx="6.974" transform="matrix(1, 0.004, -0.004, 1, 23.091, 16.345)" fill="none" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <rect id="Rectangle_30" data-name="Rectangle 30" width="67.679" height="5.253" rx="2.626" transform="translate(96.51 16.779) rotate(0.227)" fill="#fff" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <rect id="Rectangle_31" data-name="Rectangle 31" width="100.16" height="5.199" rx="2.6" transform="matrix(1, 0.004, -0.004, 1, 14.298, 98.578)" fill="#fff" stroke="#ec1c24" stroke-miterlimit="10" stroke-width="1"/>
+    <rect id="Rectangle_32" data-name="Rectangle 32" width="27.883" height="3.494" rx="1.747" transform="translate(15.983 77.995)" fill="#ec1c24"/>
+    <rect id="Rectangle_33" data-name="Rectangle 33" width="27.883" height="3.494" rx="1.747" transform="translate(51.168 77.995)" fill="#ec1c24"/>
+    <rect id="Rectangle_34" data-name="Rectangle 34" width="27.883" height="3.494" rx="1.747" transform="translate(86.354 77.995)" fill="#ec1c24"/>
+    <rect id="Rectangle_35" data-name="Rectangle 35" width="27.883" height="3.494" rx="1.747" transform="translate(121.54 77.995)" fill="#ec1c24"/>
+  </g>
+</svg>
