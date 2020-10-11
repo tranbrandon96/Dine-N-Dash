@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
+import 'package:flutter_app/screens/employee_screens/checkout_screen.dart';
 import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
 import 'package:flutter_app/screens/sign_up/member_type_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -185,7 +186,18 @@ class _sign_in_screen extends State<sign_in_screen> {
   Widget _floatingActionButtonTester(){
     return FloatingActionButton(
       onPressed: (){
-        displayModalBottomSheet(context);
+        //Brings up a bottom sheet
+        //displayModalBottomSheet(context);
+
+        //Sends to designated page
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return checkout_screen();
+            },
+          ),
+        );
+
       }
     );
   }
@@ -193,7 +205,13 @@ class _sign_in_screen extends State<sign_in_screen> {
   ///This button is to go to main page after login.
   Widget _loginButton(){
       return RaisedButton(
-        onPressed: () { membership_card_screen();   },
+        onPressed: () { Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return membership_card_screen();
+            },
+          ),
+        );   },
 
         child: Text(
             'LOGIN',
