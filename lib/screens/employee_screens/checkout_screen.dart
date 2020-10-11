@@ -8,9 +8,9 @@ class checkout_screen extends StatefulWidget{
 class _checkout_screen extends State<checkout_screen>{
   List<ListTile> menuItems = [
   ListTile(
-    title: Text('List item 1'),
-    subtitle: Text('item details'),
-    trailing: Text('\$10.00'),
+    title: Text('\t\tList item 1'),
+    subtitle: Text('\t\titem details'),
+    trailing: Text('\$10.00\t\t'),
   ),
   ];
 
