@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../components/membership_card_screen.dart';
 
 class account_creation_screen extends StatelessWidget {
   Widget build(BuildContext context) {
