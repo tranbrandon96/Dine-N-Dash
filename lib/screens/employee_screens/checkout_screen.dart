@@ -66,7 +66,7 @@ class _checkout_screen extends State<checkout_screen>{
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                         children:totalTextList),
-                    _PayButton(),
+                    _payButton(),
                   ],
                 ),
             ),
@@ -77,7 +77,7 @@ class _checkout_screen extends State<checkout_screen>{
     );
   }
 
-  Widget _PayButton(){
+  Widget _payButton(){
     return RaisedButton(
       onPressed: () {   },
       color:Color(0xFFFF0041),

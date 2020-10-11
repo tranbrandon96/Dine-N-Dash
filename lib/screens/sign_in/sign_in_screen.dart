@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_app/screens/employee_screens/checkout_screen.dart';
+import 'package:flutter_app/screens/employee_screens/review_order_screen.dart';
 import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
 import 'package:flutter_app/screens/sign_up/member_type_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -193,7 +194,8 @@ class _sign_in_screen extends State<sign_in_screen> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
-              return checkout_screen();
+              //return checkout_screen();
+              return review_order_screen();
             },
           ),
         );
