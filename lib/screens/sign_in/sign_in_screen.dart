@@ -5,6 +5,7 @@ import 'package:flutter_app/screens/employee_screens/checkout_screen.dart';
 import 'package:flutter_app/screens/employee_screens/review_order_screen.dart';
 import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
 import 'package:flutter_app/screens/employee_screens/tables_screen.dart';
+import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:flutter_app/screens/sign_up/member_type_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -197,7 +198,8 @@ class _sign_in_screen extends State<sign_in_screen> {
             builder: (context) {
               //return checkout_screen();
               //return review_order_screen();
-              return tables_screen();
+              //return tables_screen();
+              return view_table_screen();
             },
           ),
         );
