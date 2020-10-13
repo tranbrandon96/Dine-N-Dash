@@ -159,38 +159,12 @@ class _sign_in_screen extends State<sign_in_screen> {
     );
   }
 
-  ///This class is the setup for calling a modal bottomSheet.
-  ///Temporarily located here fot testing until screen that this is meant to go is created.
-  void displayModalBottomSheet(context) {
-    var bottomSheetController =
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0)),
-        clipBehavior: Clip.hardEdge,
-        isScrollControlled: true,
-
-        context: context,
-        builder: (BuildContext buildContext) {
-          return SingleChildScrollView(
-            padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: Container(
-                height:MediaQuery.of(context).size.height/3,
-                color: Color(0xFF737373),
-                child:table_info_screen(),
-              ),
-          );
-        }
-        );
-  }
 
   ///This class is to test new screens using FAB on press.
   ///Feel free to use.
   Widget _floatingActionButtonTester(){
     return FloatingActionButton(
       onPressed: (){
-        //Brings up a bottom sheet
-        //displayModalBottomSheet(context);
 
         //Sends to designated page
         Navigator.of(context).push(
@@ -198,8 +172,8 @@ class _sign_in_screen extends State<sign_in_screen> {
             builder: (context) {
               //return checkout_screen();
               //return review_order_screen();
-              //return tables_screen();
-              return view_table_screen();
+              return tables_screen();
+              //return view_table_screen();
             },
           ),
         );
