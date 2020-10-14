@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
+import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
+import 'package:flutter_app/screens/profile_screen/profile_screen.dart';
 import 'package:flutter_app/screens/employee_screens/checkout_screen.dart';
 import 'package:flutter_app/screens/employee_screens/review_order_screen.dart';
 import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_app/screens/employee_screens/tables_screen.dart';
 import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:flutter_app/screens/sign_up/member_type_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class sign_in_screen extends StatefulWidget {
   sign_in_screen({Key key, this.title}) : super(key: key);
@@ -28,6 +31,10 @@ class sign_in_screen extends StatefulWidget {
 }
 
 class _sign_in_screen extends State<sign_in_screen> {
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
+
   int _counter = 0;
 
   void _incrementCounter() {
@@ -74,72 +81,89 @@ class _sign_in_screen extends State<sign_in_screen> {
                 width: 150,
                 height: 150,
               ),
-
               SizedBox(height: 60),
               Text(
                 'EMAIL/USERNAME',
                 style: TextStyle(fontSize: 14, color: Colors.white),
               ),
-
               Container(
                 width: 300,
                 child: TextField(
-                  textAlign: TextAlign.center,
-                  obscureText: false,
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                  decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                    keyboardType: TextInputType.emailAddress,
+                    textAlign: TextAlign.center,
+                    obscureText: false,
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
                     ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                  ),
-                ),
+                    onChanged: (value) {
+                      email = value;
+                    }),
               ),
-
               SizedBox(height: 20),
               Text(
                 'PASSWORD',
                 style: TextStyle(fontSize: 14, color: Colors.white),
               ),
-
               Container(
                 width: 300,
                 child: TextField(
-                  textAlign: TextAlign.center,
-                  obscureText: true,
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                  decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                    textAlign: TextAlign.center,
+                    obscureText: true,
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
                     ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                  ),
+                    onChanged: (value) {
+                      password = value;
+                    }),
+              ),
+              SizedBox(height: 20),
+              RaisedButton(
+                onPressed: () async {
+                  try {
+                    final user = await _auth.signInWithEmailAndPassword(
+                        email: email, password: password);
+                    if (user != null) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage()));
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+                child:
+                    Text('LOGIN', style: TextStyle(color: Colors.deepOrange)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
                 ),
               ),
-
-              SizedBox(height: 20),
-              _loginButton(),
-
               SizedBox(height: 10),
               _signInButton(),
-
               FlatButton(
                 onPressed: () {},
                 child: Text('FORGOT USERNAME OR PASSWORD?',
                     style: TextStyle(color: Colors.white)),
                 highlightColor: Colors.deepOrangeAccent,
               ),
-
               FlatButton(
                 onPressed: () {
                   Navigator.push(
@@ -212,7 +236,7 @@ class _sign_in_screen extends State<sign_in_screen> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return FirstScreen();
+                  return HomePage();
                 },
               ),
             );
@@ -249,6 +273,7 @@ class _sign_in_screen extends State<sign_in_screen> {
 }
 
 class FirstScreen extends StatelessWidget {
+  static const String id = 'first_screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
