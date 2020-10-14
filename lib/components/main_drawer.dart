@@ -71,7 +71,7 @@ class MainDrawer extends StatelessWidget {
           signOutGoogle();
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) {
-            return LoginActivity();
+            return sign_in_screen();
           }), ModalRoute.withName('/'));
         },
         leading: Icon(

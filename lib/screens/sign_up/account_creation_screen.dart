@@ -11,13 +11,13 @@ String gender;
 String birthday;
 String password;
 
-class AccountCreationActivity extends StatefulWidget {
+class account_creation_screen extends StatefulWidget {
   @override
   _AccountCreationActivityState createState() =>
       _AccountCreationActivityState();
 }
 
-class _AccountCreationActivityState extends State<AccountCreationActivity> {
+class _AccountCreationActivityState extends State<account_creation_screen> {
 
 
   final _auth = FirebaseAuth.instance;
@@ -134,7 +134,7 @@ class _AccountCreationActivityState extends State<AccountCreationActivity> {
                     final newUser = await _auth.createUserWithEmailAndPassword(
                         email: email, password: password);
                     if (newUser != null) {
-                      Navigator.pushNamed(context, FirstScreen().id);
+                      Navigator.pushNamed(context, FirstScreen.id);
                     }
                   } catch (e) {
                     print(e);
