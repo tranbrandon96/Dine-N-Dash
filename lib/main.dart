@@ -1,8 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'screens/new_updates_screens/balanceprint_screen.dart';
-import 'screens/new_updates_screens/discount_screen.dart';
-import 'screens/new_updates_screens/employee_memberlink.dart';
 import 'screens/sign_in/sign_in_screen.dart';
 
 void main() async {
@@ -35,7 +32,7 @@ class DineNDashApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: employee_memberlink(),
+      home: sign_in_screen(title: 'Flutter Demo Home Page'),
     );
   }
 }

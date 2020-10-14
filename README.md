@@ -1,6 +1,6 @@
-# dinedash_app
+# flutter_app
 
-Dine n' Dash Mobile Application
+A new Flutter application.
 
 ## Getting Started
 
