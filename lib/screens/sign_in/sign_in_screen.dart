@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/screens/sign_up/sign_up_choice_screen.dart';
+import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
-import '../../components/membership_card_screen.dart';
-import '../sign_up/account_creation_screen.dart';
-import '../sign_up/account_creation_screen.dart';
+import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
+import 'package:flutter_app/screens/profile_screen/profile_screen.dart';
+import 'package:flutter_app/screens/employee_screens/checkout_screen.dart';
+import 'package:flutter_app/screens/employee_screens/review_order_screen.dart';
+import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
+import 'package:flutter_app/screens/employee_screens/tables_screen.dart';
+import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
+import 'package:flutter_app/screens/sign_up/member_type_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginActivity extends StatefulWidget {
-  LoginActivity({Key key, this.title}) : super(key: key);
+class sign_in_screen extends StatefulWidget {
+  sign_in_screen({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -21,10 +27,14 @@ class LoginActivity extends StatefulWidget {
   final String title;
 
   @override
-  _LoginActivity createState() => _LoginActivity();
+  _sign_in_screen createState() => _sign_in_screen();
 }
 
-class _LoginActivity extends State<LoginActivity> {
+class _sign_in_screen extends State<sign_in_screen> {
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
+
   int _counter = 0;
 
   void _incrementCounter() {
@@ -47,33 +57,21 @@ class _LoginActivity extends State<LoginActivity> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
+      floatingActionButton: _floatingActionButtonTester(),
+
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [Color(0xFFFF0041), Color(0xFFFB8E40)]),
-        ),
-        child: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
+          ),
 
+        child:Center(
           child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
             children: <Widget>[
@@ -91,21 +89,24 @@ class _LoginActivity extends State<LoginActivity> {
               Container(
                 width: 300,
                 child: TextField(
-                  textAlign: TextAlign.center,
-                  obscureText: false,
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                  decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                    keyboardType: TextInputType.emailAddress,
+                    textAlign: TextAlign.center,
+                    obscureText: false,
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
                     ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                  ),
-                ),
+                    onChanged: (value) {
+                      email = value;
+                    }),
               ),
               SizedBox(height: 20),
               Text(
@@ -115,29 +116,39 @@ class _LoginActivity extends State<LoginActivity> {
               Container(
                 width: 300,
                 child: TextField(
-                  textAlign: TextAlign.center,
-                  obscureText: true,
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                  decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                    textAlign: TextAlign.center,
+                    obscureText: true,
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
                     ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                  ),
-                ),
+                    onChanged: (value) {
+                      password = value;
+                    }),
               ),
               SizedBox(height: 20),
               RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CustomerIDActivity()));
+                onPressed: () async {
+                  try {
+                    final user = await _auth.signInWithEmailAndPassword(
+                        email: email, password: password);
+                    if (user != null) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage()));
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
                 },
                 child:
                     Text('LOGIN', style: TextStyle(color: Colors.deepOrange)),
@@ -158,7 +169,7 @@ class _LoginActivity extends State<LoginActivity> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SignUpSelectActivity()));
+                          builder: (context) => member_type_screen()));
                 },
                 child: Text('NO ACCOUNT? SIGN UP',
                     style: TextStyle(color: Colors.white)),
@@ -167,9 +178,53 @@ class _LoginActivity extends State<LoginActivity> {
               SizedBox(height: 40),
             ],
           ),
-        ),
+        ),),
       ),
     );
+  }
+
+
+  ///This class is to test new screens using FAB on press.
+  ///Feel free to use.
+  Widget _floatingActionButtonTester(){
+    return FloatingActionButton(
+      onPressed: (){
+
+        //Sends to designated page
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              //return checkout_screen();
+              //return review_order_screen();
+              return tables_screen();
+              //return view_table_screen();
+            },
+          ),
+        );
+
+      }
+    );
+  }
+
+  ///This button is to go to main page after login.
+  Widget _loginButton(){
+      return RaisedButton(
+        onPressed: () { Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return membership_card_screen();
+            },
+          ),
+        );   },
+
+        child: Text(
+            'LOGIN',
+            style: TextStyle(color: Colors.deepOrange)),
+
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+        ),
+      );
   }
 
   Widget _signInButton() {
@@ -181,7 +236,7 @@ class _LoginActivity extends State<LoginActivity> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return FirstScreen();
+                  return HomePage();
                 },
               ),
             );
@@ -218,6 +273,7 @@ class _LoginActivity extends State<LoginActivity> {
 }
 
 class FirstScreen extends StatelessWidget {
+  static const String id = 'first_screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -277,7 +333,7 @@ class FirstScreen extends StatelessWidget {
                   signOutGoogle();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) {
-                    return LoginActivity();
+                    return sign_in_screen();
                   }), ModalRoute.withName('/'));
                 },
                 color: Colors.white,
