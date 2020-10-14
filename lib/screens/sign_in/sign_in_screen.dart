@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
+import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
+import 'package:flutter_app/screens/profile_screen/profile_screen.dart';
 import 'package:flutter_app/screens/sign_up/sign_up_choice_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginActivity extends StatefulWidget {
   LoginActivity({Key key, this.title}) : super(key: key);
@@ -23,6 +26,10 @@ class LoginActivity extends StatefulWidget {
 }
 
 class _LoginActivity extends State<LoginActivity> {
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
+
   int _counter = 0;
 
   void _incrementCounter() {
@@ -89,21 +96,24 @@ class _LoginActivity extends State<LoginActivity> {
               Container(
                 width: 300,
                 child: TextField(
-                  textAlign: TextAlign.center,
-                  obscureText: false,
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                  decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                    keyboardType: TextInputType.emailAddress,
+                    textAlign: TextAlign.center,
+                    obscureText: false,
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
                     ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                  ),
-                ),
+                    onChanged: (value) {
+                      email = value;
+                    }),
               ),
               SizedBox(height: 20),
               Text(
@@ -113,29 +123,39 @@ class _LoginActivity extends State<LoginActivity> {
               Container(
                 width: 300,
                 child: TextField(
-                  textAlign: TextAlign.center,
-                  obscureText: true,
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                  decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                    textAlign: TextAlign.center,
+                    obscureText: true,
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
                     ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                  ),
-                ),
+                    onChanged: (value) {
+                      password = value;
+                    }),
               ),
               SizedBox(height: 20),
               RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CustomerIDActivity()));
+                onPressed: () async {
+                  try {
+                    final user = await _auth.signInWithEmailAndPassword(
+                        email: email, password: password);
+                    if (user != null) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage()));
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
                 },
                 child:
                     Text('LOGIN', style: TextStyle(color: Colors.deepOrange)),
@@ -179,7 +199,7 @@ class _LoginActivity extends State<LoginActivity> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return FirstScreen();
+                  return HomePage();
                 },
               ),
             );
@@ -216,6 +236,7 @@ class _LoginActivity extends State<LoginActivity> {
 }
 
 class FirstScreen extends StatelessWidget {
+  static const String id = 'first_screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
