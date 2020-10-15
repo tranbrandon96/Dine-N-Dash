@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/edit_creditcart/edit_creditcard.dart';
 
-class add_creditcard extends StatefulWidget {
+class AddCreditCard extends StatefulWidget {
   @override
-  _add_creditcardState createState() => _add_creditcardState();
+  _AddCreditCardState createState() => _AddCreditCardState();
 }
 
-class _add_creditcardState extends State<add_creditcard> {
+class _AddCreditCardState extends State<AddCreditCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: const Color(0xfffd1040),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
-          iconSize: 30.0,
+
           color: Colors.white,
-          onPressed: () {},
+          onPressed: () {
+                                       Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditCreditCard()));
+        },
+          
         ),
         title: Text(
           'Add Payment Method',
           style: TextStyle(
-            fontSize: 28.0,
+
             fontFamily: 'Futura',
             fontWeight: FontWeight.w600,
           ),
@@ -87,7 +95,12 @@ class _add_creditcardState extends State<add_creditcard> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                                       Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditCreditCard()));
+        },
                     child: Text(
                         'SAVE'
                     ),

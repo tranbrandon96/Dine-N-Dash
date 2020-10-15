@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 
-class checkout_screen extends StatefulWidget{
-  _checkout_screen createState() =>  _checkout_screen();
+class CheckoutScreen extends StatefulWidget{
+  _CheckoutScreen createState() =>  _CheckoutScreen();
 }
 
-class _checkout_screen extends State<checkout_screen>{
+class _CheckoutScreen extends State<CheckoutScreen>{
   List<ListTile> menuItems = [
   ListTile(
-    title: Text('\t\tList item 1'),
-    subtitle: Text('\t\titem details'),
+    title: Text('\t\tDouble Double'),
+    subtitle: Text('\t\t + Animal Style' + '\n\t\t -  No Pickles'),
     trailing: Text('\$10.00\t\t'),
   ),
   ];
@@ -32,7 +32,7 @@ class _checkout_screen extends State<checkout_screen>{
           ),
           title: Text( "Receipt",
             style: TextStyle(
-            fontSize: 35,
+            
             color: Colors.black,),),
           backgroundColor: Colors.white,
         ),
@@ -51,7 +51,7 @@ class _checkout_screen extends State<checkout_screen>{
             ),
 
             Container(
-                height: 150,
+                height: 100,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children:<Widget>[

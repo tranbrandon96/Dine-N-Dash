@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
+import 'package:flutter_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
-import 'package:flutter_app/screens/profile_screen/profile_screen.dart';
+
 import 'package:flutter_app/screens/employee_screens/checkout_screen.dart';
 import 'package:flutter_app/screens/employee_screens/review_order_screen.dart';
 import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
@@ -57,7 +58,7 @@ class _sign_in_screen extends State<sign_in_screen> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      floatingActionButton: _floatingActionButtonTester(),
+     // floatingActionButton: _floatingActionButtonTester(),
 
       body: SingleChildScrollView(
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -159,8 +160,13 @@ class _sign_in_screen extends State<sign_in_screen> {
               SizedBox(height: 10),
               _signInButton(),
               FlatButton(
-                onPressed: () {},
-                child: Text('FORGOT USERNAME OR PASSWORD?',
+                onPressed: () {
+                                   Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ForgotPasswordScreen()));
+                },
+                child: Text('FORGOT PASSWORD?',
                     style: TextStyle(color: Colors.white)),
                 highlightColor: Colors.deepOrangeAccent,
               ),
@@ -186,25 +192,25 @@ class _sign_in_screen extends State<sign_in_screen> {
 
   ///This class is to test new screens using FAB on press.
   ///Feel free to use.
-  Widget _floatingActionButtonTester(){
-    return FloatingActionButton(
-      onPressed: (){
+  // Widget _floatingActionButtonTester(){
+  //   return FloatingActionButton(
+  //     onPressed: (){
 
-        //Sends to designated page
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) {
-              //return checkout_screen();
-              //return review_order_screen();
-              return tables_screen();
-              //return view_table_screen();
-            },
-          ),
-        );
+  //       //Sends to designated page
+  //       Navigator.of(context).push(
+  //         MaterialPageRoute(
+  //           builder: (context) {
+  //             //return checkout_screen();
+  //             //return review_order_screen();
+  //             return TableInfoScreen();
+  //             //return view_table_screen();
+  //           },
+  //         ),
+  //       );
 
-      }
-    );
-  }
+  //     }
+  //   );
+  // }
 
   ///This button is to go to main page after login.
   Widget _loginButton(){

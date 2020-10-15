@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
+import 'package:flutter_app/screens/edit_creditcart/edit_creditcard.dart';
+import 'package:flutter_app/screens/edit_employee_account/edit_employeeacct.dart';
+import 'package:flutter_app/screens/proxy/proxy_screen.dart';
+
+import 'package:flutter_app/screens/settings/settings_screen.dart';
 import 'package:flutter_app/screens/sign_in/sign_in_screen.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -35,7 +40,10 @@ class MainDrawer extends StatelessWidget {
         height: 20.0,
       ),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => EditEmployeeAccount()));
+        },
         leading: Icon(
           Icons.person,
           color: Colors.black,
@@ -43,15 +51,21 @@ class MainDrawer extends StatelessWidget {
         title: Text("Your Profile"),
       ),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Proxy()));
+        },
         leading: Icon(
           Icons.tablet,
           color: Colors.black,
         ),
-        title: Text("Recall by Proxy"),
+        title: Text("Proxy"),
       ),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => EditCreditCard()));
+        },
         leading: Icon(
           Icons.credit_card,
           color: Colors.black,
@@ -59,7 +73,10 @@ class MainDrawer extends StatelessWidget {
         title: Text("Payment Method"),
       ),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Setting()));
+        },
         leading: Icon(
           Icons.settings,
           color: Colors.black,

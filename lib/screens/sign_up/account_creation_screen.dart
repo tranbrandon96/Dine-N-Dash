@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
 
   String firstName;
 String lastName;
@@ -134,7 +135,10 @@ class _AccountCreationActivityState extends State<account_creation_screen> {
                     final newUser = await _auth.createUserWithEmailAndPassword(
                         email: email, password: password);
                     if (newUser != null) {
-                      Navigator.pushNamed(context, FirstScreen.id);
+                    Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage()));
                     }
                   } catch (e) {
                     print(e);

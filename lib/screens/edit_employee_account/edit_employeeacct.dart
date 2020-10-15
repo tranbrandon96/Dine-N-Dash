@@ -1,45 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/firebase/sign_in.dart';
+import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
 
-class edit_employeeacct extends StatefulWidget {
+class EditEmployeeAccount extends StatefulWidget {
   @override
-  _edit_employeeacctState createState() => _edit_employeeacctState();
+  _EditEmployeeAccountState createState() => _EditEmployeeAccountState();
 }
 
-class _edit_employeeacctState extends State<edit_employeeacct> {
+class _EditEmployeeAccountState extends State<EditEmployeeAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          iconSize: 30.0,
-          color: const Color(0xfffd1040),
-          onPressed: () {},
-        ),
-        title: Text(
-          'Employee Account Info',
-          style: TextStyle(
-            fontSize: 28.0,
-            fontFamily: 'Futura',
-            fontWeight: FontWeight.w600,
-            color: Colors.black,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: const Color(0xfffd1040),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            iconSize: 30.0,
+            color: Colors.white,
+            onPressed: () {
+                                    Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage()));
+            },
+          ),
+          title: Text(
+            'Profile',
+            style: TextStyle(
+
+              fontFamily: 'Futura',
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(80.0),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  alignment: Alignment.center,
-                  image: const AssetImage('assets/images/ProfilePicture.png'),
-                ),
+              SizedBox(height: 20),
+              CircleAvatar(
+                radius: 50.0,
+                backgroundImage: NetworkImage(imageUrl),
               ),
-            ),
+            
             Container(
               padding: EdgeInsets.all(5.0),
               child: Center(

@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
 import 'package:flutter_svg/svg.dart';
 
-class tables_screen extends StatefulWidget{
-  _tables_screen createState() =>  _tables_screen();
+class TablesScreen extends StatefulWidget{
+  _TablesScreen createState() =>  _TablesScreen();
 }
 
-class _tables_screen extends State<tables_screen>{
+class _TablesScreen extends State<TablesScreen>{
   List<ListTile> tableItems = [
     ListTile(
       leading: SvgPicture.asset(
@@ -91,7 +91,7 @@ class _tables_screen extends State<tables_screen>{
             child: Container(
               height:MediaQuery.of(context).size.height/3,
               color: Color(0xFF737373),
-              child:table_info_screen(),
+              child:TableInfoScreen(),
             ),
           );
         }

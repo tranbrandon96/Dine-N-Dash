@@ -4,11 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 
-class table_info_screen extends StatefulWidget{
-  _table_info_screen createState() =>  _table_info_screen();
+class TableInfoScreen extends StatefulWidget{
+  _TableInfoScreen createState() =>  _TableInfoScreen();
 }
 
-class _table_info_screen extends State<table_info_screen> {
+class _TableInfoScreen extends State<TableInfoScreen> {
   TextField _tableNumberField = buildNumberTextField();
   TextField _partySizeField = buildNumberTextField();
 

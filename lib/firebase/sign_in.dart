@@ -30,7 +30,7 @@ Future<String> signInWithGoogle() async {
   if (user != null) {
     // Add the following lines after getting the user
     // Checking if email and name is null
-    assert(user.email != null);
+    //assert(user.email != null);
     assert(user.displayName != null);
     assert(user.photoURL != null);
 

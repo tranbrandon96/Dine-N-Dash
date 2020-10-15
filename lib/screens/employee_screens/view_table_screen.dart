@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/screens/employee_screens/checkout_screen.dart';
 import 'package:flutter_svg/svg.dart';
 
-class view_table_screen extends StatefulWidget{
-  _view_table_screen createState() =>  _view_table_screen();
+class ViewTableScreen extends StatefulWidget{
+  _ViewTableScreen createState() =>  _ViewTableScreen();
 }
 
-class _view_table_screen extends State<view_table_screen>{
+class _ViewTableScreen extends State<ViewTableScreen>{
   List<ExpansionTile> menuItems = [
     ExpansionTile(
-      title: Text('\t\tList item 1'),
-      subtitle: Text('\t\titem details'),
+      title: Text('\t\tDouble Double'),
+      subtitle: Text('\t\t + Animal Style' + '\n\t\t -  No Pickles'),
       trailing: Text('\$10.00\t\t'),
       children: [
         Row(
@@ -45,7 +46,7 @@ class _view_table_screen extends State<view_table_screen>{
           ],
           title: Text( "Table 12",
             style: TextStyle(
-              fontSize: 35,
+              
               color: Colors.black,),),
           backgroundColor: Colors.white,
         ),
@@ -88,7 +89,7 @@ class _view_table_screen extends State<view_table_screen>{
           ),
 
           Container(
-            height: 100,
+            height: 50,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children:<Widget>[
@@ -96,7 +97,7 @@ class _view_table_screen extends State<view_table_screen>{
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children:<Widget>[
                     _button('BALANCE PRINT', null),
-                    _button('CHECKOUT', null)
+                    _button('CHECKOUT', CheckoutScreen())
 
                   ],
                 ),
