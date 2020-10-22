@@ -1,6 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/QR_component.dart';
 
 class membership_card_screen extends StatelessWidget {
+  String memberID;
+  String memberName;
+
+  membership_card_screen(){
+    memberID = '7HSGD930GJAJADMG39J';
+    memberName = 'John Doe';
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -47,8 +57,9 @@ class membership_card_screen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Container(
-                height: 400,
-                width: 300,
+                height: MediaQuery.of(context).size.height/1.8,
+                width: MediaQuery.of(context).size.width/1.3,
+                
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
@@ -56,32 +67,35 @@ class membership_card_screen extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.circular(20)),
                 child: Container(
+                  margin: EdgeInsets.only(left:10,right:10,top:20,bottom:10),
                   child: Center(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Text(
                           'Member Card',
                           style: TextStyle(
-                              fontSize: 23,
-                              color: Colors.deepOrange,
+                              fontSize: 30,
+                              color: Color(0xFFFF0041),
                               fontWeight: FontWeight.bold),
                         ),
-                        Image(
-                          image: AssetImage('assets/images/QR_Code.png'),
-                        ),
-                        Text(
-                          'John Doe',
-                          style: TextStyle(
-                              fontSize: 23,
-                              color: Colors.deepOrange,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          '7HSGD930GJAJADMG39J',
-                          style:
-                              TextStyle(fontSize: 15, color: Colors.deepOrange),
+                        QR_component(memberID,context),
+                        Column(
+                          children: [
+                            Text(
+                              memberName,
+                              style: TextStyle(
+                                  fontSize: 27,
+                                  color: Color(0xFFFF0041),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              memberID,
+                              style:
+                              TextStyle(fontSize: 15, color: Color(0xFFFF0041)),
+                            ),
+                          ],
                         ),
                       ],
                     ),
