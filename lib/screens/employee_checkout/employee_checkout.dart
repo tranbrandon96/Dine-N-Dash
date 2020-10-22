@@ -67,4 +67,46 @@ class _employee_checkoutState extends State<employee_checkout> {
       ),
     );
   }
+  Future<void> _showChargeAlert() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+                title: Text('Charge User Name?'),
+                content: SvgPicture.asset(
+                  "assets/icons/user-1.svg",
+                  height: 135,
+                  width: 135,
+                ),
+                actions: [
+                  RaisedButton(
+                      onPressed: () {},
+                      child: Text(
+                          'YES'
+                      ),
+                      color: const Color(0xfffd1040),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(100))
+                      )
+
+                  ),
+                  RaisedButton(
+                      onPressed: () {},
+                      child: Text(
+                          'NO',
+                        style: TextStyle(
+                          color: const Color(0xfffd1040)
+                        ),
+                      ),
+                      color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(100))
+                    )
+                  ),
+                ],
+              );
+      },
+    );
+  }
 }
