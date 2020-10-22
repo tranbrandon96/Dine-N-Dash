@@ -31,6 +31,8 @@ class DineNDashApp extends StatelessWidget {
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        bottomSheetTheme: BottomSheetThemeData(
+            backgroundColor: Colors.black.withOpacity(0)),
       ),
       home: sign_in_screen(title: 'Flutter Demo Home Page'),
     );
