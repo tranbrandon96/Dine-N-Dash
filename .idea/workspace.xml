@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="3575c6aa-6d23-4c74-8d9f-c85c0dfa2fc5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+=======
+    <list default="true" id="dfe63a7a-5d35-4585-b2fc-297c4b9c9ce8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Dine-N-Dash.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dine-N-Dash.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/5.6.2/executionHistory/executionHistory.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/5.6.2/executionHistory/executionHistory.lock" beforeDir="false" />
@@ -1699,12 +1710,28 @@
       <change beforePath="$PROJECT_DIR$/lib/screens/new_updates_screens/employee_memberlink.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/new_screens_update/employee_memberlink.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/new_screens_update/employee_memberlink.dart" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< Updated upstream
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_6_API_29" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+>>>>>>> Stashed changes
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -1720,7 +1747,11 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+<<<<<<< Updated upstream
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+=======
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+>>>>>>> Stashed changes
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunManager">
@@ -1746,6 +1777,7 @@
     <state width="1398" height="228" key="GridCell.Tab.0.bottom" timestamp="1602647332584">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
+<<<<<<< Updated upstream
     <state width="1398" height="228" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1602647332584" />
     <state width="1398" height="228" key="GridCell.Tab.0.center" timestamp="1602647332583">
       <screen x="0" y="23" width="1440" height="877" />
@@ -1759,5 +1791,69 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1398" height="228" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1602647332584" />
+=======
+    <state x="305" y="6" key="CommitChangelistDialog2/0.0.1368.872@0.0.1368.872" timestamp="1603387810673" />
+    <state x="649" y="171" key="FileChooserDialogImpl" timestamp="1602713982325">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="649" y="171" key="FileChooserDialogImpl/0.0.1368.872@0.0.1368.872" timestamp="1602713982325" />
+    <state width="1398" height="188" key="GridCell.Tab.0.bottom" timestamp="1603747578669">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="666" height="208" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1603396022616" />
+    <state width="1398" height="188" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1603747578669" />
+    <state width="1398" height="188" key="GridCell.Tab.0.center" timestamp="1603747578668">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="666" height="208" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1603396022616" />
+    <state width="1398" height="188" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1603747578668" />
+    <state width="1398" height="188" key="GridCell.Tab.0.left" timestamp="1603747578668">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="666" height="208" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1603396022615" />
+    <state width="1398" height="188" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1603747578668" />
+    <state width="1398" height="188" key="GridCell.Tab.0.right" timestamp="1603747578669">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="666" height="208" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1603396022616" />
+    <state width="1398" height="188" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1603747578669" />
+    <state x="260" y="50" key="MergeDialog" timestamp="1602977593623">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="260" y="50" key="MergeDialog/0.0.1368.872@0.0.1368.872" timestamp="1602977593623" />
+    <state x="323" y="198" key="MultipleFileMergeDialog" timestamp="1603387533002">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="323" y="198" key="MultipleFileMergeDialog/0.0.1368.872@0.0.1368.872" timestamp="1603387533002" />
+    <state x="196" y="102" key="SettingsEditor" timestamp="1603747721622">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="186" y="79" key="SettingsEditor/0.0.1368.872@0.0.1368.872" timestamp="1602648203291" />
+    <state x="196" y="102" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1603747721622" />
+    <state x="277" y="170" key="Vcs.Push.Dialog.v2" timestamp="1603387887841">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="277" y="170" key="Vcs.Push.Dialog.v2/0.0.1368.872@0.0.1368.872" timestamp="1603387887841" />
+    <state x="-3" y="95" width="1846" height="1370" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1602710595795">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="-3" y="95" width="1846" height="1370" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1368.872@0.0.1368.872" timestamp="1602710595795" />
+    <state x="94" y="94" width="1181" height="685" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1602648277600">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="94" y="94" width="1181" height="685" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1368.872@0.0.1368.872" timestamp="1602648277600" />
+    <state x="492" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603387391905">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="492" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872@0.0.1368.872" timestamp="1603387391905" />
+    <state x="261" y="201" key="run.anything.popup" timestamp="1603342093992">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="261" y="201" key="run.anything.popup/0.0.1368.872@0.0.1368.872" timestamp="1603342093992" />
+    <state x="469" y="91" width="672" height="678" key="search.everywhere.popup" timestamp="1602712598409">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="469" y="91" width="672" height="678" key="search.everywhere.popup/0.0.1368.872@0.0.1368.872" timestamp="1602712598409" />
+>>>>>>> Stashed changes
   </component>
 </project>
