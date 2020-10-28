@@ -3,6 +3,7 @@ import 'package:flutter_app/components/main_drawer.dart';
 import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
 import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,26 +11,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //   List<ListTile> tableItems = [
-  //   ListTile(
-  //     leading: SvgPicture.asset(
-  //       "assets/icons/user-1.svg",
-  //       height: 60,
-  //       width: 60,
-  //     ),
-  //     title: Text('User Name'),
-  //     subtitle: Text('Check In: 12:00pm\nParty Size 4'),
-  //     trailing: Row(
-  //         mainAxisSize: MainAxisSize.min,
-  //         children: <Widget>[
-  //           Text('Table 14', style: TextStyle(fontSize: 20, color: Colors.grey),),
-  //           IconButton(
-  //             icon: Icon(Icons.keyboard_arrow_right),
-  //           )
-  //         ]),
-      
-  //   ),
-  // ];
+     final dbRef = FirebaseDatabase.instance.reference().child("Tables");
+     List<dynamic>lists = [];
+
   
   @override
   Widget build(BuildContext context) {
@@ -69,48 +53,58 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Color(0xFFFFF0041)
       ),
 
-      // body: Container(
-      //   height: MediaQuery.of(context).size.height,
-      //   child: ListView(children: tableItems),
-      // ),
-    
       drawer: Drawer(
         child: MainDrawer(),
-        
       ),
       
-      body: Column(children: [
-        ListTile(
-                leading: SvgPicture.asset(
-        "assets/icons/user-1.svg",
-        height: 60,
-        width: 60,
-      ),
-      title: Text('John D'),
-      subtitle: Text('Check In: 12:00pm\nParty Size 2'),
-      trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text('Table 14', style: TextStyle(fontSize: 20, color: Colors.grey),),
-            IconButton(
-              icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: () {Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ViewTableScreen()));
-              }
-            )
-          ]),
-        )
-      ]
-      )
-
-
-      
+      body: Container(child: tableListView(),),
     );
-
-    
   }
+
+  /// This method takes database data into a list. Returns and builds a listView with
+     /// listTiles that have database data.
+     Widget tableListView() {return FutureBuilder(
+         future: dbRef.once(),
+         builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
+           if (snapshot.hasData) {
+             lists.clear();
+             Map<dynamic, dynamic> values = snapshot.data.value;
+             values.forEach((key, values) {
+               lists.add(values);
+             });
+             return new ListView.builder(
+                 shrinkWrap: true,
+                 itemCount: lists.length,
+                 itemBuilder: (BuildContext context, int index) {
+                   return  ListTile(
+                     leading: SvgPicture.asset(
+                       "assets/icons/user-1.svg",
+                       height: 60,
+                       width: 60,
+                     ),
+                     title: Text("" + lists[index]["User_Name"].toString()),
+                     subtitle: Text('Check In: ' + lists[index]["Check_In"] +
+                         '\nParty Size '+ lists[index]["Party_Size"].toString()),
+                     trailing: Row(
+                         mainAxisSize: MainAxisSize.min,
+                         children: <Widget>[
+                           Text('Table ' + lists[index]["Table_Number"].toString(), style: TextStyle(fontSize: 20, color: Colors.grey),),
+                           IconButton(
+                               icon: Icon(Icons.keyboard_arrow_right),
+                               onPressed: () {Navigator.push(
+                                   context,
+                                   MaterialPageRoute(
+                                       builder: (context) => ViewTableScreen()));
+                               }
+                           )
+                         ]),
+                   );
+
+
+                 });
+           }
+           return CircularProgressIndicator();
+         });}
 }
 
  ///This class is the setup for calling a modal bottomSheet.
