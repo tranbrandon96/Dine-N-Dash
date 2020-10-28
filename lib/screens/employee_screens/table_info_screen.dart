@@ -1,16 +1,22 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
+import 'package:intl/intl.dart';
 
 class TableInfoScreen extends StatefulWidget{
   _TableInfoScreen createState() =>  _TableInfoScreen();
 }
 
 class _TableInfoScreen extends State<TableInfoScreen> {
-  TextField _tableNumberField = buildNumberTextField();
-  TextField _partySizeField = buildNumberTextField();
+   final _tableNumberController = TextEditingController();
+  final _partySizeController = TextEditingController();
+  final databaseReference = FirebaseDatabase.instance.reference().child("Tables");
+  String partySize = "0";
+  String tableNumber = "0";
+  String checkIn = "0:00pm";
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +74,7 @@ class _TableInfoScreen extends State<TableInfoScreen> {
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 15),
-                      Container(width: 50, child: _tableNumberField),
+                      Container(width: 50, child: buildNumberTextField(_tableNumberController)),
                     ],
                   ),
 
@@ -85,14 +91,17 @@ class _TableInfoScreen extends State<TableInfoScreen> {
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 15),
-                      Container(width: 50, child: _partySizeField),
+                      Container(width: 50, child: buildNumberTextField(_partySizeController)),
                     ],
                   ),
                   SizedBox(height: 5),
                   RaisedButton(
                     onPressed: () {
-                      MaterialPageRoute(
-                          builder: (context) => membership_card_screen());
+                      partySize = _partySizeController.text;
+                      tableNumber = _tableNumberController.text;
+                      checkIn = DateFormat('HH:mm').format(DateTime.now());
+                      createData();
+                      Navigator.pop(context);
                     },
                     color: Color(0xFFFF0041),
                     child: Text('CONTINUE',
@@ -109,15 +118,26 @@ class _TableInfoScreen extends State<TableInfoScreen> {
 
     );
   }
+
+  void createData(){
+    DatabaseReference tableReference = databaseReference.child("Table"+tableNumber);
+    tableReference.set({
+      'User_Name': 'Guest',
+      'Party_Size': partySize,
+      'Check_In': checkIn,
+      'Table_Number': tableNumber,
+    });
+  }
 }
 
 
 ///Function builds a text field with number input values for hint text and
 ///bool to obscure user input text.
-Widget buildNumberTextField() {
+Widget buildNumberTextField(TextEditingController controller) {
   RegExp regExp = new RegExp("[0-9]");
   return TextField(
       maxLength: 4,
+      controller: controller,
       inputFormatters: [FilteringTextInputFormatter.allow(regExp)],
       keyboardType: TextInputType.number,
       style: TextStyle(fontSize: 18, color: Colors.black),

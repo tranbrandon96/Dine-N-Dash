@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                        width: 60,
                      ),
                      title: Text("" + lists[index]["User_Name"].toString()),
-                     subtitle: Text('Check In: ' + lists[index]["Check_In"] +
+                     subtitle: Text('Check In: ' + lists[index]["Check_In"].toString() +
                          '\nParty Size '+ lists[index]["Party_Size"].toString()),
                      trailing: Row(
                          mainAxisSize: MainAxisSize.min,
