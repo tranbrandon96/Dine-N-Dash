@@ -12,13 +12,13 @@ String gender;
 String birthday;
 String password;
 
-class account_creation_screen extends StatefulWidget {
+class EmployeeAccountCreationScreen extends StatefulWidget {
   @override
-  _AccountCreationActivityState createState() =>
-      _AccountCreationActivityState();
+  _EmployeeAccountCreationScreenState createState() =>
+      _EmployeeAccountCreationScreenState();
 }
 
-class _AccountCreationActivityState extends State<account_creation_screen> {
+class _EmployeeAccountCreationScreenState extends State<EmployeeAccountCreationScreen> {
 
 
   final _auth = FirebaseAuth.instance;

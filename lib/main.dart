@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'screens/sign_in/sign_in_screen.dart';
+import 'package:flutter_app/customer/welcome_screen.dart';
+import 'screens/sign_in/employee_sign_in_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,7 @@ class DineNDashApp extends StatelessWidget {
         bottomSheetTheme: BottomSheetThemeData(
             backgroundColor: Colors.black.withOpacity(0)),
       ),
-      home: sign_in_screen(title: 'Flutter Demo Home Page'),
+      home: WelcomeScreen(),
     );
   }
 }

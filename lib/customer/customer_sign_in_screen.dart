@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
+import 'package:flutter_app/customer/EmployeeCreationScreen.dart';
+import 'package:flutter_app/customer/customer_homepage_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
@@ -13,8 +15,8 @@ import 'package:flutter_app/screens/sign_up/member_type_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class sign_in_screen extends StatefulWidget {
-  sign_in_screen({Key key, this.title}) : super(key: key);
+class CustomerSignInScreen extends StatefulWidget {
+  CustomerSignInScreen({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -28,12 +30,12 @@ class sign_in_screen extends StatefulWidget {
   final String title;
 
   @override
-  _sign_in_screen createState() => _sign_in_screen();
+  _CustomerSignInScreen createState() => _CustomerSignInScreen();
 }
 
-class _sign_in_screen extends State<sign_in_screen> {
+class _CustomerSignInScreen extends State<CustomerSignInScreen> {
   final _auth = FirebaseAuth.instance;
-  String email;
+  String customerEmail;
   String password;
 
   int _counter = 0;
@@ -106,7 +108,7 @@ class _sign_in_screen extends State<sign_in_screen> {
                       ),
                     ),
                     onChanged: (value) {
-                      email = value;
+                      customerEmail = value;
                     }),
               ),
               SizedBox(height: 20),
@@ -140,12 +142,12 @@ class _sign_in_screen extends State<sign_in_screen> {
                 onPressed: () async {
                   try {
                     final user = await _auth.signInWithEmailAndPassword(
-                        email: email, password: password);
+                        email: customerEmail, password: password);
                     if (user != null) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomePage()));
+                              builder: (context) => CustomerHomePageScreen()));
                     }
                   } catch (e) {
                     print(e);
@@ -175,7 +177,7 @@ class _sign_in_screen extends State<sign_in_screen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => member_type_screen()));
+                          builder: (context) => CustomerAccountCreationScreen()));
                 },
                 child: Text('NO ACCOUNT? SIGN UP',
                     style: TextStyle(color: Colors.white)),
@@ -278,87 +280,3 @@ class _sign_in_screen extends State<sign_in_screen> {
   }
 }
 
-class FirstScreen extends StatelessWidget {
-  static const String id = 'first_screen';
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Color(0xFFFF0041), Color(0xFFFB8E40)],
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              CircleAvatar(
-                backgroundImage: NetworkImage(
-                  imageUrl,
-                ),
-                radius: 60,
-                backgroundColor: Colors.transparent,
-              ),
-              SizedBox(height: 40),
-              Text(
-                'NAME',
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
-              ),
-              Text(
-                name,
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20),
-              Text(
-                'EMAIL',
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
-              ),
-              Text(
-                email,
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 40),
-              RaisedButton(
-                onPressed: () {
-                  signOutGoogle();
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) {
-                    return sign_in_screen();
-                  }), ModalRoute.withName('/'));
-                },
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Sign Out',
-                    style:
-                        TextStyle(fontSize: 25, color: Colors.deepOrangeAccent),
-                  ),
-                ),
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}

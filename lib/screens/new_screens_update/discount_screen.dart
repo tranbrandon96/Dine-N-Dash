@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
+import 'package:flutter_app/screens/new_screens_update/employee_memberlink.dart';
 
 
-class discount_screen extends StatefulWidget {
+class DiscountScreen extends StatefulWidget {
   @override
-  _discount_screenState createState() => _discount_screenState();
+  _DiscountScreenState createState() => _DiscountScreenState();
 }
 
-class _discount_screenState extends State<discount_screen> {
+class _DiscountScreenState extends State<DiscountScreen> {
   @override
   Widget build(BuildContext context) {
       return Scaffold(
@@ -14,15 +16,13 @@ class _discount_screenState extends State<discount_screen> {
             centerTitle: true,
             backgroundColor: Colors.white,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              iconSize: 30.0,
+              icon: Icon(Icons.keyboard_arrow_left, size: 35),
               color: Colors.black,
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).pop(),
             ),
             title: Text(
               'Discount',
               style: TextStyle(
-                fontSize: 28.0,
                 color: Colors.black,
                 fontFamily: 'Futura',
                 fontWeight: FontWeight.w600,
@@ -41,7 +41,9 @@ class _discount_screenState extends State<discount_screen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(100))
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => ManagerApprovalScreen()));
+                      },
                       child: Text(
                           '15%'
                       ),
@@ -59,7 +61,7 @@ class _discount_screenState extends State<discount_screen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(100))
                       ),
-                      onPressed: () {},
+                      onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => ManagerApprovalScreen()));},
                       child: Text(
                           '25%'
                       ),
@@ -76,7 +78,7 @@ class _discount_screenState extends State<discount_screen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(100))
                       ),
-                      onPressed: () {},
+                      onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => ManagerApprovalScreen()));},
                       child: Text(
                           '35%'
                       ),
@@ -93,7 +95,7 @@ class _discount_screenState extends State<discount_screen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(100))
                       ),
-                      onPressed: () {},
+                      onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => ManagerApprovalScreen()));},
                       child: Text(
                           '50%'
                       ),
@@ -110,7 +112,7 @@ class _discount_screenState extends State<discount_screen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(100))
                       ),
-                      onPressed: () {},
+                      onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => ManagerApprovalScreen()));},
                       child: Text(
                           'COMP'
                       ),
@@ -127,7 +129,7 @@ class _discount_screenState extends State<discount_screen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(100))
                       ),
-                      onPressed: () {},
+                      onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => ManagerApprovalScreen()));},
                       child: Text(
                           'OTHER'
                       ),

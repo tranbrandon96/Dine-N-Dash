@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/manual_input/manual_input_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
 
@@ -128,7 +129,9 @@ class _QRscanner_screen extends State<QRscanner_screen> {
           ),
         ),
         FlatButton(
-          onPressed: () {},
+          onPressed: () {
+              displayModalBottomSheet(context);
+          },
           child: Text('ENTER CUSTOMER ID',
               style: TextStyle(fontSize:15, color: Color(0xFFFF0041))),
           highlightColor: Colors.white,
@@ -180,3 +183,27 @@ class _QRscanner_screen extends State<QRscanner_screen> {
   }
 
 }
+
+ ///This class is the setup for calling a modal bottomSheet.
+  void displayModalBottomSheet(context) {
+    var bottomSheetController =
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0)),
+        clipBehavior: Clip.hardEdge,
+        isScrollControlled: true,
+
+        context: context,
+        builder: (BuildContext buildContext) {
+          return SingleChildScrollView(
+            padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+              height:MediaQuery.of(context).size.height/4,
+              color: Color(0xFF737373),
+              child:ManualInputScreen(),
+            ),
+          );
+        }
+    );
+  }

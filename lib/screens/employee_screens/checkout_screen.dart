@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/screens/new_screens_update/cashpayment_dialog.dart';
 
 class CheckoutScreen extends StatefulWidget{
   _CheckoutScreen createState() =>  _CheckoutScreen();
@@ -8,16 +9,17 @@ class CheckoutScreen extends StatefulWidget{
 
 class _CheckoutScreen extends State<CheckoutScreen>{
   List<ListTile> menuItems = [
+  
   ListTile(
     title: Text('\t\tDouble Double'),
     subtitle: Text('\t\t + Animal Style' + '\n\t\t -  No Pickles'),
-    trailing: Text('\$10.00\t\t'),
+    trailing: Text('\$4.25\t\t'),
   ),
   ];
 
-  List<Text> subTotalTextList =  [Text("SUBTOTAL: \$"),Text("10.00")];
+  List<Text> subTotalTextList =  [Text("SUBTOTAL: \$"),Text("4.25")];
   List<Text> taxTextList =  [Text("TAX: \$"),Text("0.10")];
-  List<Text> totalTextList =  [Text("TOTAL: \$"),Text("10.10")];
+  List<Text> totalTextList =  [Text("TOTAL: \$"),Text("4.35")];
 
 
   Widget build (BuildContext context){
@@ -39,6 +41,7 @@ class _CheckoutScreen extends State<CheckoutScreen>{
       ),
       body: Column(
           children:<Widget>[
+            SizedBox(height: 10),
             Container(
               height: 500,
                 child: ListView(children: menuItems),
@@ -80,7 +83,10 @@ class _CheckoutScreen extends State<CheckoutScreen>{
 
   Widget _payButton(){
     return RaisedButton(
-      onPressed: () {   },
+      onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => cashpayment_dialog()));   },
       color:Color(0xFFFF0041),
       child: Text(
           'PAY',

@@ -4,12 +4,12 @@ import 'package:flutter/widgets.dart';
 
 
 
-class balanceprint_screen extends StatefulWidget {
+class BalancePrintScreen extends StatefulWidget {
   @override
-  _balanceprint_screenState createState() => _balanceprint_screenState();
+  _BalancePrintScreenState createState() => _BalancePrintScreenState();
 }
 
-class _balanceprint_screenState extends State<balanceprint_screen> {
+class _BalancePrintScreenState extends State<BalancePrintScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +29,7 @@ class _balanceprint_screenState extends State<balanceprint_screen> {
               size: 30,),
         padding: const EdgeInsets.only(right:15),
               onPressed: (){
-                _balanceprint_screenDialog(context);
+                _BalancePrintScreenDialog(context);
               },
     )
     ],
@@ -53,38 +53,38 @@ class _balanceprint_screenState extends State<balanceprint_screen> {
                 margin: EdgeInsets.all(50),
                 ),
 
-//              AlertDialog(
-//                title: Text('Print Receipt?'),
-//                content: Icon(Icons.print,
-//                size: 80,),
-//                actions: [
-//                  RaisedButton(
-//                      onPressed: () {},
-//                      child: Text(
-//                          'YES'
-//                      ),
-//                      color: const Color(0xfffd1040),
-//                      shape: RoundedRectangleBorder(
-//                          borderRadius: BorderRadius.all(Radius.circular(100))
-//                      )
-//
-//                  ),
-//                  RaisedButton(
-//                      onPressed: () {},
-//                      child: Text(
-//                          'NO',
-//                        style: TextStyle(
-//                          color: const Color(0xfffd1040)
-//                        ),
-//                      ),
-//                      color: Colors.white,
-//                    shape: RoundedRectangleBorder(
-//                        borderRadius: BorderRadius.all(Radius.circular(100))
-//                    )
-//
-//                  ),
-//                ],
-//              )
+             AlertDialog(
+               title: Text('Print Receipt?'),
+               content: Icon(Icons.print,
+               size: 80,),
+               actions: [
+                 RaisedButton(
+                     onPressed: () {},
+                     child: Text(
+                         'YES'
+                     ),
+                     color: const Color(0xfffd1040),
+                     shape: RoundedRectangleBorder(
+                         borderRadius: BorderRadius.all(Radius.circular(100))
+                     )
+
+                 ),
+                 RaisedButton(
+                     onPressed: () {},
+                     child: Text(
+                         'NO',
+                       style: TextStyle(
+                         color: const Color(0xfffd1040)
+                       ),
+                     ),
+                     color: Colors.white,
+                   shape: RoundedRectangleBorder(
+                       borderRadius: BorderRadius.all(Radius.circular(100))
+                   )
+
+                 ),
+               ],
+             )
 
 
 
@@ -97,7 +97,7 @@ class _balanceprint_screenState extends State<balanceprint_screen> {
         ),
     );
   }
-  void _balanceprint_screenDialog(context){
+  void _BalancePrintScreenDialog(context){
     showDialog(context: context, builder: (BuildContext bc){
       return Center(
         child: AlertDialog(

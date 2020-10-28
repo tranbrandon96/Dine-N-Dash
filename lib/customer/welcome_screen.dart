@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/customer/EmployeeCreationScreen.dart';
-import 'package:flutter_app/screens/sign_up/employee_account_creation_screen.dart';
+import 'package:flutter_app/customer/customer_sign_in_screen.dart';
+import 'package:flutter_app/screens/sign_in/employee_sign_in_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 
-class member_type_screen extends StatelessWidget {
+class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -21,38 +21,45 @@ class member_type_screen extends StatelessWidget {
 
             children: <Widget>[
               SizedBox(height: 60),
+              Text(
+                'Welcome to Dine n Dash',
+                style: TextStyle(fontSize: 25, color: Colors.white),
+              ),
               SvgPicture.asset(
                 "assets/images/DnDLogo.svg",
                 width: 150,
                 height: 150,
               ),
-              SizedBox(height: 50),
+              
               Text(
-                'USE FOR:',
+                'WHERE DINING MEETS DASHING',
+                style: TextStyle(fontSize: 16, color: Colors.white),
+              ),
+                            Text(
+                'Are you an Employee?',
                 style: TextStyle(fontSize: 25, color: Colors.white),
               ),
-              SizedBox(height: 50),
               FlatButton(
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CustomerAccountCreationScreen()));
+                          builder: (context) => EmployeeSignInScreen()));
                 },
-                child: Text('CUSTOMER', style: TextStyle(color: Colors.white)),
+                child: Text('YES', style: TextStyle(color: Colors.white)),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                     side: BorderSide(color: Colors.white)),
               ),
-              SizedBox(height: 25),
+             
               FlatButton(
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => EmployeeAccountCreationScreen()));
+                          builder: (context) => CustomerSignInScreen()));
                 },
-                child: Text('EMPLOYEE', style: TextStyle(color: Colors.white)),
+                child: Text('NO', style: TextStyle(color: Colors.white)),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                     side: BorderSide(color: Colors.white)),

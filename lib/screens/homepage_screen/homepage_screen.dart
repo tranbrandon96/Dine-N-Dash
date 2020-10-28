@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/main_drawer.dart';
+import 'package:flutter_app/components/employee_main_drawer.dart';
 import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
 import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:flutter_svg/svg.dart';

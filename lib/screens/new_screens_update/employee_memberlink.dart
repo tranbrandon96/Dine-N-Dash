@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 
-class employee_memberlink extends StatefulWidget {
+class ManagerApprovalScreen extends StatefulWidget {
   @override
-  _employee_memberlinkState createState() => _employee_memberlinkState();
+  _ManagerApprovalScreenState createState() => _ManagerApprovalScreenState();
 }
 
-class _employee_memberlinkState extends State<employee_memberlink> {
+class _ManagerApprovalScreenState extends State<ManagerApprovalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.white,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            iconSize: 30.0,
-            color: const Color(0xfffd1040),
-            onPressed: () {},
-          ),
+                      leading: IconButton(
+              icon: Icon(Icons.keyboard_arrow_left, size: 35),
+              color: Colors.black,
+              onPressed: () => Navigator.of(context).pop(),
+            ),
           title: Text(
-            'Requires Manager Approval',
+            'Please Get Manager Approval',
             style: TextStyle(
-              fontSize: 25.0,
+
               color: Colors.black,
               fontFamily: 'Futura',
               fontWeight: FontWeight.w600,
@@ -29,6 +28,7 @@ class _employee_memberlinkState extends State<employee_memberlink> {
           ),
         ),
         body: Column(children: [
+          SizedBox(height: 30),
           Container(
             padding: EdgeInsets.all(5.0),
             child: Center(
@@ -36,7 +36,7 @@ class _employee_memberlinkState extends State<employee_memberlink> {
               children: <Widget>[
                 Text('Scan Manager QR Code',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                  
                   fontSize: 25,
 
                 ),
@@ -44,8 +44,8 @@ class _employee_memberlinkState extends State<employee_memberlink> {
                 //Generate Table Number Information Here
 
                 IconButton(
-                  icon: Image.asset('assets/images/QR Code.png'),
-                  iconSize: 200,
+                  icon: Image.asset('assets/images/QR_CodeImage.png'),
+                  iconSize: 230,
                   onPressed: () {},
                 ),
               ],
@@ -68,9 +68,10 @@ class _employee_memberlinkState extends State<employee_memberlink> {
                   fontSize: 25,
                 ),
                 ),
+                SizedBox(height: 30),
                 Text('Manually Input',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      
                       fontSize: 25,
                     ),
                 ),
@@ -93,7 +94,7 @@ class _employee_memberlinkState extends State<employee_memberlink> {
                   child: Column(children: <Widget>[
                 Text('Must obtain Manager Approval\n in order to provide discount',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      
                       fontSize: 15,
                     ),
                   textAlign: TextAlign.center,

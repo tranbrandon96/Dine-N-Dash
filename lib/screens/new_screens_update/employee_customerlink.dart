@@ -1,51 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 
-class employee_customerlink extends StatefulWidget {
+class EmployeeAddCustomerIDScreen extends StatefulWidget {
   @override
-  _employee_customerlinkState createState() => _employee_customerlinkState();
+  _EmployeeAddState createState() => _EmployeeAddState();
 }
 
-class _employee_customerlinkState extends State<employee_customerlink> {
+class _EmployeeAddState extends State<EmployeeAddCustomerIDScreen> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: new Scaffold(
         backgroundColor: const Color(0xfffd1040) ,
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: const Color(0xfffd1040),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              iconSize: 30.0,
-              color: Colors.white,
-              onPressed: () {},
-            ),
-            title: Text(
-              'Add Customer To Table',
+
+          body: Column(children: [
+            SizedBox(height: 40),
+            IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.cancel, size: 35,
+                        color: Colors.white),
+
+                  ),
+            Container(
+              padding: EdgeInsets.all(5.0),
+              child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Text('Add Customer To Table',
               style: TextStyle(
                 fontSize: 25.0,
                 color: Colors.white,
                 fontFamily: 'Futura',
                 fontWeight: FontWeight.w600,
               ),
-            ),
-          ),
-
-          body: Column(children: [
-            Container(
-              padding: EdgeInsets.all(5.0),
-              child: Center(
-                  child: Column(
-                    children: <Widget>[
-                      Text('Scan Manager QR Code',
+              ),
+              SizedBox(height: 20),
+                      Text('Table 12',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          
+                          fontSize: 25,
+                          decoration: TextDecoration.underline,
+
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text('Scan QR',
+                        style: TextStyle(
+                          color: Colors.white,
                           fontSize: 25,
 
                         ),
                       ),
-
                       //Generate Table Number Information Here
 
                       IconButton(
@@ -67,17 +75,11 @@ class _employee_customerlinkState extends State<employee_customerlink> {
               child: Center(
                   child: Column(
                     children: <Widget>[
-                      Text('OR',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                        ),
-                      ),
+
                       Text('Manually Input',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                         
                           fontSize: 25,
                         ),
                       ),
@@ -98,7 +100,7 @@ class _employee_customerlinkState extends State<employee_customerlink> {
                 padding: EdgeInsets.all(5.0),
                 child: Center(
                     child: Column(children: <Widget>[
-                      Text('Must obtain Manager Approval\n in order to provide discount',
+                      Text('Scan customers Dine n Dash QR code or \nenter customers info manually',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

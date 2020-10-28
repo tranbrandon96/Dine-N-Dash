@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/screens/food/view_food_item.dart';
 import 'package:flutter_svg/svg.dart';
 
 class FoodCategoryScreen extends StatefulWidget{
@@ -9,37 +10,23 @@ class FoodCategoryScreen extends StatefulWidget{
 
 class _FoodCategoryScreen extends State<FoodCategoryScreen>{
   List<ListTile> sameCategoryFoodItems = [
-    ListTile(
-      leading: SvgPicture.asset(
-        "assets/images/foodPlaceHolder.svg",
-        height: 35,
-        width: 35,
-      ),
-      title: Text('Food Item Name'),
-      subtitle: Text('XX - X Cal'),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget> [
-          Text(
-              "\$00.00",
-            style: TextStyle(fontSize: 16, color: Colors.black),
-          ),
-          Icon(Icons.keyboard_arrow_right),
-        ]
-      )
-    )
+
   ];
 
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios, color: Colors.deepOrange),
+        centerTitle: true,
+        leading: IconButton(
+            icon: Icon(Icons.keyboard_arrow_left, color: Color(0xFFFF0041), size:35,),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         backgroundColor: Colors.white,
         title: Text(
+          
           'Category',
           style: TextStyle(
-            fontSize: 28.0,
             fontFamily: 'Futura',
             fontWeight: FontWeight.w400,
             color: Colors.black,
@@ -48,7 +35,35 @@ class _FoodCategoryScreen extends State<FoodCategoryScreen>{
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        child: ListView(children: sameCategoryFoodItems),
+        child: ListView(
+          children: [
+                ListTile(
+                                onTap: () {
+             Navigator.push(
+                       context,
+                       MaterialPageRoute(
+                           builder: (context) => ViewFoodItemScreen()));
+        },
+      leading: SvgPicture.asset(
+        "assets/images/foodPlaceHolder.svg",
+        height: 35,
+        width: 35,
+        color: Color(0xFFFF0041)
+      ),
+      title: Text('Double Double'),
+      subtitle: Text('670 Cal'),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget> [
+          Text(
+              "\$3.45",
+            style: TextStyle(fontSize: 16, color: Colors.black),
+          ),
+          Icon(Icons.keyboard_arrow_right),
+        ]
+      )
+    )
+          ],),
       ),
     );
   }}

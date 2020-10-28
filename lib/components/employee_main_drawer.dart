@@ -5,7 +5,7 @@ import 'package:flutter_app/screens/edit_employee_account/edit_employeeacct.dart
 import 'package:flutter_app/screens/proxy/proxy_screen.dart';
 
 import 'package:flutter_app/screens/settings/settings_screen.dart';
-import 'package:flutter_app/screens/sign_in/sign_in_screen.dart';
+import 'package:flutter_app/screens/sign_in/employee_sign_in_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key key}) : super(key: key);
@@ -88,7 +88,7 @@ class MainDrawer extends StatelessWidget {
           signOutGoogle();
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) {
-            return sign_in_screen();
+            return EmployeeSignInScreen();
           }), ModalRoute.withName('/'));
         },
         leading: Icon(

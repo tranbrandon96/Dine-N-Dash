@@ -1,30 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class view_food_item extends StatefulWidget {
+class ViewFoodItemScreen extends StatefulWidget {
   @override
-  _view_food_itemState createState() => _view_food_itemState();
+  _ViewFoodItemScreenState createState() => _ViewFoodItemScreenState();
 }
 
-class _view_food_itemState extends State<view_food_item> {
+class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios, color: Colors.deepOrange),
+        leading: IconButton(
+            icon: Icon(Icons.keyboard_arrow_left, color: Color(0xFFFF0041), size:35,),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        
 //          title: Text('Change Password', style: TextStyle(color: Colors.black, fontSize: 36)),
         backgroundColor: Colors.white,
+        
       ),
       body: Container(
-          child: Column(
+          child: ListView(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 SizedBox(height: 60),
                       SvgPicture.asset(
-                        "assets/foodPlaceHolder.svg",
+                        "assets/images/foodPlaceHolder.svg",
                         width: 250,
-                        height: 200,
+                        height: 150,
+                        color: Color(0xFFFE0C40)
                       ),
+                SizedBox(height: 10),
                 new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -32,8 +40,8 @@ class _view_food_itemState extends State<view_food_item> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(20,10,10,0),
                             child: Text(
-                              'Entree Name',
-                              style: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),
+                              'Double Double',
+                              style: TextStyle(fontSize: 24, color: Colors.black),
                             ),
                           )
                       ),
@@ -41,7 +49,7 @@ class _view_food_itemState extends State<view_food_item> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(20,5,20,10),
                             child: Text(
-                              'Price',
+                              '3.49',
                               style: TextStyle(fontSize: 18, color: Colors.black),
                             ),
                           )
@@ -55,12 +63,15 @@ class _view_food_itemState extends State<view_food_item> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(20,5,40,10),
                             child: Text(
-                              'Brief Description of the food. Feel free to mention ingredients, food process, anything you want. Please eat the food.',
+                              'Toasted Buns, Two Cheese, Two Beef Patties, Lettuce, Onions, Tomatos, Spread ',
                               style: TextStyle(fontSize: 16, color: Colors.black),
                             ),
                           )
                       ),
                     ]
+                ),
+                Divider(
+                    color: Colors.black,
                 ),
                 new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +81,7 @@ class _view_food_itemState extends State<view_food_item> {
                             padding: const EdgeInsets.fromLTRB(20,0,0,0),
                             child: Text(
                               'Quantity',
-                              style: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 20, color: Colors.black),
                             ),
                           )
                       ),
@@ -107,6 +118,9 @@ class _view_food_itemState extends State<view_food_item> {
                       )
                     ]
                 ),
+                Divider(
+                    color: Colors.black,
+                ),
                 new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget> [
@@ -115,7 +129,7 @@ class _view_food_itemState extends State<view_food_item> {
                             padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
                             child: Text(
                               "Modifications",
-                              style: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 20, color: Colors.black),
                             ),
                           )
                       )
@@ -128,8 +142,8 @@ class _view_food_itemState extends State<view_food_item> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(60, 10, 0, 10),
                             child: Text(
-                              "Shrimp",
-                              style: TextStyle(fontSize: 20, color: Colors.black),
+                              "No Pickles",
+                              style: TextStyle(fontSize: 16, color: Colors.black),
                             ),
                           )
                       ),
@@ -141,6 +155,7 @@ class _view_food_itemState extends State<view_food_item> {
                                     side: BorderSide(color: Colors.grey)),
                                 color: Colors.white,
                                 padding: EdgeInsets.all(10),
+                                highlightColor: Color(0xFFFE0C40),
                                 onPressed: () {},
                               )
                           )
@@ -154,8 +169,8 @@ class _view_food_itemState extends State<view_food_item> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(60, 10, 0, 10),
                             child: Text(
-                              "No Shrimp",
-                              style: TextStyle(fontSize: 20, color: Colors.black),
+                              "No Lettuce",
+                              style: TextStyle(fontSize: 16, color: Colors.black),
                             ),
                           )
                       ),
@@ -168,11 +183,15 @@ class _view_food_itemState extends State<view_food_item> {
                                 ),
                                 color: Colors.white,
                                 padding: EdgeInsets.all(10),
+                                highlightColor: Color(0xFFFE0C40),
                                 onPressed: () {},
                               )
                           )
                       )
                     ]
+                ),
+                Divider(
+                    color: Colors.black,
                 ),
                 new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,15 +212,17 @@ class _view_food_itemState extends State<view_food_item> {
                     children: <Widget>[
                       new Flexible(
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            child: new TextField(
-                                decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.fromLTRB(10,0,0,0)
-                                )
+                            padding: const EdgeInsets.fromLTRB(20,5,40,10),
+                            child: Text(
+                              'Animal Style',
+                              style: TextStyle(fontSize: 16, color: Colors.black),
                             ),
                           )
-                      )
+                      ),
                     ]
+                ),
+                Divider(
+                    color: Colors.black,
                 ),
                 new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -231,6 +252,25 @@ class _view_food_itemState extends State<view_food_item> {
                       ),
                     ]
                 ),
+                                Divider(
+                    color: Colors.black,
+                ),
+                new             Container(
+              padding: EdgeInsets.all(50.0),
+              child: Center(
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTableScreen()));
+                  },
+                  child: Text('ADD'),
+                  color: const Color(0xfffd1040),
+                  textColor: Colors.white,
+                ),
+              ),
+            ),
               ]
           )
       ),

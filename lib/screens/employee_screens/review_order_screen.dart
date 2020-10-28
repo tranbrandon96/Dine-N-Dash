@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
+import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
+import 'package:flutter_app/screens/new_screens_update/kitchenconfirm_dialog.dart';
 
-class review_order_screen extends StatefulWidget{
-  _review_order_screen createState() =>  _review_order_screen();
+class ReviewOrderScreen extends StatefulWidget{
+  _ReviewOrderScreen createState() =>  _ReviewOrderScreen();
 }
 
-class _review_order_screen extends State<review_order_screen>{
+class _ReviewOrderScreen extends State<ReviewOrderScreen>{
   List<ListTile> menuItems = [
     ListTile(
-      title: Text('\t\tList item 1'),
-      subtitle: Text('\t\titem details'),
-      trailing: Text('\$10.00\t\t'),
+      title: Text('\t\tDouble Double'),
+      subtitle: Text('\t\tAnimal Style, No Pickles'),
+      trailing: Text('\$3.45\t\t'),
     ),
   ];
 
@@ -73,7 +76,9 @@ class _review_order_screen extends State<review_order_screen>{
 
   Widget _submitButton(){
     return RaisedButton(
-      onPressed: () {   },
+      onPressed: () {  
+OrderSuccessfulPopup(context);}, 
+       
       color:Color(0xFFFF0041),
       child: Text(
           'SUBMIT',
@@ -87,3 +92,43 @@ class _review_order_screen extends State<review_order_screen>{
 
 }
 
+//Alert Dialog - Pop-up notification
+void OrderSuccessfulPopup(context) {
+  showDialog(context: context, builder: (BuildContext bc) {
+    return AlertDialog(
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        
+      ),
+      title: Text('Order Submitted \nSuccessfully!', textAlign: TextAlign.center,),
+      content: ImageIcon(AssetImage("assets/images/chefhat.png"),
+        color: const Color(0xfffd1040),
+        size: 100,),
+      actions: [
+              Container(
+                padding: EdgeInsets.fromLTRB(0,0,100,0),
+                child: Center(
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    onPressed: () {
+                                       Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomePage()));
+        },
+                    child: Text(
+                        'DONE'
+                    ),
+                    textColor: Colors.white,
+                    color: const Color(0xfffd1040),
+                  ),
+
+                ),
+              ),
+  ],
+    );
+  });
+}

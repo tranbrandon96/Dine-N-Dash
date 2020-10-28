@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/components/QRscanner_screen.dart';
 import 'package:flutter_app/screens/employee_screens/checkout_screen.dart';
+import 'package:flutter_app/screens/employee_screens/review_order_screen.dart';
+import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
+import 'package:flutter_app/screens/food/category.dart';
+import 'package:flutter_app/screens/food/food_category.dart';
+import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
+import 'package:flutter_app/screens/new_screens_update/balanceprint_screen.dart';
+import 'package:flutter_app/screens/new_screens_update/discount_screen.dart';
+import 'package:flutter_app/screens/new_screens_update/employee_customerlink.dart';
+import 'package:flutter_app/screens/new_screens_update/kitchenconfirm_dialog.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ViewTableScreen extends StatefulWidget{
@@ -9,26 +19,25 @@ class ViewTableScreen extends StatefulWidget{
 }
 
 class _ViewTableScreen extends State<ViewTableScreen>{
-  List<ExpansionTile> menuItems = [
+
+  Widget build (BuildContext context){
+      List<ExpansionTile> menuItems = [
     ExpansionTile(
       title: Text('\t\tDouble Double'),
       subtitle: Text('\t\t + Animal Style' + '\n\t\t -  No Pickles'),
-      trailing: Text('\$10.00\t\t'),
+      trailing: Text('\$4.25\t\t'),
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children:[
-            FlatButton(color:Colors.purple,onPressed: (){}, child:Text('DISCOUNT',style:TextStyle(color:Colors.white,fontSize:15))),
-            FlatButton(color:Colors.orangeAccent,onPressed: (){}, child:Text('EDIT',style:TextStyle(color:Colors.white,fontSize:15))),
+            FlatButton(color:Colors.purple,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => DiscountScreen()));}, child:Text('DISCOUNT',style:TextStyle(color:Colors.white,fontSize:15))),
+            FlatButton(color:Colors.orangeAccent,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTableScreen()));}, child:Text('EDIT',style:TextStyle(color:Colors.white,fontSize:15))),
             FlatButton(color:Colors.red,onPressed: (){}, child:Text('REMOVE',style:TextStyle(color:Colors.white,fontSize:15))),
           ]
         )
       ],
     ),
   ];
-
-
-  Widget build (BuildContext context){
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0),
@@ -36,23 +45,25 @@ class _ViewTableScreen extends State<ViewTableScreen>{
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.keyboard_arrow_left, color: Color(0xFFFF0041), size:35,),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => HomePage()));}
           ),
           actions: [
             IconButton(
             icon: Icon(Icons.add, color: Color(0xFFFF0041), size:35,),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,MaterialPageRoute(builder: (context) => CategoryScreen()));
+            },
           ),
           ],
           title: Text( "Table 12",
             style: TextStyle(
-              
               color: Colors.black,),),
           backgroundColor: Colors.white,
         ),
       ),
       body: Column(
         children:<Widget>[
+          SizedBox(height: 5),
           Container(
             height: 100,
             child: ListTile(
@@ -61,7 +72,7 @@ class _ViewTableScreen extends State<ViewTableScreen>{
                 height: 65,
                 width: 65,
               ),
-              title: Text('John D.', style: TextStyle(fontSize: 25)),
+              title: Text('Guest', style: TextStyle(fontSize: 25)),
               subtitle: Text('Party Size: 2'),
               trailing: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -72,7 +83,9 @@ class _ViewTableScreen extends State<ViewTableScreen>{
                   color: Colors.grey,)),
                 IconButton(
                   icon: Icon(Icons.edit, color: Colors.grey, size:25,),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => QRscanner_screen()));
+                  },
                 ),
               ]),
             ),
@@ -89,19 +102,39 @@ class _ViewTableScreen extends State<ViewTableScreen>{
           ),
 
           Container(
-            height: 50,
+            height: 100,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children:<Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children:<Widget>[
-                    _button('BALANCE PRINT', null),
-                    _button('CHECKOUT', CheckoutScreen())
+                    RaisedButton(
+              onPressed: () {BalancePrintPopup(context); },
+              color:Color(0xFFFF0041),
+              child: Text(
+              'BALANCE PRINT',
+              style: TextStyle(color: Colors.white, fontSize:15,fontWeight: FontWeight.bold)),
 
+               shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24.0),
+                ),
+              ),
+                    _button('CHECKOUT', CheckoutScreen()),
+                    
                   ],
                 ),
+              RaisedButton(
+              onPressed: () {displayModalBottomSheet(context);  },
+              color:Color(0xFFFF0041),
+              child: Text(
+              'SUBMIT',
+              style: TextStyle(color: Colors.white, fontSize:15,fontWeight: FontWeight.bold)),
 
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24.0),
+      ),
+    )
               ],
             ),
           ),
@@ -131,3 +164,91 @@ class _ViewTableScreen extends State<ViewTableScreen>{
 
 }
 
+ ///This class is the setup for calling a modal bottomSheet.
+  void displayModalBottomSheet(context) {
+    var bottomSheetController =
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0)),
+        clipBehavior: Clip.hardEdge,
+        isScrollControlled: true,
+
+        context: context,
+        builder: (BuildContext buildContext) {
+          return SingleChildScrollView(
+            padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+              height:MediaQuery.of(context).size.height/1,
+              color: Color(0xFF737373),
+              child:ReviewOrderScreen(),
+            ),
+          );
+        }
+    );
+  }
+
+  void BalancePrintPopup(context) {
+  showDialog(context: context, builder: (BuildContext bc) {
+    return AlertDialog(
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        
+      ),
+      title: Text('Print Receipt?', textAlign: TextAlign.center,),
+      content: ImageIcon(AssetImage("assets/images/chefhat.png"),
+        color: const Color(0xfffd1040),
+        size: 100,),
+      actions: [
+              Row(children: [
+                Container(
+                padding: EdgeInsets.fromLTRB(0,0,70,0),
+                child: Center(
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    onPressed: () {
+                                       Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ViewTableScreen()));
+        },
+                    child: Text(
+                        'YES'
+                    ),
+                    textColor: Colors.white,
+                    color: const Color(0xfffd1040),
+                  ),
+
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(0,0,30,0),
+                child: Center(
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    onPressed: () {
+                                       Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ViewTableScreen()));
+        },
+                    child: Text(
+                        'NO'
+                    ),
+                    textColor: Colors.white,
+                    color: const Color(0xfffd1040),
+                  ),
+
+                ),
+              ),
+              ],
+              )
+  ],
+    );
+  });
+}
