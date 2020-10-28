@@ -11,22 +11,22 @@
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Dine-N-Dash.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dine-N-Dash.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/homepage_screen/homepage_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/homepage_screen/homepage_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/sign_in/sign_in_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/sign_in/sign_in_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/new_screens_update/employee_memberlink.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/new_screens_update/employee_memberlink.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_3_API_28]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_6_API_29" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -54,7 +54,7 @@
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="dart.settings" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -93,21 +93,13 @@
       <option name="project" value="LOCAL" />
       <updated>1603387811717</updated>
     </task>
-    <task id="LOCAL-00003" summary="dynamic Bottom Sheet added to QR Scan Screen">
-      <created>1603396245592</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1603396245593</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Convert ID to Qr and Scan QR added" />
     <MESSAGE value="Fixed typo" />
-    <MESSAGE value="dynamic Bottom Sheet added to QR Scan Screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="dynamic Bottom Sheet added to QR Scan Screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed typo" />
   </component>
   <component name="WindowStateProjectService">
     <state x="140" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603308172918">
@@ -118,38 +110,38 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="365" y="173" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1368.872@0.0.1368.872" timestamp="1602710610349" />
-    <state x="94" y="94" width="1181" height="685" key="AVDManager" timestamp="1603844902969">
+    <state x="94" y="94" width="1181" height="685" key="AVDManager" timestamp="1603341804355">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state x="94" y="94" width="1181" height="685" key="AVDManager/0.0.1368.872@0.0.1368.872" timestamp="1603844902969" />
-    <state x="305" y="6" key="CommitChangelistDialog2" timestamp="1603396243827">
+    <state x="94" y="94" width="1181" height="685" key="AVDManager/0.0.1368.872@0.0.1368.872" timestamp="1603341804355" />
+    <state x="305" y="6" key="CommitChangelistDialog2" timestamp="1603387810673">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state x="305" y="6" key="CommitChangelistDialog2/0.0.1368.872@0.0.1368.872" timestamp="1603396243827" />
+    <state x="305" y="6" key="CommitChangelistDialog2/0.0.1368.872@0.0.1368.872" timestamp="1603387810673" />
     <state x="649" y="171" key="FileChooserDialogImpl" timestamp="1602713982325">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="649" y="171" key="FileChooserDialogImpl/0.0.1368.872@0.0.1368.872" timestamp="1602713982325" />
-    <state width="434" height="206" key="GridCell.Tab.0.bottom" timestamp="1603744804016">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state width="1398" height="188" key="GridCell.Tab.0.bottom" timestamp="1603747578669">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="434" height="206" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1603744804016" />
-    <state width="1398" height="228" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1602647332584" />
-    <state width="434" height="206" key="GridCell.Tab.0.center" timestamp="1603744804016">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state width="666" height="208" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1603396022616" />
+    <state width="1398" height="188" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1603747578669" />
+    <state width="1398" height="188" key="GridCell.Tab.0.center" timestamp="1603747578668">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="434" height="206" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1603744804016" />
-    <state width="1398" height="228" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1602647332583" />
-    <state width="434" height="206" key="GridCell.Tab.0.left" timestamp="1603744804015">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state width="666" height="208" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1603396022616" />
+    <state width="1398" height="188" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1603747578668" />
+    <state width="1398" height="188" key="GridCell.Tab.0.left" timestamp="1603747578668">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="434" height="206" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1603744804015" />
-    <state width="1398" height="228" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1602647332583" />
-    <state width="434" height="206" key="GridCell.Tab.0.right" timestamp="1603744804016">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state width="666" height="208" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1603396022615" />
+    <state width="1398" height="188" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1603747578668" />
+    <state width="1398" height="188" key="GridCell.Tab.0.right" timestamp="1603747578669">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="434" height="206" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1603744804016" />
-    <state width="1398" height="228" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1602647332584" />
+    <state width="666" height="208" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1603396022616" />
+    <state width="1398" height="188" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1603747578669" />
     <state x="260" y="50" key="MergeDialog" timestamp="1602977593623">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
@@ -158,14 +150,15 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="323" y="198" key="MultipleFileMergeDialog/0.0.1368.872@0.0.1368.872" timestamp="1603387533002" />
-    <state x="186" y="79" key="SettingsEditor" timestamp="1602648203291">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state x="196" y="102" key="SettingsEditor" timestamp="1603747721622">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="186" y="79" key="SettingsEditor/0.0.1368.872@0.0.1368.872" timestamp="1602648203291" />
-    <state x="277" y="170" key="Vcs.Push.Dialog.v2" timestamp="1603396260935">
+    <state x="196" y="102" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1603747721622" />
+    <state x="277" y="170" key="Vcs.Push.Dialog.v2" timestamp="1603387887841">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state x="277" y="170" key="Vcs.Push.Dialog.v2/0.0.1368.872@0.0.1368.872" timestamp="1603396260935" />
+    <state x="277" y="170" key="Vcs.Push.Dialog.v2/0.0.1368.872@0.0.1368.872" timestamp="1603387887841" />
     <state x="-3" y="95" width="1846" height="1370" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1602710595795">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
@@ -174,10 +167,10 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="94" y="94" width="1181" height="685" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1368.872@0.0.1368.872" timestamp="1602648277600" />
-    <state x="492" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603704378647">
+    <state x="492" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603387391905">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state x="492" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872@0.0.1368.872" timestamp="1603704378647" />
+    <state x="492" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872@0.0.1368.872" timestamp="1603387391905" />
     <state x="261" y="201" key="run.anything.popup" timestamp="1603342093992">
       <screen x="0" y="0" width="1368" height="872" />
     </state>

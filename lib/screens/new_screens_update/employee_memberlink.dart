@@ -41,6 +41,8 @@ class _employee_memberlinkState extends State<employee_memberlink> {
 
                 ),
                 ),
+                //Generate Table Number Information Here
+
                 IconButton(
                   icon: Image.asset('assets/images/QR Code.png'),
                   iconSize: 200,
