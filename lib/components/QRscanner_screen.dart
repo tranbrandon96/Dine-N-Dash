@@ -1,20 +1,35 @@
+import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/manual_input/manual_input_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class QRscanner_screen extends StatefulWidget {
+  String _tableNumber;
+  QRscanner_screen(String tableNumber){
+    _tableNumber = tableNumber;
+  }
   @override
-  _QRscanner_screen createState() => new _QRscanner_screen();
+  _QRscanner_screen createState() => new _QRscanner_screen(_tableNumber);
 }
 
 
 class _QRscanner_screen extends State<QRscanner_screen> {
+  DatabaseReference tableReference;
+  DatabaseReference userReference = FirebaseDatabase.instance.reference().child("Users");
+  String _tableNumber;
   String qr;
   String memberName = "John Doe";
   bool camState = true;
   bool scanned = false;
+
+  _QRscanner_screen(String tableNumber){
+    _tableNumber = tableNumber;
+    tableReference = FirebaseDatabase.instance.reference().child("Tables").child("Table"+ tableNumber);
+  }
 
 
   @override
@@ -59,6 +74,14 @@ class _QRscanner_screen extends State<QRscanner_screen> {
                           qrCodeCallback: (code) {
                             setState(() {
                               qr = code;
+
+                              //Retrieve the customer's name from the database
+                              DatabaseReference customerReference = userReference.child(qr).child("profile");
+                              customerReference.once().then((DataSnapshot snapshot){
+                                Map<dynamic, dynamic> values=snapshot.value;
+                                memberName = values["userName"];
+                              });
+
                               camState = false;
                               scanned = true;
                             });
@@ -130,7 +153,7 @@ class _QRscanner_screen extends State<QRscanner_screen> {
         ),
         FlatButton(
           onPressed: () {
-              displayModalBottomSheet(context);
+              displayModalBottomSheet(context,_tableNumber);
           },
           child: Text('ENTER CUSTOMER ID',
               style: TextStyle(fontSize:15, color: Color(0xFFFF0041))),
@@ -166,7 +189,13 @@ class _QRscanner_screen extends State<QRscanner_screen> {
           ),
 
           RaisedButton(
-            onPressed: () {},
+            onPressed: () {//Update the table with the customer's info
+              Map<String, Object> updateDoc = new HashMap();
+              updateDoc['customer_ID'] = qr;
+              updateDoc['User_Name'] = memberName;
+              tableReference.update(updateDoc);
+              Navigator.pop(context);
+              },
             color: Color(0xFFFF0041),
             child: Text('ADD CUSTOMER',
                 style: TextStyle(color: Colors.white)),
@@ -185,7 +214,7 @@ class _QRscanner_screen extends State<QRscanner_screen> {
 }
 
  ///This class is the setup for calling a modal bottomSheet.
-  void displayModalBottomSheet(context) {
+  void displayModalBottomSheet(context,String _tableNumber) {
     var bottomSheetController =
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
@@ -201,7 +230,7 @@ class _QRscanner_screen extends State<QRscanner_screen> {
             child: Container(
               height:MediaQuery.of(context).size.height/4,
               color: Color(0xFF737373),
-              child:ManualInputScreen(),
+              child:ManualInputScreen(_tableNumber),
             ),
           );
         }

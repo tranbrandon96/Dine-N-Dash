@@ -263,7 +263,8 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   onPressed: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTableScreen()));
+                    //TO-DO: Needs to be fixed
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTableScreen("12")));
                   },
                   child: Text('ADD'),
                   color: const Color(0xfffd1040),

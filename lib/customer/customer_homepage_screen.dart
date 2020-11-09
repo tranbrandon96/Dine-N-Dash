@@ -7,6 +7,7 @@ import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_app/firebase/sign_in.dart';
 
 class CustomerHomePageScreen extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class CustomerHomePageScreen extends StatefulWidget {
 }
 
 class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
-  final dbRef = FirebaseDatabase.instance.reference().child("Tables");
+  final dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("customer_ID").equalTo(userID);
   List<dynamic> lists = [];
 
   @override
@@ -44,10 +45,7 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.credit_card),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ViewTableScreen()));
-            },
+            onPressed: () {},
           )
         ],
       ),
@@ -112,7 +110,7 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ViewTableScreen()));
+                                    builder: (context) => ViewTableScreen(lists[index]["Table_Number"].toString())));
                           })
                     ]),
                   );
