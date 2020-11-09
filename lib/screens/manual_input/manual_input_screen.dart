@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +10,22 @@ import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:intl/intl.dart';
 
 class ManualInputScreen extends StatefulWidget {
-  _TableInfoScreen createState() => _TableInfoScreen();
+  String _tableNumber;
+  _TableInfoScreen createState() => _TableInfoScreen(_tableNumber);
+  ManualInputScreen(String tableNumber){
+   _tableNumber = tableNumber;
+  }
+
 }
 
 class _TableInfoScreen extends State<ManualInputScreen> {
   final _customerIDController = TextEditingController();
+  DatabaseReference tableReference;
+  DatabaseReference userReference = FirebaseDatabase.instance.reference().child("Users");
+  String memberName = "John Doe";
+  _TableInfoScreen(String tableNumber){
+    tableReference = FirebaseDatabase.instance.reference().child("Tables").child("Table"+ tableNumber);
+  }
 
   Widget build(BuildContext context) {
     String customerID = "0";
@@ -74,10 +87,14 @@ class _TableInfoScreen extends State<ManualInputScreen> {
                 RaisedButton(
                   onPressed: () {
                     customerID = _customerIDController.text;
-                    Navigator.push(
-                                   context,
-                                   MaterialPageRoute(
-                                       builder: (context) => ViewTableScreen()));
+                    userReference.child(customerID).child("profile").once().then((DataSnapshot snapshot){
+                     memberName =snapshot.value['userName'];
+                     Map<String, Object> updateDoc = new HashMap();
+                     updateDoc['customer_ID'] = customerID;
+                     updateDoc['User_Name'] = memberName;
+                     tableReference.update(updateDoc);
+                     Navigator.pop(context);
+                    });
                   },
                   color: Color(0xFFFF0041),
                   child:
@@ -95,15 +112,11 @@ class _TableInfoScreen extends State<ManualInputScreen> {
   }
 }
 
-///Function builds a text field with number input values for hint text and
-///bool to obscure user input text.
+///Function builds a text field
 Widget buildNumberTextField(TextEditingController controller) {
-  RegExp regExp = new RegExp("[0-9]");
   return TextField(
     maxLength: 99,
     controller: controller,
-    inputFormatters: [FilteringTextInputFormatter.allow(regExp)],
-    keyboardType: TextInputType.number,
     style: TextStyle(fontSize: 18, color: Colors.black),
     decoration: InputDecoration(
       counterText: '',

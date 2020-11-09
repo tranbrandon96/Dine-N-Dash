@@ -244,7 +244,7 @@ class _CustomerSignInScreen extends State<CustomerSignInScreen> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return HomePage();
+                  return CustomerHomePageScreen();
                 },
               ),
             );

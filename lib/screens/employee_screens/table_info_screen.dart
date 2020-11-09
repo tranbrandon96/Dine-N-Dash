@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app/components/membership_card_screen.dart';
+import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:intl/intl.dart';
 
 class TableInfoScreen extends StatefulWidget{
@@ -126,6 +126,8 @@ class _TableInfoScreen extends State<TableInfoScreen> {
       'Party_Size': partySize,
       'Check_In': checkIn,
       'Table_Number': tableNumber,
+      'employee_ID': userID,
+      'customer_ID':'',
     });
   }
 }

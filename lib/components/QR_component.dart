@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 
 
 class QR_component extends StatelessWidget {
-  String _dataString = "Hello";
+  String _dataString = 'Hello';
   BuildContext context;
 
   QR_component(String dataString,BuildContext bc){
