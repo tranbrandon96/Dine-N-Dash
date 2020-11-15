@@ -1,13 +1,47 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ViewFoodItemScreen extends StatefulWidget {
+  String itemName;
+  String menuName;
+  ViewFoodItemScreen(String itemName, String menuType){
+    this.itemName = itemName;
+    menuName = menuType;
+  }
   @override
   _ViewFoodItemScreenState createState() => _ViewFoodItemScreenState();
 }
 
 class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
+  String restaurantID = "mVIkdMLJkvTkwaRvxqsPFgteNkv1";
+  String menuName;
+  String calories;
+  String description;
+  String itemName;
+  List<dynamic>modifications = [];
+  String price;
+
+  int quantity;
+  String specialInstructions;
+  String allergy;
+  DatabaseReference dbRef = FirebaseDatabase.instance.reference().child("Menus");
+
+  _ViewFoodItemScreenState(String itemName,String menuType){
+    this.itemName = itemName;
+    menuName = menuType;
+    dbRef = dbRef.child(restaurantID).child(menuName).child("Items").child(this.itemName).then(
+        (DataSnapshot snapshot){
+          if (snapshot.value != null) {
+            customerName = "Guest";
+            Map<dynamic, dynamic> values=snapshot.data.value;
+            partySize = values["Party_Size"].toString();
+            customerName = values["User_Name"].toString();
+          };
+        }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -258,18 +292,20 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                 new             Container(
               padding: EdgeInsets.all(50.0),
               child: Center(
-                child: RaisedButton(
+                child: new Builder(
+    builder: (BuildContext context) {return RaisedButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   onPressed: () {
-                    //TO-DO: Needs to be fixed
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTableScreen("12")));
+                    Scaffold.of(context).showSnackBar(new SnackBar(
+                      content: new Text("Item Added"),
+                    ));
                   },
                   child: Text('ADD'),
                   color: const Color(0xfffd1040),
                   textColor: Colors.white,
-                ),
+                );}),
               ),
             ),
               ]

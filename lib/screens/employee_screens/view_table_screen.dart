@@ -5,14 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/components/QRscanner_screen.dart';
 import 'package:flutter_app/screens/employee_screens/checkout_screen.dart';
 import 'package:flutter_app/screens/employee_screens/review_order_screen.dart';
-import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
 import 'package:flutter_app/screens/food/category.dart';
-import 'package:flutter_app/screens/food/food_category.dart';
-import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
-import 'package:flutter_app/screens/new_screens_update/balanceprint_screen.dart';
 import 'package:flutter_app/screens/new_screens_update/discount_screen.dart';
-import 'package:flutter_app/screens/new_screens_update/employee_customerlink.dart';
-import 'package:flutter_app/screens/new_screens_update/kitchenconfirm_dialog.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ViewTableScreen extends StatefulWidget{
@@ -66,7 +60,7 @@ class _ViewTableScreen extends State<ViewTableScreen>{
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.keyboard_arrow_left, color: Color(0xFFFF0041), size:35,),
-            onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => HomePage()));}
+            onPressed: () {Navigator.pop(context);}
           ),
           actions: [
             IconButton(
@@ -82,11 +76,12 @@ class _ViewTableScreen extends State<ViewTableScreen>{
           backgroundColor: Colors.white,
         ),
       ),
-      body: futureView(),
+      body: tableView(),
     );
   }
 
-  Widget futureView() {return FutureBuilder(
+  Widget tableView() {
+    return FutureBuilder(
       future: db.once(),
     builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
     if (snapshot.hasData) {
@@ -122,7 +117,8 @@ class _ViewTableScreen extends State<ViewTableScreen>{
                         IconButton(
                           icon: Icon(Icons.edit, color: Colors.grey, size:25,),
                           onPressed: () {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => QRscanner_screen(_tableNumber)));
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => QRscanner_screen(_tableNumber)))
+                                .then((value) {  setState((){ });  });
                           },
                         ),
                       ]),

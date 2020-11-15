@@ -88,6 +88,11 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
                 itemCount: lists.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
+                    onTap: () {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) => ViewTableScreen(lists[index]["Table_Number"].toString())));},
                     leading: SvgPicture.asset(
                       "assets/icons/user-1.svg",
                       height: 60,
@@ -104,14 +109,7 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
                         'Table ' + lists[index]["Table_Number"].toString(),
                         style: TextStyle(fontSize: 20, color: Colors.grey),
                       ),
-                      IconButton(
-                          icon: Icon(Icons.keyboard_arrow_right),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ViewTableScreen(lists[index]["Table_Number"].toString())));
-                          })
+                       Icon(Icons.keyboard_arrow_right),
                     ]),
                   );
                 });
