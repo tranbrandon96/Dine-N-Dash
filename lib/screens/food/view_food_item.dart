@@ -30,16 +30,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
   _ViewFoodItemScreenState(String itemName,String menuType){
     this.itemName = itemName;
     menuName = menuType;
-    dbRef = dbRef.child(restaurantID).child(menuName).child("Items").child(this.itemName).then(
-        (DataSnapshot snapshot){
-          if (snapshot.value != null) {
-            customerName = "Guest";
-            Map<dynamic, dynamic> values=snapshot.data.value;
-            partySize = values["Party_Size"].toString();
-            customerName = values["User_Name"].toString();
-          };
-        }
-    );
+    dbRef = dbRef.child(restaurantID).child(menuName).child("Items").child(this.itemName);
   }
 
   @override
