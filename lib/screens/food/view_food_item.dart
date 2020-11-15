@@ -10,7 +10,7 @@ class ViewFoodItemScreen extends StatefulWidget {
     menuName = menuType;
   }
   @override
-  _ViewFoodItemScreenState createState() => _ViewFoodItemScreenState();
+  _ViewFoodItemScreenState createState() => _ViewFoodItemScreenState(itemName,menuName);
 }
 
 class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
