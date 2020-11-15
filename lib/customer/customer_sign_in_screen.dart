@@ -4,14 +4,6 @@ import 'package:flutter_app/customer/EmployeeCreationScreen.dart';
 import 'package:flutter_app/customer/customer_homepage_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_app/screens/forgot_password/forgot_password_screen.dart';
-import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
-
-import 'package:flutter_app/screens/employee_screens/checkout_screen.dart';
-import 'package:flutter_app/screens/employee_screens/review_order_screen.dart';
-import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
-import 'package:flutter_app/screens/employee_screens/tables_screen.dart';
-import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
-import 'package:flutter_app/screens/sign_up/member_type_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
