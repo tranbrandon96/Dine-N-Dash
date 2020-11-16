@@ -2,25 +2,30 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_app/screens/food/view_food_item.dart';
 import 'package:flutter_svg/svg.dart';
 
 class FoodCategoryScreen extends StatefulWidget{
   String menuName;
-  FoodCategoryScreen(String menuType){
+  String tableNumber;
+  FoodCategoryScreen(String tableNumber, String menuType){
     menuName = menuType;
+    this.tableNumber = tableNumber;
   }
-  _FoodCategoryScreen createState() => _FoodCategoryScreen(menuName);
+  _FoodCategoryScreen createState() => _FoodCategoryScreen(tableNumber, menuName);
 }
 
 class _FoodCategoryScreen extends State<FoodCategoryScreen>{
-  String restaurantID = "mVIkdMLJkvTkwaRvxqsPFgteNkv1";
+  String restaurantID = userID;
   String menuName;
   String itemName;
+  String tableNumber;
   List<dynamic>lists = [];
   DatabaseReference dbRef = FirebaseDatabase.instance.reference().child("Menus");
 
-  _FoodCategoryScreen(String menuType){
+  _FoodCategoryScreen(String tableNumber,String menuType){
+    this.tableNumber = tableNumber;
     menuName = menuType;
     dbRef = dbRef.child(restaurantID).child(menuName).child("Items");
   }
@@ -72,7 +77,7 @@ class _FoodCategoryScreen extends State<FoodCategoryScreen>{
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ViewFoodItemScreen(itemName,menuName)));
+                                builder: (context) => ViewFoodItemScreen(tableNumber,itemName,menuName)));
                       },
                       leading: SvgPicture.asset(
                       "assets/images/foodPlaceHolder.svg",
@@ -86,7 +91,7 @@ class _FoodCategoryScreen extends State<FoodCategoryScreen>{
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget> [
                       Text(
-                        lists[index]["Price"].toString(),
+                        "\$"+ lists[index]["Price"].toString(),
                       style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                       Icon(Icons.keyboard_arrow_right),

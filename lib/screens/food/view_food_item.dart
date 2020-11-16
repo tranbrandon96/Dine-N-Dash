@@ -1,36 +1,55 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ViewFoodItemScreen extends StatefulWidget {
   String itemName;
   String menuName;
-  ViewFoodItemScreen(String itemName, String menuType){
+  String tableNumber;
+  ViewFoodItemScreen(String tableNumber, String itemName, String menuType){
     this.itemName = itemName;
     menuName = menuType;
+    this.tableNumber = tableNumber;
+
   }
   @override
-  _ViewFoodItemScreenState createState() => _ViewFoodItemScreenState(itemName,menuName);
+  _ViewFoodItemScreenState createState() => _ViewFoodItemScreenState(tableNumber,itemName,menuName);
 }
 
 class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
-  String restaurantID = "mVIkdMLJkvTkwaRvxqsPFgteNkv1";
+  String tableNumber;
+  String restaurantID = userID;
   String menuName;
-  String calories;
-  String description;
-  String itemName;
-  List<dynamic>modifications = [];
-  String price;
+  String calories="";
+  String description="";
+  String itemName="";
+  Map<dynamic, dynamic>modifications = {};
+  double price;
 
-  int quantity;
-  String specialInstructions;
-  String allergy;
+  int quantity = 0;
+  String specialInstructions="";
+  String allergy="";
+
   DatabaseReference dbRef = FirebaseDatabase.instance.reference().child("Menus");
-
-  _ViewFoodItemScreenState(String itemName,String menuType){
+  DatabaseReference tableRef = FirebaseDatabase.instance.reference().child("Tables");
+  _ViewFoodItemScreenState(String tableNumber, String itemName,String menuType){
+    this.tableNumber = tableNumber;
     this.itemName = itemName;
     menuName = menuType;
+
+    tableRef = tableRef.child("Table"+tableNumber).child("Items");
     dbRef = dbRef.child(restaurantID).child(menuName).child("Items").child(this.itemName);
+    dbRef.once().then((snapshot) {
+      Map<dynamic, dynamic> values= snapshot.value;
+      calories = values["Calories"].toString();
+      description = values["Description"].toString();
+      this.itemName = values["Item_Name"].toString();
+      price = values["Price"];
+      modifications = values["Modifications"];
+      setState((){ });
+    }
+    );
   }
 
   @override
@@ -65,7 +84,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(20,10,10,0),
                             child: Text(
-                              'Double Double',
+                              itemName,
                               style: TextStyle(fontSize: 24, color: Colors.black),
                             ),
                           )
@@ -74,7 +93,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(20,5,20,10),
                             child: Text(
-                              '3.49',
+                              "\$" + price.toString(),
                               style: TextStyle(fontSize: 18, color: Colors.black),
                             ),
                           )
@@ -88,7 +107,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(20,5,40,10),
                             child: Text(
-                              'Toasted Buns, Two Cheese, Two Beef Patties, Lettuce, Onions, Tomatos, Spread ',
+                              description,
                               style: TextStyle(fontSize: 16, color: Colors.black),
                             ),
                           )
@@ -113,7 +132,9 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                       new Flexible(
                           child: FlatButton(
                             onPressed: () {
-                              /*...*/
+                              if(quantity > 0){quantity--;
+                              setState(() {});
+                              }
                             },
                             child: Text(
                               "-",
@@ -123,7 +144,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                       ),
                       new Flexible(
                         child: Text(
-                          "1",
+                          quantity.toString(),
                           style: TextStyle(fontSize: 24, color: Colors.black),
                         ),
                       ),
@@ -132,7 +153,8 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                               child: FlatButton(
                                 onPressed: () {
-                                  /*...*/
+                                  quantity++;
+                                  setState(() {});
                                 },
                                 child: Text(
                                   "+",
@@ -146,6 +168,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                 Divider(
                     color: Colors.black,
                 ),
+
                 new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget> [
@@ -160,61 +183,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                       )
                     ]
                 ),
-                new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget> [
-                      new Flexible(
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(60, 10, 0, 10),
-                            child: Text(
-                              "No Pickles",
-                              style: TextStyle(fontSize: 16, color: Colors.black),
-                            ),
-                          )
-                      ),
-                      new Flexible(
-                          child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                              child: FlatButton(
-                                shape: CircleBorder(
-                                    side: BorderSide(color: Colors.grey)),
-                                color: Colors.white,
-                                padding: EdgeInsets.all(10),
-                                highlightColor: Color(0xFFFE0C40),
-                                onPressed: () {},
-                              )
-                          )
-                      )
-                    ]
-                ),
-                new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget> [
-                      new Flexible(
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(60, 10, 0, 10),
-                            child: Text(
-                              "No Lettuce",
-                              style: TextStyle(fontSize: 16, color: Colors.black),
-                            ),
-                          )
-                      ),
-                      new Flexible(
-                          child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                              child: FlatButton(
-                                shape: CircleBorder(
-                                    side: BorderSide(color: Colors.grey)
-                                ),
-                                color: Colors.white,
-                                padding: EdgeInsets.all(10),
-                                highlightColor: Color(0xFFFE0C40),
-                                onPressed: () {},
-                              )
-                          )
-                      )
-                    ]
-                ),
+                modificationsBuilder(),
                 Divider(
                     color: Colors.black,
                 ),
@@ -289,9 +258,23 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   onPressed: () {
-                    Scaffold.of(context).showSnackBar(new SnackBar(
-                      content: new Text("Item Added"),
-                    ));
+                    if(quantity > 0) {
+                      Map<String, Object> updateDoc = {};
+                      updateDoc['Item_Name'] = itemName;
+                      updateDoc['Price'] = price;
+                      updateDoc['Modifications'] = modifications;
+                      updateDoc['Quantity'] = quantity;
+                      DatabaseReference itemRef = tableRef.push();
+                      itemRef.update(updateDoc);
+                      Scaffold.of(context).showSnackBar(new SnackBar(
+                        content: new Text("Item Added"),
+                      ));
+                    }
+                    else{
+                      Scaffold.of(context).showSnackBar(new SnackBar(
+                        content: new Text("Please Select Quantity"),
+                      ));
+                    }
                   },
                   child: Text('ADD'),
                   color: const Color(0xfffd1040),
@@ -304,4 +287,66 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
       ),
     );
   }
+
+  Widget modificationsBuilder(){
+
+    if(modifications != null) {
+      List lists = [];
+      modifications.forEach((key, values) {
+        lists.add(key);
+      });
+      return new ListView.builder(
+          shrinkWrap: true,
+          itemCount: lists.length,
+          itemBuilder: (BuildContext context, int index) {
+            bool checkBoxValue = false;
+            return new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  new Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(60, 10, 0, 10),
+                        child: Text(
+                          lists[index],
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        ),
+                      )
+                  ),
+                  new Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                        child: Checkbox(
+                          value: modifications[lists[index]],
+                          onChanged: (value) {
+
+                            setState(() {
+                              modifications[lists[index]] = value;
+                            });
+                          },
+                        ),
+                      )
+                  )
+                ]
+            );
+          }
+      );
+    }
+    else {
+      return new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            new Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20,5,40,10),
+                  child: Text(
+                    'None',
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                )
+            ),
+          ]
+      );
+    }
+  }
+
 }
