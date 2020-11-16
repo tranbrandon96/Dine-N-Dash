@@ -3,22 +3,30 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_app/screens/food/food_category.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CategoryScreen extends StatefulWidget {
+  String tableNumber;
+  CategoryScreen(String tableNumber){
+    this.tableNumber = tableNumber;
+  }
   @override
-  _CategoryScreenState createState() => _CategoryScreenState();
+  _CategoryScreenState createState() => _CategoryScreenState(tableNumber);
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-  String restaurantID = "mVIkdMLJkvTkwaRvxqsPFgteNkv1";
+  String restaurantID = userID;
   String menuName;
+  String tableNumber;
+
   List<dynamic>lists = [];
   DatabaseReference dbRef = FirebaseDatabase.instance.reference().child("Menus");
 
-  _CategoryScreenState(){
+  _CategoryScreenState(String tableNumber){
     dbRef = dbRef.child(restaurantID);
+    this.tableNumber = tableNumber;
   }
 
   @override
@@ -69,7 +77,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => FoodCategoryScreen(menuName)));},
+                            builder: (context) => FoodCategoryScreen(tableNumber,menuName)));},
 
                   title: Align(
                     child: Text("" + lists[index]["Menu_Name"].toString()),

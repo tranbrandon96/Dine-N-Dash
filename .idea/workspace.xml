@@ -8,7 +8,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfe63a7a-5d35-4585-b2fc-297c4b9c9ce8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
@@ -19,18 +18,10 @@
       <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/QR_component.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/QR_component.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/QRscanner_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/QRscanner_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/components/membership_card_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/membership_card_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/customer/customer_homepage_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/customer/customer_homepage_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/customer/customer_sign_in_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/customer/customer_sign_in_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/firebase/sign_in.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase/sign_in.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/employee_screens/table_info_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/employee_screens/table_info_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/employee_screens/view_table_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/employee_screens/view_table_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/food/category.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/food/category.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/food/food_category.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/food/food_category.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/food/view_food_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/food/view_food_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/homepage_screen/homepage_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/homepage_screen/homepage_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/manual_input/manual_input_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/manual_input/manual_input_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/sign_in/employee_sign_in_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/sign_in/employee_sign_in_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,8 +37,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1iqYfe3XYykmoHQbWTAhD3gbsVC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -111,14 +106,45 @@
       <option name="project" value="LOCAL" />
       <updated>1603851529685</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added database connection.&#10;view_table_screen.dart now displays info correctly&#10;Table can be linked with customer(requires page re-clicked to&#10; show update)&#10;View only for your tables(Only for Google Sign In Users)">
+      <created>1604910456195</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1604910456195</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added database connection.&#10;Menu Categories and menu items display corresponding items from Database.">
+      <created>1605469462971</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605469462971</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Not yet database connected page, but errors fixed to not break master">
+      <created>1605469689362</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605469689362</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Not yet database connected page, but errors fixed to not break master">
+      <created>1605469751566</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605469751566</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Convert ID to Qr and Scan QR added" />
     <MESSAGE value="Fixed typo" />
     <MESSAGE value="Add Table functionality working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Table functionality working" />
+    <MESSAGE value="Added database connection.&#10;view_table_screen.dart now displays info correctly&#10;Table can be linked with customer(requires page re-clicked to&#10; show update)&#10;View only for your tables(Only for Google Sign In Users)" />
+    <MESSAGE value="Added database connection.&#10;Menu Categories and menu items display corresponding items from Database." />
+    <MESSAGE value="Not yet database connected page, but errors fixed to not break master" />
+    <option name="LAST_COMMIT_MESSAGE" value="Not yet database connected page, but errors fixed to not break master" />
   </component>
   <component name="WindowStateProjectService">
     <state x="140" y="92" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603308172918">
@@ -129,37 +155,41 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="365" y="173" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1368.872@0.0.1368.872" timestamp="1602710610349" />
+    <state x="246" y="183" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605085890979">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="246" y="183" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1368.872@0.0.1368.872" timestamp="1605085890979" />
     <state x="26" y="54" width="1181" height="685" key="AVDManager" timestamp="1603911685213">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="26" y="54" width="1181" height="685" key="AVDManager/0.0.1368.872@0.0.1368.872" timestamp="1603911685213" />
-    <state x="305" y="6" key="CommitChangelistDialog2" timestamp="1603851527979">
+    <state x="305" y="0" key="CommitChangelistDialog2" timestamp="1605469750804">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state x="305" y="6" key="CommitChangelistDialog2/0.0.1368.872@0.0.1368.872" timestamp="1603851527979" />
+    <state x="305" y="0" key="CommitChangelistDialog2/0.0.1368.872@0.0.1368.872" timestamp="1605469750804" />
     <state x="404" y="174" key="FileChooserDialogImpl" timestamp="1603846208391">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="404" y="174" key="FileChooserDialogImpl/0.0.1368.872@0.0.1368.872" timestamp="1603846208391" />
-    <state width="661" height="207" key="GridCell.Tab.0.bottom" timestamp="1604906216691">
+    <state width="919" height="207" key="GridCell.Tab.0.bottom" timestamp="1605471001579">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="661" height="207" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1604906216691" />
+    <state width="919" height="207" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1605471001579" />
     <state width="1398" height="188" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1603747578669" />
-    <state width="661" height="207" key="GridCell.Tab.0.center" timestamp="1604906216691">
+    <state width="919" height="207" key="GridCell.Tab.0.center" timestamp="1605471001579">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="661" height="207" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1604906216691" />
+    <state width="919" height="207" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1605471001579" />
     <state width="1398" height="188" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1603747578668" />
-    <state width="661" height="207" key="GridCell.Tab.0.left" timestamp="1604906216691">
+    <state width="919" height="207" key="GridCell.Tab.0.left" timestamp="1605471001579">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="661" height="207" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1604906216691" />
+    <state width="919" height="207" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1605471001579" />
     <state width="1398" height="188" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1603747578668" />
-    <state width="661" height="207" key="GridCell.Tab.0.right" timestamp="1604906216691">
+    <state width="919" height="207" key="GridCell.Tab.0.right" timestamp="1605471001579">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="661" height="207" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1604906216691" />
+    <state width="919" height="207" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1605471001579" />
     <state width="1398" height="188" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1603747578669" />
     <state x="260" y="50" key="MergeDialog" timestamp="1603911169141">
       <screen x="0" y="0" width="1368" height="872" />
@@ -174,10 +204,10 @@
     </state>
     <state x="49" y="81" key="SettingsEditor/0.0.1368.872@0.0.1368.872" timestamp="1603846210648" />
     <state x="196" y="102" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1603747721622" />
-    <state x="277" y="170" key="Vcs.Push.Dialog.v2" timestamp="1603851544542">
+    <state x="277" y="170" key="Vcs.Push.Dialog.v2" timestamp="1605469765799">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state x="277" y="170" key="Vcs.Push.Dialog.v2/0.0.1368.872@0.0.1368.872" timestamp="1603851544542" />
+    <state x="277" y="170" key="Vcs.Push.Dialog.v2/0.0.1368.872@0.0.1368.872" timestamp="1605469765799" />
     <state x="-3" y="95" width="1846" height="1370" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1602710595795">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
@@ -186,10 +216,14 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="94" y="94" width="1181" height="685" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1368.872@0.0.1368.872" timestamp="1602648277600" />
-    <state x="492" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603911126610">
+    <state x="492" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604910820383">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state x="492" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872@0.0.1368.872" timestamp="1603911126610" />
+    <state x="492" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872@0.0.1368.872" timestamp="1604910820383" />
+    <state x="459" y="338" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1604910516544">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="459" y="338" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1368.872@0.0.1368.872" timestamp="1604910516544" />
     <state x="261" y="201" key="run.anything.popup" timestamp="1603342093992">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
