@@ -207,14 +207,18 @@ class _ViewTableScreen extends State<ViewTableScreen>{
               subtitle: Column(
                   children: modificationBuilder(lists[index]["Modifications"]),
               ),
-              trailing: Text('\$'+ lists[index]["Price"].toString() + '\t\t'),
+              trailing: Text('\$'+ lists[index]["Price"].toStringAsFixed(2) + '\t\t'),
               children: [
                 Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children:[
                       FlatButton(color:Colors.purple,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => DiscountScreen()));}, child:Text('DISCOUNT',style:TextStyle(color:Colors.white,fontSize:15))),
                       FlatButton(color:Colors.orangeAccent,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTableScreen(_tableNumber)));}, child:Text('EDIT',style:TextStyle(color:Colors.white,fontSize:15))),
-                      FlatButton(color:Colors.red,onPressed: (){}, child:Text('REMOVE',style:TextStyle(color:Colors.white,fontSize:15))),
+                      FlatButton(color:Colors.red,onPressed: (){
+                        db.child('Items').child(lists[index]["Key"]).remove().then((value){
+                          setState(() { });
+                        });
+                        }, child:Text('REMOVE',style:TextStyle(color:Colors.white,fontSize:15))),
                     ]
                 )
               ],
@@ -278,10 +282,7 @@ class _ViewTableScreen extends State<ViewTableScreen>{
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ViewTableScreen(_tableNumber)));
+                    Navigator.pop(context);
                   },
                   child: Text(
                       'YES'
@@ -300,10 +301,7 @@ class _ViewTableScreen extends State<ViewTableScreen>{
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ViewTableScreen(_tableNumber)));
+                    Navigator.pop(context);
                   },
                   child: Text(
                       'NO'
