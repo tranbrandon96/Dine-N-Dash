@@ -24,6 +24,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
   String calories="";
   String description="";
   String itemName="";
+  String key ="";
   Map<dynamic, dynamic>modifications = {};
   double price;
 
@@ -261,10 +262,12 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                     if(quantity > 0) {
                       Map<String, Object> updateDoc = {};
                       updateDoc['Item_Name'] = itemName;
-                      updateDoc['Price'] = price;
+                      updateDoc['Price'] = price*quantity;
                       updateDoc['Modifications'] = modifications;
                       updateDoc['Quantity'] = quantity;
                       DatabaseReference itemRef = tableRef.push();
+                      key = itemRef.key;
+                      updateDoc['Key'] = key;
                       itemRef.update(updateDoc);
                       Scaffold.of(context).showSnackBar(new SnackBar(
                         content: new Text("Item Added"),
