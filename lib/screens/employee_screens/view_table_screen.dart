@@ -24,7 +24,6 @@ class _ViewTableScreen extends State<ViewTableScreen>{
   String partySize = '1';
   Map<dynamic, dynamic>items = {};
   DatabaseReference db;
-  List<ExpansionTile> menuItems;
 
   _ViewTableScreen(String tableNumber){
     _tableNumber = tableNumber;
@@ -38,23 +37,6 @@ class _ViewTableScreen extends State<ViewTableScreen>{
 
 
   Widget build (BuildContext context){
-      menuItems = [
-    ExpansionTile(
-      title: Text('\t\tDouble Double'),
-      subtitle: Text('\t\t + Animal Style' + '\n\t\t -  No Pickles'),
-      trailing: Text('\$4.25\t\t'),
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children:[
-            FlatButton(color:Colors.purple,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => DiscountScreen()));}, child:Text('DISCOUNT',style:TextStyle(color:Colors.white,fontSize:15))),
-            FlatButton(color:Colors.orangeAccent,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTableScreen(_tableNumber)));}, child:Text('EDIT',style:TextStyle(color:Colors.white,fontSize:15))),
-            FlatButton(color:Colors.red,onPressed: (){}, child:Text('REMOVE',style:TextStyle(color:Colors.white,fontSize:15))),
-          ]
-        )
-      ],
-    ),
-  ];
 
     return Scaffold(
       appBar: PreferredSize(
@@ -160,7 +142,7 @@ class _ViewTableScreen extends State<ViewTableScreen>{
                             borderRadius: BorderRadius.circular(24.0),
                           ),
                         ),
-                        _button('CHECKOUT', CheckoutScreen()),
+                        _button('CHECKOUT', CheckoutScreen(_tableNumber)),
 
                       ],
                     ),

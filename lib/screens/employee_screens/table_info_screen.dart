@@ -1,9 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:intl/intl.dart';
 
 class TableInfoScreen extends StatefulWidget{
@@ -17,6 +17,13 @@ class _TableInfoScreen extends State<TableInfoScreen> {
   String partySize = "0";
   String tableNumber = "0";
   String checkIn = "0:00pm";
+  String userID;
+
+  _TableInfoScreen(){
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    User user = auth.currentUser;
+    userID = user.uid;
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(

@@ -17,7 +17,7 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-  String restaurantID = userID;
+  String restaurantID = 'mVIkdMLJkvTkwaRvxqsPFgteNkv1';
   String menuName;
   String tableNumber;
 

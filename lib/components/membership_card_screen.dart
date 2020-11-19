@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/QR_component.dart';
-import 'package:flutter_app/firebase/sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class membership_card_screen extends StatelessWidget {
   String memberID;
   String memberName;
 
   membership_card_screen(){
-    memberID = userID;
-    memberName = name;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    User user = auth.currentUser;
+    memberID = user.uid;
+    memberName = user.displayName;
   }
 
   Widget build(BuildContext context) {

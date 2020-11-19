@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
 
-  String firstName;
+String firstName;
 String lastName;
 String email;
 String phoneNumber;
@@ -19,9 +20,6 @@ class EmployeeAccountCreationScreen extends StatefulWidget {
 }
 
 class _EmployeeAccountCreationScreenState extends State<EmployeeAccountCreationScreen> {
-
-
-  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +41,9 @@ class _EmployeeAccountCreationScreenState extends State<EmployeeAccountCreationS
           backgroundColor: Colors.red[500],
         ),
 
-      body: Container(
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child:Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -129,34 +129,53 @@ class _EmployeeAccountCreationScreenState extends State<EmployeeAccountCreationS
         }),
   ),
               SizedBox(height: 20),
-              RaisedButton(
-                onPressed: () async {
-                  try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email, password: password);
-                    if (newUser != null) {
-                    Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomePage()));
-                    }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-                child: Text('Continue',
-                    style: TextStyle(color: Colors.deepOrange)),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-              ),
+              RegisterButton(),
               SizedBox(height: 40),
             ],
           ),
         ),
       ),
+    ));
+  }
+
+}
+
+class RegisterButton extends StatelessWidget {
+  final _auth = FirebaseAuth.instance;
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      onPressed: () async {
+        try {
+          final newUserCredential = await _auth.createUserWithEmailAndPassword(
+              email: email, password: password);
+          if (newUserCredential != null) {
+            if(newUserCredential.additionalUserInfo.isNewUser == true){
+              User newUser = newUserCredential.user;
+              //Add user to database
+              DatabaseReference userDB = FirebaseDatabase.instance.reference().child("Users").child(newUser.uid).child("profile");
+              userDB.set({"userID": newUser.uid, "userName":newUser.displayName, "userEmail":newUser.email});
+            }
+            Navigator.pop(context,'Account Created');
+          }
+          else{Scaffold.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text("Account Creation Failed")));}
+        } catch (e) {
+          print(e);
+          Scaffold.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text("Account Creation Failed")));
+
+        }
+      },
+      child: Text('REGISTER',
+          style: TextStyle(color: Colors.deepOrange)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18.0),
+      ),
     );
   }
+
 }
 
 Widget buildTextField(String input, String hint, bool obscure) {
