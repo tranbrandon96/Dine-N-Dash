@@ -39,10 +39,16 @@ Future<String> signInWithGoogle() async {
     assert(user.displayName != null);
     assert(user.photoURL != null);
 
-    //Add user to database
-    DatabaseReference userDB = FirebaseDatabase.instance.reference().child("Users").child(user.uid).child("profile");
-    userDB.set({"userID": user.uid, "userName":user.displayName, "userEmail":user.email});
-
+    if(authResult.additionalUserInfo.isNewUser == true) {
+      //Add user to database
+      DatabaseReference userDB = FirebaseDatabase.instance.reference().child(
+          "Users").child(user.uid).child("profile");
+      userDB.set({
+        "userID": user.uid,
+        "userName": user.displayName,
+        "userEmail": user.email
+      });
+    }
     // Store the retrieved data
     name = user.displayName;
     email = user.email;

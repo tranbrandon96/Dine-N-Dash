@@ -19,7 +19,7 @@ class ViewFoodItemScreen extends StatefulWidget {
 
 class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
   String tableNumber;
-  String restaurantID = userID;
+  String restaurantID = 'mVIkdMLJkvTkwaRvxqsPFgteNkv1';
   String menuName;
   String calories="";
   String description="";

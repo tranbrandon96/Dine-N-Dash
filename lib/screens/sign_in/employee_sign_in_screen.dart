@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
@@ -30,7 +31,6 @@ class _EmployeeSignInScreen extends State<EmployeeSignInScreen> {
   final _auth = FirebaseAuth.instance;
   String employeeEmail;
   String password;
-  String userID;
 
   int _counter = 0;
 
@@ -135,9 +135,9 @@ class _EmployeeSignInScreen extends State<EmployeeSignInScreen> {
               RaisedButton(
                 onPressed: () async {
                   try {
-                    final user = await _auth.signInWithEmailAndPassword(
+                    final userCredential = await _auth.signInWithEmailAndPassword(
                         email: employeeEmail, password: password);
-                    if (user != null) {
+                    if (userCredential != null) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -166,24 +166,16 @@ class _EmployeeSignInScreen extends State<EmployeeSignInScreen> {
                     style: TextStyle(color: Colors.white)),
                 highlightColor: Colors.deepOrangeAccent,
               ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EmployeeAccountCreationScreen()));
-                },
-                child: Text('NO ACCOUNT? SIGN UP',
-                    style: TextStyle(color: Colors.white)),
-                highlightColor: Colors.deepOrangeAccent,
-              ),
+              SignUpButton(),
               SizedBox(height: 40),
             ],
           ),
         ),),
       ),
     );
+
   }
+
 
 
   ///This class is to test new screens using FAB on press.
@@ -271,6 +263,35 @@ class _EmployeeSignInScreen extends State<EmployeeSignInScreen> {
         ),
       ),
     );
+  }
+}
+
+class SignUpButton extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return FlatButton(
+      onPressed: () {
+        _navigateSignUp(context);
+      },
+      child: Text('NO ACCOUNT? SIGN UP',
+          style: TextStyle(color: Colors.white)),
+      highlightColor: Colors.deepOrangeAccent,
+    );
+  }
+  // A method that launches the SignUpScreen and awaits the result from
+  // Navigator.pop.
+  _navigateSignUp(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => EmployeeAccountCreationScreen()),
+    );
+
+    // After the Selection Screen returns a result, hide any previous snackbars
+    // and show the new result.
+    Scaffold.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text("$result")));
   }
 }
 

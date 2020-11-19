@@ -1,10 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/employee_main_drawer.dart';
 import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
 import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter_app/firebase/sign_in.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -13,9 +13,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  User user;
+  String userID;
+
   final fbReference = FirebaseDatabase.instance.reference();
-     final dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("employee_ID").equalTo(userID);
-     List<dynamic>lists = [];
+  Query dbRef;
+  List<dynamic>lists = [];
+
+  _HomePageState(){
+    user = auth.currentUser;
+    userID = user.uid;
+    dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("employee_ID").equalTo(userID);
+
+}
 
 
   
@@ -68,37 +79,55 @@ class _HomePageState extends State<HomePage> {
            if (snapshot.hasData) {
              lists.clear();
              Map<dynamic, dynamic> values = snapshot.data.value;
-             values.forEach((key, values) {
-               lists.add(values);
-             });
-             return new ListView.builder(
-                 shrinkWrap: true,
-                 itemCount: lists.length,
-                 itemBuilder: (BuildContext context, int index) {
-                   return  ListTile(
-                     onTap: () {
-                       Navigator.push(
-                           context,
-                           MaterialPageRoute(
-                               builder: (context) => ViewTableScreen(lists[index]["Table_Number"].toString())));},
-                     leading: SvgPicture.asset(
-                       "assets/icons/user-1.svg",
-                       height: 60,
-                       width: 60,
-                     ),
-                     title: Text("" + lists[index]["User_Name"].toString()),
-                     subtitle: Text('Check In: ' + lists[index]["Check_In"].toString() +
-                         '\nParty Size '+ lists[index]["Party_Size"].toString()),
-                     trailing: Row(
-                         mainAxisSize: MainAxisSize.min,
-                         children: <Widget>[
-                           Text('Table ' + lists[index]["Table_Number"].toString(), style: TextStyle(fontSize: 20, color: Colors.grey),),
-                           Icon(Icons.keyboard_arrow_right),
-                         ]),
-                   );
-
-
-                 });
+             if(values != null) {
+               values.forEach((key, values) {
+                 lists.add(values);
+               });
+               return new ListView.builder(
+                   shrinkWrap: true,
+                   itemCount: lists.length,
+                   itemBuilder: (BuildContext context, int index) {
+                     return ListTile(
+                       onTap: () {
+                         Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                                 builder: (context) =>
+                                     ViewTableScreen(
+                                         lists[index]["Table_Number"]
+                                             .toString())));
+                       },
+                       leading: SvgPicture.asset(
+                         "assets/icons/user-1.svg",
+                         height: 60,
+                         width: 60,
+                       ),
+                       title: Text("" + lists[index]["User_Name"].toString()),
+                       subtitle: Text(
+                           'Check In: ' + lists[index]["Check_In"].toString() +
+                               '\nParty Size ' +
+                               lists[index]["Party_Size"].toString()),
+                       trailing: Row(
+                           mainAxisSize: MainAxisSize.min,
+                           children: <Widget>[
+                             Text('Table ' +
+                                 lists[index]["Table_Number"].toString(),
+                               style: TextStyle(fontSize: 20, color: Colors
+                                   .grey),),
+                             Icon(Icons.keyboard_arrow_right),
+                           ]),
+                     );
+                   });
+             }
+             else{
+               return Center(
+                  child:
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                      children:[Text("ADD A TABLE")]
+                  )
+                  );
+             }
            }
            return CircularProgressIndicator();
          });}
