@@ -25,11 +25,8 @@ class _HomePageState extends State<HomePage> {
     user = auth.currentUser;
     userID = user.uid;
     dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("employee_ID").equalTo(userID);
-
 }
 
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

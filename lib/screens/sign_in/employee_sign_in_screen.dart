@@ -281,13 +281,13 @@ class SignUpButton extends StatelessWidget {
   // Navigator.pop.
   _navigateSignUp(BuildContext context) async {
     // Navigator.push returns a Future that completes after calling
-    // Navigator.pop on the Selection Screen.
+    // Navigator.pop on the Screen.
     final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => EmployeeAccountCreationScreen()),
     );
 
-    // After the Selection Screen returns a result, hide any previous snackbars
+    // After the Screen returns a result, hide any previous snackbars
     // and show the new result.
     Scaffold.of(context)
       ..removeCurrentSnackBar()
