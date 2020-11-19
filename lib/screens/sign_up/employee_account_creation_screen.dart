@@ -1,14 +1,15 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
-String firstName;
-String lastName;
-String email;
-String phoneNumber;
-String gender;
-String birthday;
-String password;
+TextEditingController firstName = TextEditingController();
+TextEditingController lastName = TextEditingController();
+TextEditingController email = TextEditingController();
+TextEditingController phoneNumber= TextEditingController();
+TextEditingController gender = TextEditingController();
+TextEditingController birthday = TextEditingController();
+TextEditingController password = TextEditingController();
 
 class EmployeeAccountCreationScreen extends StatefulWidget {
   @override
@@ -78,53 +79,11 @@ class _EmployeeAccountCreationScreenState extends State<EmployeeAccountCreationS
               ),
               buildTextField(firstName, "First Name", false),
               buildTextField(lastName, "Last Name", false),
-              Container(
-    width: 300,
-    child: TextField(
-        keyboardType: TextInputType.emailAddress,
-
-        style: TextStyle(fontSize: 18, color: Colors.black),
-        decoration: InputDecoration(
-          hintText: 'Email',
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          ),
-          border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          ),
-        ),
-        onChanged: (value) {
-          email = value;
-        }),
-  ),
+              buildTextField(email, "Email", false),
               buildTextField(phoneNumber, "Mobile Number", false),
               buildTextField(gender, "Gender", false),
               buildTextField(birthday, "Birthday", false),
-              Container(
-    width: 300,
-    child: TextField(
-        keyboardType: TextInputType.emailAddress,
-
-        style: TextStyle(fontSize: 18, color: Colors.black),
-        decoration: InputDecoration(
-          hintText: 'Password',
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          ),
-          border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          ),
-        ),
-        onChanged: (value) {
-          password = value;
-        }),
-  ),
+              buildTextField(password, "Password", true),
               SizedBox(height: 20),
               RegisterButton(),
               SizedBox(height: 40),
@@ -142,27 +101,47 @@ class RegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RaisedButton(
       onPressed: () async {
-        try {
-          final newUserCredential = await _auth.createUserWithEmailAndPassword(
-              email: email, password: password);
-          if (newUserCredential != null) {
-            if(newUserCredential.additionalUserInfo.isNewUser == true){
-              User newUser = newUserCredential.user;
-              //Add user to database
-              DatabaseReference userDB = FirebaseDatabase.instance.reference().child("Users").child(newUser.uid).child("profile");
-              userDB.set({"userID": newUser.uid, "userName":newUser.displayName, "userEmail":newUser.email});
+        if(firstName.text == ""){
+          showSnackBar(context,"Account Creation Failed. Please Enter A First Name.");
+        }
+        else if(lastName.text == ""){
+          showSnackBar(context,"Account Creation Failed. Please Enter A Last Name.");
+        }
+        else if(email.text == ""){
+          showSnackBar(context,"Account Creation Failed. Please Enter A Valid Email.");
+        }
+        else if(password.text == "" || password.text.length < 6){
+          showSnackBar(context,"Account Creation Failed. Please Password An Password With At Least 6 Characters.");
+        }
+        else {
+          try {
+            final newUserCredential = await _auth
+                .createUserWithEmailAndPassword(
+                email: email.text, password: password.text);
+            if (newUserCredential != null) {
+              if (newUserCredential.additionalUserInfo.isNewUser == true) {
+                User newUser = newUserCredential.user;
+                newUser.updateProfile(
+                    displayName: (firstName.text + " " + lastName.text));
+                //Add user to database
+                DatabaseReference userDB = FirebaseDatabase.instance.reference()
+                    .child("Users").child(newUser.uid)
+                    .child("profile");
+                userDB.set({
+                  "userID": newUser.uid,
+                  "userName": firstName.text + " " + lastName.text,
+                  "userEmail": newUser.email
+                });
+              }
+              Navigator.pop(context, 'Account Created');
             }
-            Navigator.pop(context,'Account Created');
+            else {
+              showSnackBar(context,"Account Creation Failed");
+            }
+          } catch (e) {
+            print(e);
+            showSnackBar(context,"Account Creation Failed");
           }
-          else{Scaffold.of(context)
-            ..removeCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text("Account Creation Failed")));}
-        } catch (e) {
-          print(e);
-          Scaffold.of(context)
-            ..removeCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text("Account Creation Failed")));
-
         }
       },
       child: Text('REGISTER',
@@ -172,30 +151,39 @@ class RegisterButton extends StatelessWidget {
       ),
     );
   }
+
+  void showSnackBar(BuildContext context, String text){
+    Scaffold.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(
+          SnackBar(content: Text(text)));
+  }
 }
 
-Widget buildTextField(String input, String hint, bool obscure) {
+Widget buildTextField(TextEditingController input, String hint, bool obscure) {
   return Container(
     width: 300,
     child: TextField(
-        keyboardType: TextInputType.emailAddress,
-        obscureText: obscure,
-        style: TextStyle(fontSize: 18, color: Colors.black),
-        decoration: InputDecoration(
-          hintText: hint,
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          ),
-          border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-          ),
+      keyboardType: TextInputType.emailAddress,
+      obscureText: obscure,
+      controller: input,
+      style: TextStyle(fontSize: 18, color: Colors.black),
+      inputFormatters: [FilteringTextInputFormatter.deny(
+          new RegExp(r"\s\b|\b\s")
+      )],
+      decoration: InputDecoration(
+        hintText: hint,
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey, width: 1.0),
         ),
-        onChanged: (value) {
-          input = value;
-        }),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey, width: 1.0),
+        ),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey, width: 1.0),
+        ),
+      ),
+    ),
   );
 }
 

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_app/screens/edit_creditcart/edit_creditcard.dart';
@@ -8,7 +9,17 @@ import 'package:flutter_app/screens/settings/settings_screen.dart';
 import 'package:flutter_app/screens/sign_in/employee_sign_in_screen.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({Key key}) : super(key: key);
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  User user;
+  String name;
+  String imageUrl = "";
+  MainDrawer(){
+    user = auth.currentUser;
+    name = user.displayName;
+    if(user.photoURL != null) {
+      imageUrl = user.photoURL;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
