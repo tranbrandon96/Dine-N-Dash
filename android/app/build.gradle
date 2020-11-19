@@ -50,6 +50,11 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 flutter {
@@ -57,7 +62,7 @@ flutter {
 }
 
 dependencies {
-    false
+    implementation "com.squareup.sdk.in-app-payments:card-entry:1.4.0"
 
     // add SDKs for desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries

@@ -24,5 +24,6 @@ public final class GeneratedPluginRegistrant {
     flutterEngine.getPlugins().add(new io.flutter.plugins.imagepicker.ImagePickerPlugin());
       com.github.rmtmckenzie.nativedeviceorientation.NativeDeviceOrientationPlugin.registerWith(shimPluginRegistry.registrarFor("com.github.rmtmckenzie.nativedeviceorientation.NativeDeviceOrientationPlugin"));
     flutterEngine.getPlugins().add(new com.github.rmtmckenzie.qrmobilevision.QrMobileVisionPlugin());
+    flutterEngine.getPlugins().add(new sqip.flutter.SquareInAppPaymentsFlutterPlugin());
   }
 }

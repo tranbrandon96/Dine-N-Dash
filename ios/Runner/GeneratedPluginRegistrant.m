@@ -52,6 +52,12 @@
 @import qr_mobile_vision;
 #endif
 
+#if __has_include(<square_in_app_payments/SquareInAppPaymentsFlutterPlugin.h>)
+#import <square_in_app_payments/SquareInAppPaymentsFlutterPlugin.h>
+#else
+@import square_in_app_payments;
+#endif
+
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
@@ -63,6 +69,7 @@
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
   [NativeDeviceOrientationPlugin registerWithRegistrar:[registry registrarForPlugin:@"NativeDeviceOrientationPlugin"]];
   [QrMobileVisionPlugin registerWithRegistrar:[registry registrarForPlugin:@"QrMobileVisionPlugin"]];
+  [SquareInAppPaymentsFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"SquareInAppPaymentsFlutterPlugin"]];
 }
 
 @end

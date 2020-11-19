@@ -43,7 +43,8 @@ dependencies:
   qr_mobile_vision: 1.0.2
   #For time format
   intl: ^0.16.1
-  
+  square_in_app_payments: ^1.5.0
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter
