@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/customer_main_drawer.dart';
-import 'package:flutter_app/components/employee_main_drawer.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/screens/employee_screens/table_info_screen.dart';
 import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:flutter_app/firebase/sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CustomerHomePageScreen extends StatefulWidget {
   @override
@@ -15,8 +14,19 @@ class CustomerHomePageScreen extends StatefulWidget {
 }
 
 class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
-  final dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("customer_ID").equalTo(userID);
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  User user;
+  String userID;
+
+  final fbReference = FirebaseDatabase.instance.reference();
+  Query dbRef;
   List<dynamic> lists = [];
+
+  _CustomerHomePageScreenState(){
+    user = auth.currentUser;
+    userID = user.uid;
+    dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("customer_ID").equalTo(userID);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +90,7 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
           if (snapshot.hasData) {
             lists.clear();
             Map<dynamic, dynamic> values = snapshot.data.value;
+            if(values != null){
             values.forEach((key, values) {
               lists.add(values);
             });
@@ -113,11 +124,20 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
                     ]),
                   );
                 });
+            }
+            else{
+              return Center(
+                  child:
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:[Text("CALL WAITER TO ADD AN ORDER")]
+                  )
+              );
+            }
           }
           return CircularProgressIndicator();
-        });
-  }
-}
+        });}
+    }
 
 ///This class is the setup for calling a modal bottomSheet.
 void displayModalBottomSheet(context) {

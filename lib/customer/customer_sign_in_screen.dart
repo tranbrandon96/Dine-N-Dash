@@ -164,17 +164,7 @@ class _CustomerSignInScreen extends State<CustomerSignInScreen> {
                     style: TextStyle(color: Colors.white)),
                 highlightColor: Colors.deepOrangeAccent,
               ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CustomerAccountCreationScreen()));
-                },
-                child: Text('NO ACCOUNT? SIGN UP',
-                    style: TextStyle(color: Colors.white)),
-                highlightColor: Colors.deepOrangeAccent,
-              ),
+             SignUpButton(),
               SizedBox(height: 40),
             ],
           ),
@@ -182,29 +172,6 @@ class _CustomerSignInScreen extends State<CustomerSignInScreen> {
       ),
     );
   }
-
-
-  ///This class is to test new screens using FAB on press.
-  ///Feel free to use.
-  // Widget _floatingActionButtonTester(){
-  //   return FloatingActionButton(
-  //     onPressed: (){
-
-  //       //Sends to designated page
-  //       Navigator.of(context).push(
-  //         MaterialPageRoute(
-  //           builder: (context) {
-  //             //return checkout_screen();
-  //             //return review_order_screen();
-  //             return TableInfoScreen();
-  //             //return view_table_screen();
-  //           },
-  //         ),
-  //       );
-
-  //     }
-  //   );
-  // }
 
   ///This button is to go to main page after login.
   Widget _loginButton(){
@@ -269,6 +236,35 @@ class _CustomerSignInScreen extends State<CustomerSignInScreen> {
         ),
       ),
     );
+  }
+}
+
+class SignUpButton extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return FlatButton(
+      onPressed: () {
+        _navigateSignUp(context);
+      },
+      child: Text('NO ACCOUNT? SIGN UP',
+          style: TextStyle(color: Colors.white)),
+      highlightColor: Colors.deepOrangeAccent,
+    );
+  }
+  // A method that launches the SignUpScreen and awaits the result from
+  // Navigator.pop.
+  _navigateSignUp(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Screen.
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CustomerAccountCreationScreen()),
+    );
+
+    // After the Screen returns a result, hide any previous snackbars
+    // and show the new result.
+    Scaffold.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text("$result")));
   }
 }
 
