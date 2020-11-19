@@ -1,16 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/customer/customer_sign_in_screen.dart';
 import 'package:flutter_app/customer/edit_customer_account_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_app/screens/edit_creditcart/edit_creditcard.dart';
-import 'package:flutter_app/screens/edit_employee_account/edit_employeeacct.dart';
-import 'package:flutter_app/screens/proxy/proxy_screen.dart';
-
 import 'package:flutter_app/screens/settings/settings_screen.dart';
-import 'package:flutter_app/screens/sign_in/employee_sign_in_screen.dart';
 
 class CustomerMainDrawer extends StatelessWidget {
-  const CustomerMainDrawer({Key key}) : super(key: key);
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  User user;
+  String name;
+  String imageUrl = "";
+  CustomerMainDrawer(){
+    user = auth.currentUser;
+    name = user.displayName;
+    if(user.photoURL != null) {
+      imageUrl = user.photoURL;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +30,15 @@ class CustomerMainDrawer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
-                
                 radius: 50.0,
+                backgroundImage: NetworkImage(imageUrl),
               ),
               SizedBox(height: 5.0),
               Text("Hello",
                   style:
                       TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400)),
               SizedBox(height: 5.0),
-              Text("Blank" + "!",
+              Text(name + "!",
                   style:
                       TextStyle(fontSize: 22.0, fontWeight: FontWeight.w800)),
             ],
