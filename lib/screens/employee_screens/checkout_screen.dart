@@ -76,6 +76,9 @@ class _CheckoutScreen extends State<CheckoutScreen>{
             List lists = [];
             items.forEach((key, values) {
               lists.add(values);
+              subtotal = values["Price"] + subtotal;
+              tax = subtotal * taxRate;
+              total = subtotal + tax;
             });
             return Column(
                 children:<Widget>[
@@ -86,11 +89,6 @@ class _CheckoutScreen extends State<CheckoutScreen>{
               shrinkWrap: true,
               itemCount: lists.length,
               itemBuilder: (BuildContext context, int index) {
-                subtotal = lists[index]["Price"] + subtotal;
-                tax = subtotal * taxRate;
-                total = subtotal + tax;
-
-                print('subtotal is' + subtotal.toString());
                 return ListTile(
                   title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
