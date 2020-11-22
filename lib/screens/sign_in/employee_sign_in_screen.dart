@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/components/membership_card_screen.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_app/screens/forgot_password/forgot_password_screen.dart';
@@ -90,6 +91,9 @@ class _EmployeeSignInScreen extends State<EmployeeSignInScreen> {
                     textAlign: TextAlign.center,
                     obscureText: false,
                     style: TextStyle(fontSize: 18, color: Colors.white),
+                    inputFormatters: [FilteringTextInputFormatter.deny(
+                        new RegExp(r"\s\b|\b\s")
+                    )],
                     decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -116,6 +120,9 @@ class _EmployeeSignInScreen extends State<EmployeeSignInScreen> {
                     textAlign: TextAlign.center,
                     obscureText: true,
                     style: TextStyle(fontSize: 18, color: Colors.white),
+                    inputFormatters: [FilteringTextInputFormatter.deny(
+                        new RegExp(r"\s\b|\b\s")
+                    )],
                     decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 1.0),

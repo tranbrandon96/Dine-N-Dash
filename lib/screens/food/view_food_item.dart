@@ -265,6 +265,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                       updateDoc['Price'] = price*quantity;
                       updateDoc['Modifications'] = modifications;
                       updateDoc['Quantity'] = quantity;
+                      updateDoc['Status'] = 'Not Submitted';
                       DatabaseReference itemRef = tableRef.push();
                       key = itemRef.key;
                       updateDoc['Key'] = key;
