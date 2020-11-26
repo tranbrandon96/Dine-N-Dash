@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,14 +22,19 @@ class _FoodCategoryScreen extends State<FoodCategoryScreen>{
   String menuName;
   String itemName;
   String tableNumber;
+  String imageURL="";
   List<dynamic>lists = [];
   DatabaseReference dbRef = FirebaseDatabase.instance.reference().child("Menus");
+
+  final FirebaseStorage mStorage = FirebaseStorage.instance;
+  StorageReference defaultImageURL;
 
   _FoodCategoryScreen(String tableNumber,String menuType){
     this.tableNumber = tableNumber;
     menuName = menuType;
     dbRef = dbRef.child(restaurantID).child(menuName).child("Items");
   }
+
 
 
   Widget build(BuildContext context) {
@@ -57,9 +63,11 @@ class _FoodCategoryScreen extends State<FoodCategoryScreen>{
     );
   }
 
+  Future<DataSnapshot>getData() async{return await dbRef.once();}
+
   Widget itemsListView() {
     return FutureBuilder(
-        future: dbRef.once(),
+        future: getData(),
         builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
           if (snapshot.hasData) {
             lists.clear();
@@ -71,6 +79,8 @@ class _FoodCategoryScreen extends State<FoodCategoryScreen>{
                 shrinkWrap: true,
                 itemCount: lists.length,
                 itemBuilder: (BuildContext context, int index) {
+                  if(lists[index]["Image"] != null){imageURL = lists[index]["Image"];}
+                  defaultImageURL = FirebaseStorage.instance.ref().child("Item_Images").child(restaurantID).child(imageURL);
                   return  ListTile(
                       onTap: () {
                         itemName = lists[index]["Item_Name"].toString();
@@ -79,12 +89,32 @@ class _FoodCategoryScreen extends State<FoodCategoryScreen>{
                             MaterialPageRoute(
                                 builder: (context) => ViewFoodItemScreen(tableNumber,itemName,menuName)));
                       },
-                      leading: SvgPicture.asset(
-                      "assets/images/foodPlaceHolder.svg",
-                      height: 35,
-                      width: 35,
-                      color: Color(0xFFFF0041)
-                  ),
+                      leading: FutureBuilder(
+                          future: defaultImageURL.getDownloadURL(),
+                          builder:(context,snapshot){
+                            if(snapshot.hasData) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return FadeInImage.assetNetwork(
+                                  placeholder: "",
+                                  image: snapshot.data.toString(),
+                                  width: 100,
+                                  height:50,
+                                );
+                                return Image.network(snapshot.data.toString(),width: 350,height: 250);
+                              }
+                              if(snapshot.connectionState == ConnectionState.waiting){
+                                return CircularProgressIndicator();
+                              }
+                            }
+                            return SvgPicture.asset(
+                                "assets/images/foodPlaceHolder.svg",
+                                width: 35,
+                                height: 35,
+                                color: Color(0xFFFE0C40)
+                            );
+                          }
+                      ),
                       title: Text(lists[index]["Item_Name"].toString()),
                       subtitle: Text(lists[index]["Calories"].toString()),
                       trailing: Row(

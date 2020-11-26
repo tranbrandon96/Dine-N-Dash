@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_app/screens/edit_creditcart/edit_creditcard.dart';
@@ -10,14 +11,26 @@ import 'package:flutter_app/screens/sign_in/employee_sign_in_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseStorage mStorage = FirebaseStorage.instance;
+  final StorageReference defaultImageURL = FirebaseStorage.instance.ref().child("profile_picture_default.PNG");
   User user;
   String name;
-  String imageUrl = "";
-  MainDrawer(){
+  String imageURL = "";
+  MainDrawer() {
     user = auth.currentUser;
     name = user.displayName;
-    if(user.photoURL != null) {
-      imageUrl = user.photoURL;
+    setImage();
+  }
+
+  setImage() async{
+    NetworkImage picture;
+    if ( user.photoURL != null){
+      imageURL = user.photoURL;
+    }
+    else {
+      await defaultImageURL.getDownloadURL().then((value) {
+        imageURL = value.toString();
+      });
     }
   }
 
@@ -33,7 +46,7 @@ class MainDrawer extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 50.0,
-                backgroundImage: NetworkImage(imageUrl),
+                backgroundImage: NetworkImage(imageURL),
               ),
               SizedBox(height: 5.0),
               Text("Hello",
