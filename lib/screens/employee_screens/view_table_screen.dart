@@ -112,6 +112,7 @@ class _ViewTableScreen extends State<ViewTableScreen>{
                       ]),
                 ),
               ),
+
               Container(
                 height: 450,
                 child: menuItemsBuilder(items),
@@ -147,10 +148,10 @@ class _ViewTableScreen extends State<ViewTableScreen>{
                       ],
                     ),
                     RaisedButton(
-                      onPressed: () {displayModalBottomSheet(context);  },
+                      onPressed: () {displayModalBottomSheet(context,_tableNumber);  },
                       color:Color(0xFFFF0041),
                       child: Text(
-                          'SUBMIT',
+                          'SUBMIT ORDER',
                           style: TextStyle(color: Colors.white, fontSize:15,fontWeight: FontWeight.bold)),
 
                       shape: RoundedRectangleBorder(
@@ -162,10 +163,7 @@ class _ViewTableScreen extends State<ViewTableScreen>{
               ),
             ],
           );
-
         });
-
-
         });
   }
 
@@ -179,31 +177,45 @@ class _ViewTableScreen extends State<ViewTableScreen>{
           shrinkWrap: true,
           itemCount: lists.length,
           itemBuilder: (BuildContext context, int index) {
-            return ExpansionTile(
-              title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:[
-                Text('\t\t'+ lists[index]['Item_Name']),
-                    Text("Qty: "+ lists[index]["Quantity"].toString()+"\t\t")
-                  ]),
-              subtitle: Column(
-                  children: modificationBuilder(lists[index]["Modifications"]),
-              ),
-              trailing: Text('\$'+ lists[index]["Price"].toStringAsFixed(2) + '\t\t'),
-              children: [
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children:[
-                      FlatButton(color:Colors.purple,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => DiscountScreen()));}, child:Text('DISCOUNT',style:TextStyle(color:Colors.white,fontSize:15))),
-                      FlatButton(color:Colors.orangeAccent,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTableScreen(_tableNumber)));}, child:Text('EDIT',style:TextStyle(color:Colors.white,fontSize:15))),
-                      FlatButton(color:Colors.red,onPressed: (){
-                        db.child('Items').child(lists[index]["Key"]).remove().then((value){
-                          setState(() { });
-                        });
-                        }, child:Text('REMOVE',style:TextStyle(color:Colors.white,fontSize:15))),
-                    ]
-                )
-              ],
+            return Column(
+              children:[
+                  ExpansionTile(
+                  title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:[
+                    Text('\t\t'+ lists[index]['Item_Name']+'\n\t\t'+
+                        "Status: "+ lists[index]["Status"].toString()),
+                        Text("Qty: "+ lists[index]["Quantity"].toString()+"\t\t"),
+                      ]),
+                  subtitle: Column(
+                      children: modificationBuilder(lists[index]["Modifications"]),
+                  ),
+                  trailing: Text('\$'+ lists[index]["Price"].toStringAsFixed(2) + '\t\t'),
+                  children: [
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children:[
+                          FlatButton(color:Colors.purple,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => DiscountScreen()));}, child:Text('DISCOUNT',style:TextStyle(color:Colors.white,fontSize:15))),
+                          FlatButton(color:Colors.orangeAccent,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTableScreen(_tableNumber)));}, child:Text('EDIT',style:TextStyle(color:Colors.white,fontSize:15))),
+                          FlatButton(color:Colors.red,onPressed: (){
+                            db.child('Items').child(lists[index]["Key"]).remove().then((value){
+                              setState(() { });
+                            });
+                            }, child:Text('REMOVE',style:TextStyle(color:Colors.white,fontSize:15))),
+                        ]
+                    )
+                  ],
+                ),
+                (index != lists.length - 1) ?
+                  Divider(
+                    color: Colors.grey,
+                    height: 5,
+                    indent: MediaQuery.of(context).size.width/9,
+                    endIndent: MediaQuery.of(context).size.width/9,
+                    thickness: 1,
+                  ) : Container()
+
+              ]
             );
 
           }
@@ -304,7 +316,7 @@ class _ViewTableScreen extends State<ViewTableScreen>{
 }
 
  ///This class is the setup for calling a modal bottomSheet.
-  void displayModalBottomSheet(context) {
+  void displayModalBottomSheet(context,tableNumber) {
     var bottomSheetController =
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
@@ -320,11 +332,13 @@ class _ViewTableScreen extends State<ViewTableScreen>{
             child: Container(
               height:MediaQuery.of(context).size.height/1,
               color: Color(0xFF737373),
-              child:ReviewOrderScreen(),
+              child:ReviewOrderScreen(tableNumber),
             ),
           );
         }
     );
   }
+
+
 
 

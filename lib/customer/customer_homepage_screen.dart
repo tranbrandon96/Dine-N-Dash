@@ -140,7 +140,7 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
     }
 
 ///This class is the setup for calling a modal bottomSheet.
-void displayModalBottomSheet(context) {
+void displayModalBottomSheet(context,userID) {
   var bottomSheetController = showModalBottomSheet(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       clipBehavior: Clip.hardEdge,
@@ -153,7 +153,7 @@ void displayModalBottomSheet(context) {
           child: Container(
             height: MediaQuery.of(context).size.height / 3,
             color: Color(0xFF737373),
-            child: TableInfoScreen(),
+            child: TableInfoScreen(userID),
           ),
         );
       });

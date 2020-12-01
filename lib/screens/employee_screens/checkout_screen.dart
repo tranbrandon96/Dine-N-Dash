@@ -16,6 +16,7 @@ class _CheckoutScreen extends State<CheckoutScreen>{
   String _tableNumber;
   String customerName = "Guest";
   String partySize = '1';
+  bool checkoutOk = true;
 
 
   double subtotal = 0;
@@ -76,67 +77,86 @@ class _CheckoutScreen extends State<CheckoutScreen>{
             List lists = [];
             items.forEach((key, values) {
               lists.add(values);
-              subtotal = values["Price"] + subtotal;
+              if(values["Status"] == 'Not Submitted'){checkoutOk = false;}
+                subtotal = values["Price"] + subtotal;
               tax = subtotal * taxRate;
               total = subtotal + tax;
             });
             return Column(
                 children:<Widget>[
                 SizedBox(height: 10),
-          Container(
-          height: 500,
-          child: new ListView.builder(
-              shrinkWrap: true,
-              itemCount: lists.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children:[
-                        Text('\t\t'+ lists[index]['Item_Name']),
-                        Text("Qty: "+ lists[index]["Quantity"].toString()+"\t\t")
-                      ]),
-                  subtitle: Column(
-                    children: modificationBuilder(lists[index]["Modifications"]),
+                Container(
+                  height: 500,
+                  child: new ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: lists.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
+                        children:[
+                            ListTile(
+                              title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children:[
+                                    Text('\t\t'+ lists[index]['Item_Name']+'\n\t\t'+
+                                        "Status: "+ lists[index]["Status"].toString()),
+                                    Text("Qty: "+ lists[index]["Quantity"].toString()+"\t\t"),
+                                  ]),
+                              subtitle: Column(
+                                children: modificationBuilder(lists[index]["Modifications"]),
+                              ),
+                              trailing: Text('\$'+ lists[index]["Price"].toStringAsFixed(2) + '\t\t'),
+                            ),
+                          (index != lists.length - 1) ?
+                          Divider(
+                            color: Colors.grey,
+                            height: 5,
+                            indent: MediaQuery.of(context).size.width/9,
+                            endIndent: MediaQuery.of(context).size.width/9,
+                            thickness: 1,
+                          ) : Container()
+
+                        ]
+                      );
+                    }
                   ),
-                  trailing: Text('\$'+ lists[index]["Price"].toStringAsFixed(2) + '\t\t'),
-                );
+                ),
 
-              }
-          ),
-          ),
+                Divider(
+                  color: Colors.grey,
+                  height: 5,
+                  thickness: 1,
+                ),
 
-          Divider(
-          color: Colors.grey,
-          height: 5,
-          thickness: 1,
-          ),
-
-          Container(
-          height: 100,
-          child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children:<Widget>[
-          Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children:[
-          Row(
-          children:[Text("SUBTOTAL: \$"),Text(subtotal.toStringAsFixed(2))]),
-          Row(
-          children:[Text("TAX: \$"),Text((tax).toStringAsFixed(2))]),
-          ],
-          ),
-          Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:[Text("TOTAL: \$"),Text(total.toStringAsFixed(2))]),
-          _payButton(),
-          ],
-          ),
-          ),
-          ],
-          );
+                Container(
+                  height: 100,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children:<Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children:[
+                          Row(
+                            children:[Text("SUBTOTAL: \$"),Text(subtotal.toStringAsFixed(2))]),
+                          Row(
+                            children:[Text("TAX: \$"),Text((tax).toStringAsFixed(2))]),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:[Text("TOTAL: \$"),Text(total.toStringAsFixed(2))]),
+                        _payButton(checkoutOk),
+                        ],
+                  ),
+                ),
+                ],
+            );
           }
-          else {return Text("ADD TO YOUR ORDER");}
+          else {return
+            Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[Center(child:Text("ADD TO YOUR ORDER"))]
+            );
+          }
         });
   }
 
@@ -151,13 +171,27 @@ class _CheckoutScreen extends State<CheckoutScreen>{
     }
     return lists;
   }
+}
 
-  Widget _payButton(){
+class _payButton extends StatelessWidget{
+  bool checkoutOk;
+  _payButton(bool checkoutOk){
+    this.checkoutOk = checkoutOk;
+
+  }
+  Widget build(BuildContext context) {
     return RaisedButton(
-      onPressed: () {Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => cashpayment_dialog()));   },
+      onPressed: () {
+        checkoutOk == false ?
+
+        Scaffold.of(context).showSnackBar(new SnackBar(
+          content: new Text("There Are Not Submitted Items In Your Order"),
+        ))
+            :
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => cashpayment_dialog()));   },
       color:Color(0xFFFF0041),
       child: Text(
           'PAY',
@@ -170,4 +204,5 @@ class _CheckoutScreen extends State<CheckoutScreen>{
   }
 
 }
+
 

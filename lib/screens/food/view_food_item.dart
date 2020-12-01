@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/firebase/sign_in.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,6 +26,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
   String description="";
   String itemName="";
   String key ="";
+  String imageURL="";
   Map<dynamic, dynamic>modifications = {};
   double price;
 
@@ -34,6 +36,9 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
 
   DatabaseReference dbRef = FirebaseDatabase.instance.reference().child("Menus");
   DatabaseReference tableRef = FirebaseDatabase.instance.reference().child("Tables");
+  final FirebaseStorage mStorage = FirebaseStorage.instance;
+  StorageReference defaultImageURL;
+
   _ViewFoodItemScreenState(String tableNumber, String itemName,String menuType){
     this.tableNumber = tableNumber;
     this.itemName = itemName;
@@ -41,17 +46,25 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
 
     tableRef = tableRef.child("Table"+tableNumber).child("Items");
     dbRef = dbRef.child(restaurantID).child(menuName).child("Items").child(this.itemName);
-    dbRef.once().then((snapshot) {
+    getData();
+  }
+
+  getData() async{
+    await dbRef.once().then((snapshot) {
       Map<dynamic, dynamic> values= snapshot.value;
       calories = values["Calories"].toString();
       description = values["Description"].toString();
       this.itemName = values["Item_Name"].toString();
       price = values["Price"];
       modifications = values["Modifications"];
+      if(values["Image"] != null){imageURL = values["Image"];}
+      defaultImageURL = FirebaseStorage.instance.ref().child("Item_Images").child(restaurantID).child(imageURL);
       setState((){ });
     }
     );
-  }
+}
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +84,32 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 SizedBox(height: 60),
-                      SvgPicture.asset(
-                        "assets/images/foodPlaceHolder.svg",
-                        width: 250,
-                        height: 150,
-                        color: Color(0xFFFE0C40)
-                      ),
+                FutureBuilder(
+                    future: defaultImageURL.getDownloadURL(),
+                    builder:(context,snapshot){
+                        if(snapshot.hasData) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return FadeInImage.assetNetwork(
+                              placeholder: "",
+                              image: snapshot.data.toString(),
+                              width: 400,
+                              height:300,
+                            );
+                            return Image.network(snapshot.data.toString(),width: 350,height: 250);
+                          }
+                          if(snapshot.connectionState == ConnectionState.waiting){
+                            return CircularProgressIndicator();
+                          }
+                        }
+                      return SvgPicture.asset(
+                          "assets/images/foodPlaceHolder.svg",
+                          width: 250,
+                          height: 150,
+                          color: Color(0xFFFE0C40)
+                      );
+                    }
+                ),
                 SizedBox(height: 10),
                 new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -265,6 +298,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                       updateDoc['Price'] = price*quantity;
                       updateDoc['Modifications'] = modifications;
                       updateDoc['Quantity'] = quantity;
+                      updateDoc['Status'] = 'Not Submitted';
                       DatabaseReference itemRef = tableRef.push();
                       key = itemRef.key;
                       updateDoc['Key'] = key;

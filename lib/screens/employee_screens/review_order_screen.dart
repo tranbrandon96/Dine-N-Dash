@@ -1,22 +1,29 @@
+import 'dart:collection';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/screens/employee_screens/view_table_screen.dart';
 import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
 import 'package:flutter_app/screens/new_screens_update/kitchenconfirm_dialog.dart';
 
 class ReviewOrderScreen extends StatefulWidget{
-  _ReviewOrderScreen createState() =>  _ReviewOrderScreen();
+  String _tableNumber;
+  ReviewOrderScreen(String tableNumber){
+    _tableNumber = tableNumber;
+  }
+  _ReviewOrderScreen createState() =>  _ReviewOrderScreen(_tableNumber);
 }
 
 class _ReviewOrderScreen extends State<ReviewOrderScreen>{
-  List<ListTile> menuItems = [
-    ListTile(
-      title: Text('\t\tDouble Double'),
-      subtitle: Text('\t\tAnimal Style, No Pickles'),
-      trailing: Text('\$3.45\t\t'),
-    ),
-  ];
+  String _tableNumber;
+  bool submittable = false;
+  DatabaseReference db;
+  Map<dynamic, dynamic>items = {};
+
+  _ReviewOrderScreen(String tableNumber){
+    _tableNumber = tableNumber;
+    db = FirebaseDatabase.instance.reference().child("Tables").child("Table"+ tableNumber);
+  }
 
   Widget build (BuildContext context){
     return Scaffold(
@@ -30,7 +37,8 @@ class _ReviewOrderScreen extends State<ReviewOrderScreen>{
           ),
           borderRadius: BorderRadius.circular(12)),
 
-          child: Column(
+          child: SingleChildScrollView(
+            child:Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:<Widget>[
               Row(
@@ -54,12 +62,12 @@ class _ReviewOrderScreen extends State<ReviewOrderScreen>{
                 ],
               ),
               Container(
-                height: 500,
-                child: ListView(children: menuItems),
+                height: 550,
+                child: itemView(),
               ),
 
               Container(
-                height: 150,
+                height: 100,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[ _submitButton() ],
@@ -69,31 +77,112 @@ class _ReviewOrderScreen extends State<ReviewOrderScreen>{
             ],
           ),
       ),
+      )
 
 
     );
   }
 
   Widget _submitButton(){
-    return RaisedButton(
-      onPressed: () {  
-OrderSuccessfulPopup(context);}, 
-       
-      color:Color(0xFFFF0041),
-      child: Text(
-          'SUBMIT',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+    return Builder(
+        builder: (context) => RaisedButton(
+          onPressed: () {
 
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18.0),
-      ),
+          if(submittable == true) {
+            OrderSuccessfulPopup(context, _tableNumber);
+          }
+          else{
+              Scaffold.of(context).showSnackBar(new SnackBar(
+                content: new Text("There Are No Items to Submit"),
+              ));
+          }
+          },
+          color:Color(0xFFFF0041),
+          child: Text(
+              'SUBMIT',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+        )
     );
   }
 
+  Widget itemView() {
+    return  FutureBuilder(
+        future:  db.once(),
+        builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
+          if (snapshot.hasData) {
+            Map<dynamic, dynamic> values=snapshot.data.value;
+            items= values["Items"];
+          if (items != null) {
+            List lists = [];
+            items.forEach((key, values) {
+              if (values["Status"] == 'Not Submitted') {
+                lists.add(values);
+              }
+              submittable = lists.isNotEmpty ? true : false;
+            });
+            if(lists.isNotEmpty){
+            return  new ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: lists.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                            children:[
+                              ListTile(
+                                title: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children:[
+                                      Text('\t\t'+ lists[index]['Item_Name']+'\n\t\t'+
+                                          "Status: "+ lists[index]["Status"].toString()),
+                                      Text("Qty: "+ lists[index]["Quantity"].toString()+"\t\t"),
+                                    ]),
+                                subtitle: Column(
+                                  children: modificationBuilder(lists[index]["Modifications"]),
+                                ),
+                                trailing: Text('\$'+ lists[index]["Price"].toStringAsFixed(2) + '\t\t'),
+                              ),
+
+                              (index != lists.length - 1) ?
+                              Divider(
+                                color: Colors.grey,
+                                height: 5,
+                                indent: MediaQuery.of(context).size.width/9,
+                                endIndent: MediaQuery.of(context).size.width/9,
+                                thickness: 1,
+                              ) : Container()
+
+                            ]
+                        );
+                      }
+                  );
+          }}}
+          return
+            Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[Center(child:Text("ADD TO YOUR ORDER"))]
+            );
+          }
+        );
+  }
+
+  List<Widget> modificationBuilder(Map<dynamic, dynamic> modifications){
+    List<Widget> lists = [];
+    if(modifications != null) {
+      modifications.forEach((key, values) {
+        if(values == true){
+          lists.add(Text("\t\t"+key.toString()));
+        }
+      });
+    }
+    return lists;
+  }
 }
 
 //Alert Dialog - Pop-up notification
-void OrderSuccessfulPopup(context) {
+void OrderSuccessfulPopup(BuildContext context, String tableNumber) {
   showDialog(context: context, builder: (BuildContext bc) {
     return AlertDialog(
 
@@ -114,10 +203,26 @@ void OrderSuccessfulPopup(context) {
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                     onPressed: () {
-                                       Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage()));
+                      DatabaseReference db = FirebaseDatabase.instance.reference().child("Tables").child("Table"+ tableNumber).child('Items');
+                      db.once().then((snapshot) {
+                        if (snapshot != null) {
+                          Map<String,dynamic> updateDoc = Map<String, dynamic>.from(snapshot.value);
+                          updateDoc.forEach((key, values) {
+                            if (values["Status"] == 'Not Submitted') {
+                              updateDoc[key]['Status'] = "Submitted";
+                              print(updateDoc);
+                            }
+                            db.update(updateDoc);
+
+                          });
+                        }
+                      });
+
+
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) {
+                            return HomePage();
+                          }), ModalRoute.withName('/'));
         },
                     child: Text(
                         'DONE'
