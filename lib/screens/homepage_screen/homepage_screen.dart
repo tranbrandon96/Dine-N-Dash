@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final FirebaseAuth auth = FirebaseAuth.instance;
+  ValueChanged<String> onChange;
   User user;
   String userID;
 
@@ -26,6 +27,16 @@ class _HomePageState extends State<HomePage> {
     userID = user.uid;
     dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("employee_ID").equalTo(userID);
 }
+
+  void initState() {
+    super.initState();
+    onChange = (value) {
+      setState(() {
+        userID = value;
+        dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("employee_ID").equalTo(userID);
+      });
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +64,7 @@ class _HomePageState extends State<HomePage> {
       ),
 
       floatingActionButton: FloatingActionButton(
-          onPressed: () {displayModalBottomSheet(context);
+          onPressed: () {displayModalBottomSheet(context,userID);
                                                    
           },
           child: Icon(Icons.add),
@@ -61,7 +72,7 @@ class _HomePageState extends State<HomePage> {
       ),
 
       drawer: Drawer(
-        child: MainDrawer(),
+        child: MainDrawer(onChange),
       ),
       
       body: Container(child: tableListView(),),
@@ -127,11 +138,13 @@ class _HomePageState extends State<HomePage> {
              }
            }
            return CircularProgressIndicator();
-         });}
+         });
+  }
+
 }
 
  ///This class is the setup for calling a modal bottomSheet.
-  void displayModalBottomSheet(context) {
+  void displayModalBottomSheet(context,userID) {
     var bottomSheetController =
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
@@ -147,7 +160,7 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               height:MediaQuery.of(context).size.height/3,
               color: Color(0xFF737373),
-              child:TableInfoScreen(),
+              child:TableInfoScreen(userID),
             ),
           );
         }

@@ -7,7 +7,9 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class TableInfoScreen extends StatefulWidget{
-  _TableInfoScreen createState() =>  _TableInfoScreen();
+  String userID;
+  TableInfoScreen(this.userID);
+  _TableInfoScreen createState() =>  _TableInfoScreen(userID);
 }
 
 class _TableInfoScreen extends State<TableInfoScreen> {
@@ -19,10 +21,9 @@ class _TableInfoScreen extends State<TableInfoScreen> {
   String checkIn = "0:00pm";
   String userID;
 
-  _TableInfoScreen(){
+  _TableInfoScreen(this.userID){
     final FirebaseAuth auth = FirebaseAuth.instance;
-    User user = auth.currentUser;
-    userID = user.uid;
+
   }
 
   Widget build(BuildContext context) {

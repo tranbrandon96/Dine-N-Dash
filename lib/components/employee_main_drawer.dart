@@ -9,6 +9,9 @@ import 'package:flutter_app/screens/proxy/proxy_screen.dart';
 import 'package:flutter_app/screens/settings/settings_screen.dart';
 import 'package:flutter_app/screens/sign_in/employee_sign_in_screen.dart';
 
+import 'package:flutter_app/screens/homepage_screen/homepage_screen.dart';
+
+
 class MainDrawer extends StatelessWidget {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseStorage mStorage = FirebaseStorage.instance;
@@ -16,14 +19,17 @@ class MainDrawer extends StatelessWidget {
   User user;
   String name;
   String imageURL = "";
-  MainDrawer() {
+  ValueChanged<String> onChange;
+
+
+  MainDrawer(this.onChange) {
     user = auth.currentUser;
     name = user.displayName;
+    userID = user.uid;
     setImage();
   }
 
   setImage() async{
-    NetworkImage picture;
     if ( user.photoURL != null){
       imageURL = user.photoURL;
     }
@@ -77,7 +83,8 @@ class MainDrawer extends StatelessWidget {
       ListTile(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Proxy()));
+              context, MaterialPageRoute(builder: (context) => Proxy())).then((userID)  {if(userID!= null){onChange(userID);}});
+
         },
         leading: Icon(
           Icons.tablet,
