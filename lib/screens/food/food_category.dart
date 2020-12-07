@@ -27,7 +27,7 @@ class _FoodCategoryScreen extends State<FoodCategoryScreen>{
   DatabaseReference dbRef = FirebaseDatabase.instance.reference().child("Menus");
 
   final FirebaseStorage mStorage = FirebaseStorage.instance;
-  StorageReference defaultImageURL;
+  StorageReference defaultImageURL =  FirebaseStorage.instance.ref();
 
   _FoodCategoryScreen(String tableNumber,String menuType){
     this.tableNumber = tableNumber;

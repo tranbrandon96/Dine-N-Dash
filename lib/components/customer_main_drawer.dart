@@ -21,13 +21,12 @@ class CustomerMainDrawer extends StatelessWidget {
   }
 
   setImage() async{
-    NetworkImage picture;
     if ( user.photoURL != null){
-      imageUrl = user.photoURL;
+      imageURL = user.photoURL;
     }
     else {
       await defaultImageURL.getDownloadURL().then((value) {
-        imageUrl = value.toString();
+        imageURL = value.toString();
       });
     }
   }

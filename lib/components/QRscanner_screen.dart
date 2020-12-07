@@ -72,14 +72,15 @@ class _QRscanner_screen extends State<QRscanner_screen> {
                             style: TextStyle(color: Colors.red),
                           ),
                           qrCodeCallback: (code) {
-                            setState(() {
-                              qr = code;
+                            qr = code;
 
-                              //Retrieve the customer's name from the database
-                              DatabaseReference customerReference = userReference.child(qr).child("profile");
-                              customerReference.once().then((DataSnapshot snapshot){
-                                Map<dynamic, dynamic> values=snapshot.value;
-                                memberName = values["userName"];
+                            //Retrieve the customer's name from the database
+                            DatabaseReference customerReference = userReference.child(qr).child("profile");
+                            customerReference.once().then((DataSnapshot snapshot){
+                              Map<dynamic, dynamic> values=snapshot.value;
+                              memberName = values["userName"];
+                            setState(() {
+
                               });
 
                               camState = false;

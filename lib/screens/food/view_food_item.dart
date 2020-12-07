@@ -37,7 +37,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
   DatabaseReference dbRef = FirebaseDatabase.instance.reference().child("Menus");
   DatabaseReference tableRef = FirebaseDatabase.instance.reference().child("Tables");
   final FirebaseStorage mStorage = FirebaseStorage.instance;
-  StorageReference defaultImageURL;
+  StorageReference defaultImageURL = FirebaseStorage.instance.ref();
 
   _ViewFoodItemScreenState(String tableNumber, String itemName,String menuType){
     this.tableNumber = tableNumber;
