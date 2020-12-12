@@ -11,10 +11,12 @@ import 'package:flutter_svg/svg.dart';
 
 class ViewTableScreen extends StatefulWidget{
   String _tableNumber;
-  ViewTableScreen(String tableNumber){
+  String restaurantID = 'mVIkdMLJkvTkwaRvxqsPFgteNkv1';
+  String orderID;
+  ViewTableScreen(String tableNumber, this.restaurantID, this.orderID){
     _tableNumber = tableNumber;
   }
-  _ViewTableScreen createState() =>  _ViewTableScreen(_tableNumber);
+  _ViewTableScreen createState() =>  _ViewTableScreen(_tableNumber, restaurantID,orderID);
 
 }
 
@@ -22,13 +24,16 @@ class _ViewTableScreen extends State<ViewTableScreen>{
   String _tableNumber;
   String customerName = "Guest";
   String partySize = '1';
+  String restaurantID = '';
+  String orderID;
   Map<dynamic, dynamic>items = {};
   DatabaseReference db;
+  DatabaseReference orderReference;
 
-  _ViewTableScreen(String tableNumber){
+  _ViewTableScreen(String tableNumber, this.restaurantID,this.orderID){
     _tableNumber = tableNumber;
-    db = FirebaseDatabase.instance.reference().child("Tables").child("Table"+ tableNumber);
-
+    db = FirebaseDatabase.instance.reference().child("Restaurant_Tables").child(restaurantID).child('Tables').child("Table"+ tableNumber);
+    orderReference = FirebaseDatabase.instance.reference().child("Orders").child(orderID).child('Items');
   }
 
   init(){
@@ -36,8 +41,8 @@ class _ViewTableScreen extends State<ViewTableScreen>{
   }
 
 
-  Widget build (BuildContext context){
 
+  Widget build (BuildContext context){
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0),
@@ -49,9 +54,9 @@ class _ViewTableScreen extends State<ViewTableScreen>{
           ),
           actions: [
             IconButton(
-            icon: Icon(Icons.add, color: Color(0xFFFF0041), size:35,),
+            icon: Icon(Icons.restaurant_menu_rounded, color: Color(0xFFFF0041), size:35,),
             onPressed: () {
-              Navigator.push(context,MaterialPageRoute(builder: (context) => CategoryScreen(_tableNumber))).then((value){
+              Navigator.push(context,MaterialPageRoute(builder: (context) => CategoryScreen(restaurantID,_tableNumber))).then((value){
                 setState(() {});
               });
             },
@@ -67,17 +72,16 @@ class _ViewTableScreen extends State<ViewTableScreen>{
     );
   }
 
+
   Widget tableView() {
-    return FutureBuilder(
-      future: db.once(),
-    builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
-    if (snapshot.hasData) {
-      customerName = "Guest";
-      Map<dynamic, dynamic> values=snapshot.data.value;
+    return StreamBuilder(
+      stream: db.onValue,
+    builder: (context, AsyncSnapshot<Event> event) {
+    if (event.hasData) {
+      Map<dynamic, dynamic> values=event.data.snapshot.value;
       partySize = values["Party_Size"].toString();
       customerName = values["User_Name"].toString();
-      items= values["Items"];
-          };
+          }
     return new ListView.builder(
         shrinkWrap: true,
         itemCount: 1,
@@ -98,14 +102,14 @@ class _ViewTableScreen extends State<ViewTableScreen>{
                   trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children:[
-                        Text('Edit Table',
+                        Text('Scan Customer',
                             style: TextStyle(
                               fontSize: 15,
                               color: Colors.grey,)),
                         IconButton(
-                          icon: Icon(Icons.edit, color: Colors.grey, size:25,),
+                          icon: Icon(Icons.camera_alt, color: Colors.grey, size:25,),
                           onPressed: () {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => QRscanner_screen(_tableNumber)))
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => QRscanner_screen(_tableNumber,restaurantID)))
                                 .then((value) {  setState((){ });  });
                           },
                         ),
@@ -115,7 +119,7 @@ class _ViewTableScreen extends State<ViewTableScreen>{
 
               Container(
                 height: 450,
-                child: menuItemsBuilder(items),
+                child: menuItemsBuilder(),
               ),
 
               Divider(
@@ -143,12 +147,12 @@ class _ViewTableScreen extends State<ViewTableScreen>{
                             borderRadius: BorderRadius.circular(24.0),
                           ),
                         ),
-                        _button('CHECKOUT', CheckoutScreen(_tableNumber)),
+                        _button('CHECKOUT', CheckoutScreen(_tableNumber,restaurantID,orderID)),
 
                       ],
                     ),
                     RaisedButton(
-                      onPressed: () {displayModalBottomSheet(context,_tableNumber);  },
+                      onPressed: () {displayModalBottomSheet(context,_tableNumber,restaurantID,orderID);  },
                       color:Color(0xFFFF0041),
                       child: Text(
                           'SUBMIT ORDER',
@@ -167,61 +171,70 @@ class _ViewTableScreen extends State<ViewTableScreen>{
         });
   }
 
-  Widget menuItemsBuilder(items) {
-    if (items != null) {
-      List lists = [];
-      items.forEach((key, values) {
-        lists.add(values);
-      });
-      return new ListView.builder(
-          shrinkWrap: true,
-          itemCount: lists.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Column(
-              children:[
-                  ExpansionTile(
-                  title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children:[
-                    Text('\t\t'+ lists[index]['Item_Name']+'\n\t\t'+
-                        "Status: "+ lists[index]["Status"].toString()),
-                        Text("Qty: "+ lists[index]["Quantity"].toString()+"\t\t"),
-                      ]),
-                  subtitle: Column(
-                      children: modificationBuilder(lists[index]["Modifications"]),
-                  ),
-                  trailing: Text('\$'+ lists[index]["Price"].toStringAsFixed(2) + '\t\t'),
-                  children: [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children:[
-                          FlatButton(color:Colors.purple,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => DiscountScreen()));}, child:Text('DISCOUNT',style:TextStyle(color:Colors.white,fontSize:15))),
-                          FlatButton(color:Colors.orangeAccent,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTableScreen(_tableNumber)));}, child:Text('EDIT',style:TextStyle(color:Colors.white,fontSize:15))),
-                          FlatButton(color:Colors.red,onPressed: (){
-                            db.child('Items').child(lists[index]["Key"]).remove().then((value){
-                              setState(() { });
-                            });
-                            }, child:Text('REMOVE',style:TextStyle(color:Colors.white,fontSize:15))),
-                        ]
-                    )
-                  ],
-                ),
-                (index != lists.length - 1) ?
-                  Divider(
-                    color: Colors.grey,
-                    height: 5,
-                    indent: MediaQuery.of(context).size.width/9,
-                    endIndent: MediaQuery.of(context).size.width/9,
-                    thickness: 1,
-                  ) : Container()
-
-              ]
-            );
-
+  Widget menuItemsBuilder() {
+    return StreamBuilder(
+        stream: orderReference.onValue,
+        builder: (context, AsyncSnapshot<Event> event) {
+          if (event.hasData && event != null) {
+            items = event.data.snapshot.value;
           }
-      );
-    }
-    else {return Text("ADD TO YOUR ORDER");}
+          if (items != null) {
+            List lists = [];
+            items.forEach((key, values) {
+              lists.add(values);
+            });
+            return new ListView.builder(
+                shrinkWrap: true,
+                itemCount: lists.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                      children:[
+                        ExpansionTile(
+                          title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children:[
+                                Text('\t\t'+ lists[index]['Item_Name']+'\n\t\t'+
+                                    "Status: "+ lists[index]["Status"].toString()),
+                                Text("Qty: "+ lists[index]["Quantity"].toString()+"\t\t"),
+                              ]),
+                          subtitle: Column(
+                            children: modificationBuilder(lists[index]["Modifications"]),
+                          ),
+                          trailing: Text('\$'+ lists[index]["Price"].toStringAsFixed(2) + '\t\t'),
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children:[
+                                  FlatButton(color:Colors.purple,onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => DiscountScreen()));}, child:Text('DISCOUNT',style:TextStyle(color:Colors.white,fontSize:15))),
+                                  FlatButton(color:Colors.orangeAccent,onPressed: (){}, child:Text('EDIT',style:TextStyle(color:Colors.white,fontSize:15))),
+                                  FlatButton(color:Colors.red,onPressed: (){
+                                    db.child('Items').child(lists[index]["Key"]).remove().then((value){
+                                      setState(() { });
+                                    });
+                                  }, child:Text('REMOVE',style:TextStyle(color:Colors.white,fontSize:15))),
+                                ]
+                            )
+                          ],
+                        ),
+                        (index != lists.length - 1) ?
+                        Divider(
+                          color: Colors.grey,
+                          height: 5,
+                          indent: MediaQuery.of(context).size.width/9,
+                          endIndent: MediaQuery.of(context).size.width/9,
+                          thickness: 1,
+                        ) : Container()
+
+                      ]
+                  );
+
+                }
+            );
+          }
+          else {return Text("ADD TO YOUR ORDER");}
+        }
+    );
+
   }
 
   List<Widget> modificationBuilder(Map<dynamic, dynamic> modifications){
@@ -315,8 +328,8 @@ class _ViewTableScreen extends State<ViewTableScreen>{
 
 }
 
- ///This class is the setup for calling a modal bottomSheet.
-  void displayModalBottomSheet(context,tableNumber) {
+ ///This class is the setup for calling ReviewOrder submission.
+  void displayModalBottomSheet(context,tableNumber,restaurantID,orderID) {
     var bottomSheetController =
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
@@ -332,7 +345,7 @@ class _ViewTableScreen extends State<ViewTableScreen>{
             child: Container(
               height:MediaQuery.of(context).size.height/1,
               color: Color(0xFF737373),
-              child:ReviewOrderScreen(tableNumber),
+              child:ReviewOrderScreen(tableNumber,restaurantID,orderID),
             ),
           );
         }

@@ -8,22 +8,36 @@ import 'package:intl/intl.dart';
 
 class TableInfoScreen extends StatefulWidget{
   String userID;
-  TableInfoScreen(this.userID);
-  _TableInfoScreen createState() =>  _TableInfoScreen(userID);
+  String restaurantID;
+  TableInfoScreen(this.userID,this.restaurantID);
+  _TableInfoScreen createState() =>  _TableInfoScreen(userID,restaurantID);
 }
 
 class _TableInfoScreen extends State<TableInfoScreen> {
    final _tableNumberController = TextEditingController();
   final _partySizeController = TextEditingController();
-  final databaseReference = FirebaseDatabase.instance.reference().child("Tables");
+  DatabaseReference databaseReference;
+  final orderReference = FirebaseDatabase.instance.reference().child("Orders");
+  String restaurantName = "";
   String partySize = "0";
   String tableNumber = "0";
+  String date = "July 14, 2020";
   String checkIn = "0:00pm";
+  String orderNumber = "00";
   String userID;
+  String restaurantID;
 
-  _TableInfoScreen(this.userID){
-    final FirebaseAuth auth = FirebaseAuth.instance;
+  _TableInfoScreen(this.userID, this.restaurantID){
+    databaseReference = FirebaseDatabase.instance.reference().child("Restaurant_Tables").child(restaurantID).child("Tables");
+    getData();
 
+  }
+
+  void getData() async{
+    await FirebaseDatabase.instance.reference().child("Restaurants").child(restaurantID).child("Name").once()
+      .then((DataSnapshot dataSnapshot) {
+    restaurantName = dataSnapshot.value;
+  });
   }
 
   Widget build(BuildContext context) {
@@ -108,6 +122,7 @@ class _TableInfoScreen extends State<TableInfoScreen> {
                       partySize = _partySizeController.text;
                       tableNumber = _tableNumberController.text;
                       checkIn = DateFormat('HH:mm').format(DateTime.now());
+                      date = DateFormat('MMMM dd,yyyy').format(DateTime.now());
                       createData();
                       Navigator.pop(context);
                     },
@@ -129,12 +144,19 @@ class _TableInfoScreen extends State<TableInfoScreen> {
 
   void createData(){
     DatabaseReference tableReference = databaseReference.child("Table"+tableNumber);
+    orderNumber = orderReference.push().key;
+    orderReference.child(orderNumber).set({
+      'Restaurant_Name': restaurantName,
+      'Date': date,
+    });
+
     tableReference.set({
       'User_Name': 'Guest',
       'Party_Size': partySize,
       'Check_In': checkIn,
       'Table_Number': tableNumber,
       'employee_ID': userID,
+      'Order_ID': orderNumber,
       'customer_ID':'',
     });
   }

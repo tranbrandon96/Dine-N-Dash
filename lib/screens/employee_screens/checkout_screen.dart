@@ -6,15 +6,19 @@ import 'package:flutter_app/screens/new_screens_update/cashpayment_dialog.dart';
 
 class CheckoutScreen extends StatefulWidget{
   String _tableNumber;
-  CheckoutScreen(String tableNumber){
+  String orderID;
+  String restaurantID;
+  CheckoutScreen(String tableNumber, this.restaurantID, this.orderID){
     _tableNumber = tableNumber;
   }
-  _CheckoutScreen createState() =>  _CheckoutScreen(_tableNumber);
+  _CheckoutScreen createState() =>  _CheckoutScreen(_tableNumber,restaurantID, orderID);
 }
 
 class _CheckoutScreen extends State<CheckoutScreen>{
   String _tableNumber;
   String customerName = "Guest";
+  String orderID;
+  String restaurantID;
   String partySize = '1';
   bool checkoutOk = true;
 
@@ -26,14 +30,15 @@ class _CheckoutScreen extends State<CheckoutScreen>{
 
   Map<dynamic, dynamic>items = {};
   DatabaseReference db;
+  DatabaseReference orderReference;
 
   List<Text> subTotalTextList = [];
   List<Text> taxTextList = [];
   List<Text> totalTextList = [];
 
-  _CheckoutScreen(String tableNumber){
+  _CheckoutScreen(String tableNumber,this.restaurantID, this.orderID){
     _tableNumber = tableNumber;
-    db = FirebaseDatabase.instance.reference().child("Tables").child("Table"+ tableNumber);
+    orderReference = FirebaseDatabase.instance.reference().child("Orders").child(orderID);
   }
 
   init(){
@@ -67,7 +72,7 @@ class _CheckoutScreen extends State<CheckoutScreen>{
 
    Widget itemView() {
     return  FutureBuilder(
-        future:  db.once(),
+        future:  orderReference.once(),
         builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
           if (snapshot.hasData) {
             Map<dynamic, dynamic> values=snapshot.data.value;

@@ -1,19 +1,19 @@
 import 'dart:collection';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/manual_input/manual_input_screen.dart';
+import 'file:///C:/Users/MANUE/AndroidStudioProjects/Dine-N-Dash/lib/components/manual_input_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class QRscanner_screen extends StatefulWidget {
   String _tableNumber;
-  QRscanner_screen(String tableNumber){
+  String restaurantID;
+  QRscanner_screen(String tableNumber, this.restaurantID){
     _tableNumber = tableNumber;
   }
   @override
-  _QRscanner_screen createState() => new _QRscanner_screen(_tableNumber);
+  _QRscanner_screen createState() => new _QRscanner_screen(_tableNumber,restaurantID);
 }
 
 
@@ -21,14 +21,16 @@ class _QRscanner_screen extends State<QRscanner_screen> {
   DatabaseReference tableReference;
   DatabaseReference userReference = FirebaseDatabase.instance.reference().child("Users");
   String _tableNumber;
+  String restaurantID;
   String qr;
+  String orderID;
   String memberName = "John Doe";
   bool camState = true;
   bool scanned = false;
 
-  _QRscanner_screen(String tableNumber){
+  _QRscanner_screen(String tableNumber, this.restaurantID){
     _tableNumber = tableNumber;
-    tableReference = FirebaseDatabase.instance.reference().child("Tables").child("Table"+ tableNumber);
+    tableReference = FirebaseDatabase.instance.reference().child('Restaurant_Tables').child(restaurantID).child("Tables").child("Table"+ tableNumber);
   }
 
 
@@ -114,6 +116,7 @@ class _QRscanner_screen extends State<QRscanner_screen> {
     );
   }
 
+  ///This widget returns the text belonging
   Widget scannerText() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,7 +157,7 @@ class _QRscanner_screen extends State<QRscanner_screen> {
         ),
         FlatButton(
           onPressed: () {
-              displayModalBottomSheet(context,_tableNumber);
+              displayModalBottomSheet(context,_tableNumber,restaurantID);
           },
           child: Text('ENTER CUSTOMER ID',
               style: TextStyle(fontSize:15, color: Color(0xFFFF0041))),
@@ -165,7 +168,6 @@ class _QRscanner_screen extends State<QRscanner_screen> {
   }
 
   Widget customerScannedUI() {
-
     return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -215,7 +217,7 @@ class _QRscanner_screen extends State<QRscanner_screen> {
 }
 
  ///This class is the setup for calling a modal bottomSheet.
-  void displayModalBottomSheet(context,String _tableNumber) {
+  void displayModalBottomSheet(context,String _tableNumber,restaurantID) {
     var bottomSheetController =
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
@@ -231,7 +233,7 @@ class _QRscanner_screen extends State<QRscanner_screen> {
             child: Container(
               height:MediaQuery.of(context).size.height/4,
               color: Color(0xFF737373),
-              child:ManualInputScreen(_tableNumber),
+              child:ManualInputScreen(_tableNumber,restaurantID),
             ),
           );
         }

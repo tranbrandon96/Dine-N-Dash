@@ -17,15 +17,16 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   User user;
   String userID;
-
-  final fbReference = FirebaseDatabase.instance.reference();
+  String restaurantID = 'mVIkdMLJkvTkwaRvxqsPFgteNkv1';
+  String orderID;
   Query dbRef;
   List<dynamic> lists = [];
 
   _CustomerHomePageScreenState(){
     user = auth.currentUser;
     userID = user.uid;
-    dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("customer_ID").equalTo(userID);
+    dbRef = FirebaseDatabase.instance.reference().child("Restaurant_Tables")
+        .child(restaurantID).child("Tables").orderByChild("employee_ID").equalTo(userID);
   }
 
   @override
@@ -84,12 +85,12 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
   /// This method takes database data into a list. Returns and builds a listView with
   /// listTiles that have database data.
   Widget tableListView() {
-    return FutureBuilder(
-        future: dbRef.once(),
-        builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
-          if (snapshot.hasData) {
+    return StreamBuilder(
+        stream: dbRef.onValue,
+        builder: (context, AsyncSnapshot<Event> event) {
+          if (event.hasData) {
             lists.clear();
-            Map<dynamic, dynamic> values = snapshot.data.value;
+            Map<dynamic, dynamic> values = event.data.snapshot.value;
             if(values != null){
             values.forEach((key, values) {
               lists.add(values);
@@ -98,12 +99,13 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
                 shrinkWrap: true,
                 itemCount: lists.length,
                 itemBuilder: (BuildContext context, int index) {
+                  orderID = lists[index]["Order_ID"];
                   return ListTile(
                     onTap: () {
                       Navigator.push(
                       context,
                       MaterialPageRoute(
-                      builder: (context) => ViewTableScreen(lists[index]["Table_Number"].toString())));},
+                      builder: (context) => ViewTableScreen(lists[index]["Table_Number"].toString(),restaurantID,orderID)));},
                     leading: SvgPicture.asset(
                       "assets/icons/user-1.svg",
                       height: 60,
@@ -138,23 +140,3 @@ class _CustomerHomePageScreenState extends State<CustomerHomePageScreen> {
           return CircularProgressIndicator();
         });}
     }
-
-///This class is the setup for calling a modal bottomSheet.
-void displayModalBottomSheet(context,userID) {
-  var bottomSheetController = showModalBottomSheet(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-      clipBehavior: Clip.hardEdge,
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext buildContext) {
-        return SingleChildScrollView(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Container(
-            height: MediaQuery.of(context).size.height / 3,
-            color: Color(0xFF737373),
-            child: TableInfoScreen(userID),
-          ),
-        );
-      });
-}

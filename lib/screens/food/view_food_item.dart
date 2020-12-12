@@ -7,15 +7,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ViewFoodItemScreen extends StatefulWidget {
   String itemName;
   String menuName;
+  String restaurantID;
   String tableNumber;
-  ViewFoodItemScreen(String tableNumber, String itemName, String menuType){
-    this.itemName = itemName;
-    menuName = menuType;
-    this.tableNumber = tableNumber;
-
-  }
+  ViewFoodItemScreen(this.restaurantID, this.itemName, this.menuName,this.tableNumber);
   @override
-  _ViewFoodItemScreenState createState() => _ViewFoodItemScreenState(tableNumber,itemName,menuName);
+  _ViewFoodItemScreenState createState() => _ViewFoodItemScreenState(restaurantID,itemName,menuName, tableNumber);
 }
 
 class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
@@ -33,24 +29,28 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
   int quantity = 0;
   String specialInstructions="";
   String allergy="";
+  String orderID ="";
 
-  DatabaseReference dbRef = FirebaseDatabase.instance.reference().child("Menus");
-  DatabaseReference tableRef = FirebaseDatabase.instance.reference().child("Tables");
+  DatabaseReference menuRef = FirebaseDatabase.instance.reference().child("Menus");
+  DatabaseReference orderRef = FirebaseDatabase.instance.reference();
   final FirebaseStorage mStorage = FirebaseStorage.instance;
   StorageReference defaultImageURL = FirebaseStorage.instance.ref();
 
-  _ViewFoodItemScreenState(String tableNumber, String itemName,String menuType){
-    this.tableNumber = tableNumber;
-    this.itemName = itemName;
-    menuName = menuType;
-
-    tableRef = tableRef.child("Table"+tableNumber).child("Items");
-    dbRef = dbRef.child(restaurantID).child(menuName).child("Items").child(this.itemName);
+  _ViewFoodItemScreenState(this.restaurantID, this.itemName,this.menuName, this.tableNumber){
+    getOrderID();
+    menuRef = menuRef.child(restaurantID).child(menuName).child("Items").child(this.itemName);
     getData();
   }
 
+  getOrderID() async {
+    await FirebaseDatabase.instance.reference().child('Restaurant_Tables').child(restaurantID).child("Tables").child(
+        'Table' + tableNumber).child('Order_ID').once().then((snapshot) {
+      orderID = snapshot.value;
+      orderRef = orderRef.child('Orders').child(orderID).child('Items');
+    });
+  }
   getData() async{
-    await dbRef.once().then((snapshot) {
+    await menuRef.once().then((snapshot) {
       Map<dynamic, dynamic> values= snapshot.value;
       calories = values["Calories"].toString();
       description = values["Description"].toString();
@@ -299,7 +299,7 @@ class _ViewFoodItemScreenState extends State<ViewFoodItemScreen> {
                       updateDoc['Modifications'] = modifications;
                       updateDoc['Quantity'] = quantity;
                       updateDoc['Status'] = 'Not Submitted';
-                      DatabaseReference itemRef = tableRef.push();
+                      DatabaseReference itemRef = orderRef.push();
                       key = itemRef.key;
                       updateDoc['Key'] = key;
                       itemRef.update(updateDoc);

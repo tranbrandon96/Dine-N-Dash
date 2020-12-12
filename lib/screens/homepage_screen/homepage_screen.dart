@@ -14,18 +14,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final FirebaseAuth auth = FirebaseAuth.instance;
+  String restaurantID = 'mVIkdMLJkvTkwaRvxqsPFgteNkv1';
   ValueChanged<String> onChange;
   User user;
   String userID;
 
-  final fbReference = FirebaseDatabase.instance.reference();
   Query dbRef;
   List<dynamic>lists = [];
 
   _HomePageState(){
     user = auth.currentUser;
     userID = user.uid;
-    dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("employee_ID").equalTo(userID);
+    dbRef = FirebaseDatabase.instance.reference().child("Restaurant_Tables")
+        .child(restaurantID).child("Tables").orderByChild("employee_ID").equalTo(userID);
 }
 
   void initState() {
@@ -33,7 +34,8 @@ class _HomePageState extends State<HomePage> {
     onChange = (value) {
       setState(() {
         userID = value;
-        dbRef = FirebaseDatabase.instance.reference().child("Tables").orderByChild("employee_ID").equalTo(userID);
+        dbRef = FirebaseDatabase.instance.reference().child("Restaurant_Tables")
+            .child(restaurantID).child("Tables").orderByChild("employee_ID").equalTo(userID);
       });
     };
   }
@@ -64,7 +66,7 @@ class _HomePageState extends State<HomePage> {
       ),
 
       floatingActionButton: FloatingActionButton(
-          onPressed: () {displayModalBottomSheet(context,userID);
+          onPressed: () {displayModalBottomSheet(context,userID,restaurantID);
                                                    
           },
           child: Icon(Icons.add),
@@ -81,12 +83,12 @@ class _HomePageState extends State<HomePage> {
 
   /// This method takes database data into a list. Returns and builds a listView with
      /// listTiles that have database data.
-     Widget tableListView() {return FutureBuilder(
-         future: dbRef.once(),
-         builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
-           if (snapshot.hasData) {
+     Widget tableListView() {return StreamBuilder(
+         stream: dbRef.onValue,
+         builder: (context, AsyncSnapshot<Event> event) {
+           if (event.hasData) {
              lists.clear();
-             Map<dynamic, dynamic> values = snapshot.data.value;
+             Map<dynamic, dynamic> values = event.data.snapshot.value;
              if(values != null) {
                values.forEach((key, values) {
                  lists.add(values);
@@ -103,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                                  builder: (context) =>
                                      ViewTableScreen(
                                          lists[index]["Table_Number"]
-                                             .toString())));
+                                             .toString(), restaurantID, lists[index]["Order_ID"])));
                        },
                        leading: SvgPicture.asset(
                          "assets/icons/user-1.svg",
@@ -143,8 +145,8 @@ class _HomePageState extends State<HomePage> {
 
 }
 
- ///This class is the setup for calling a modal bottomSheet.
-  void displayModalBottomSheet(context,userID) {
+ ///This class creates another Table.
+  void displayModalBottomSheet(context,String userID, String restaurantID) {
     var bottomSheetController =
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
@@ -160,7 +162,7 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               height:MediaQuery.of(context).size.height/3,
               color: Color(0xFF737373),
-              child:TableInfoScreen(userID),
+              child:TableInfoScreen(userID,restaurantID),
             ),
           );
         }

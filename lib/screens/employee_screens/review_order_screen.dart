@@ -8,21 +8,25 @@ import 'package:flutter_app/screens/new_screens_update/kitchenconfirm_dialog.dar
 
 class ReviewOrderScreen extends StatefulWidget{
   String _tableNumber;
-  ReviewOrderScreen(String tableNumber){
+  String orderID;
+  String restaurantID;
+  ReviewOrderScreen(String tableNumber, this.restaurantID, this.orderID){
     _tableNumber = tableNumber;
   }
-  _ReviewOrderScreen createState() =>  _ReviewOrderScreen(_tableNumber);
+  _ReviewOrderScreen createState() =>  _ReviewOrderScreen(_tableNumber,restaurantID, orderID);
 }
 
 class _ReviewOrderScreen extends State<ReviewOrderScreen>{
   String _tableNumber;
   bool submittable = false;
-  DatabaseReference db;
+  DatabaseReference orderReference;
+  String orderID;
+  String restaurantID;
   Map<dynamic, dynamic>items = {};
 
-  _ReviewOrderScreen(String tableNumber){
+  _ReviewOrderScreen(String tableNumber, this.restaurantID, this.orderID){
     _tableNumber = tableNumber;
-    db = FirebaseDatabase.instance.reference().child("Tables").child("Table"+ tableNumber);
+    orderReference = FirebaseDatabase.instance.reference().child("Orders").child(orderID);
   }
 
   Widget build (BuildContext context){
@@ -89,7 +93,7 @@ class _ReviewOrderScreen extends State<ReviewOrderScreen>{
           onPressed: () {
 
           if(submittable == true) {
-            OrderSuccessfulPopup(context, _tableNumber);
+            OrderSuccessfulPopup(context, _tableNumber, orderID);
           }
           else{
               Scaffold.of(context).showSnackBar(new SnackBar(
@@ -111,7 +115,7 @@ class _ReviewOrderScreen extends State<ReviewOrderScreen>{
 
   Widget itemView() {
     return  FutureBuilder(
-        future:  db.once(),
+        future:  orderReference.once(),
         builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
           if (snapshot.hasData) {
             Map<dynamic, dynamic> values=snapshot.data.value;
@@ -182,7 +186,7 @@ class _ReviewOrderScreen extends State<ReviewOrderScreen>{
 }
 
 //Alert Dialog - Pop-up notification
-void OrderSuccessfulPopup(BuildContext context, String tableNumber) {
+void OrderSuccessfulPopup(BuildContext context, String tableNumber, String orderID) {
   showDialog(context: context, builder: (BuildContext bc) {
     return AlertDialog(
 
@@ -203,7 +207,7 @@ void OrderSuccessfulPopup(BuildContext context, String tableNumber) {
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                     onPressed: () {
-                      DatabaseReference db = FirebaseDatabase.instance.reference().child("Tables").child("Table"+ tableNumber).child('Items');
+                      DatabaseReference db = FirebaseDatabase.instance.reference().child("Orders").child(orderID).child('Items');
                       db.once().then((snapshot) {
                         if (snapshot != null) {
                           Map<String,dynamic> updateDoc = Map<String, dynamic>.from(snapshot.value);

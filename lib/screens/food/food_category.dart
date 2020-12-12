@@ -9,29 +9,25 @@ import 'package:flutter_svg/svg.dart';
 
 class FoodCategoryScreen extends StatefulWidget{
   String menuName;
+  String restaurantID;
   String tableNumber;
-  FoodCategoryScreen(String tableNumber, String menuType){
-    menuName = menuType;
-    this.tableNumber = tableNumber;
-  }
-  _FoodCategoryScreen createState() => _FoodCategoryScreen(tableNumber, menuName);
+  FoodCategoryScreen(this.restaurantID, this.menuName,this.tableNumber);
+  _FoodCategoryScreen createState() => _FoodCategoryScreen(restaurantID, menuName,tableNumber);
 }
 
 class _FoodCategoryScreen extends State<FoodCategoryScreen>{
   String restaurantID = 'mVIkdMLJkvTkwaRvxqsPFgteNkv1';
   String menuName;
   String itemName;
-  String tableNumber;
   String imageURL="";
+  String tableNumber ="";
   List<dynamic>lists = [];
   DatabaseReference dbRef = FirebaseDatabase.instance.reference().child("Menus");
 
   final FirebaseStorage mStorage = FirebaseStorage.instance;
   StorageReference defaultImageURL =  FirebaseStorage.instance.ref();
 
-  _FoodCategoryScreen(String tableNumber,String menuType){
-    this.tableNumber = tableNumber;
-    menuName = menuType;
+  _FoodCategoryScreen(this.restaurantID,this.menuName, this.tableNumber){
     dbRef = dbRef.child(restaurantID).child(menuName).child("Items");
   }
 
@@ -87,7 +83,7 @@ class _FoodCategoryScreen extends State<FoodCategoryScreen>{
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ViewFoodItemScreen(tableNumber,itemName,menuName)));
+                                builder: (context) => ViewFoodItemScreen(restaurantID,itemName,menuName,tableNumber)));
                       },
                       leading: FutureBuilder(
                           future: defaultImageURL.getDownloadURL(),
